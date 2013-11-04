@@ -1,13 +1,9 @@
 Welcome to our CL4LRL software project!
 
-Generating Pronunciation Lexicons 
-============
-for Small-Vocabulary ASR in LRLs
+Generating Pronunciation Lexicons for Small-Vocabulary ASR in LRLs
 ============
 
-Anjana Vakil & Max Paulus
-------------
-University of Saarland
+Anjana Vakil & Max Paulus, University of Saarland
 ------------
 
 Computational Linguistics for Low-Resource Languages
