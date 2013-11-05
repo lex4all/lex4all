@@ -1,4 +1,4 @@
-# Pronunciation Lexicons for Low-Resource Languages
+# Pronunciation Lexicons for Any Low-resource Language
 
 ### Anjana Vakil & Max Paulus
 
