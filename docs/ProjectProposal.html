@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Software Project Proposal:
+Generating Pronunciation Lexicons
+for Small-Vocabulary ASR in LRLs</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="proposal.tex"> 
+<meta name="date" content="2013-11-04 19:58:00"> 
+<link rel="stylesheet" type="text/css" href="proposal.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                
+
+                                                                                
+                                                                                
+
+                                                                                
+
+<h2 class="titleHead">Software Project Proposal:<br />
+Generating Pronunciation Lexicons<br />
+for Small-Vocabulary ASR in LRLs</h2>
+ <div class="author" ><span 
+class="cmr-12">Anjana Vakil (</span><a 
+href="mailto:anjanav@coli.uni-saarland.de" ><span 
+class="cmr-12">anjanav@coli.uni-saarland.de</span></a><span 
+class="cmr-12">)</span>
+<br /> <span 
+class="cmr-12">Max Paulus (</span><a 
+href="mailto:mpaulus@coli.uni-saarland.de" ><span 
+class="cmr-12">mpaulus@coli.uni-saarland.de</span></a><span 
+class="cmr-12">)</span></div><br />
+<div class="date" ><span 
+class="cmr-12">November 4, 2013</span></div>
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Project overview</h3>
+<!--l. 55--><p class="noindent" >Developers trying to incorporate speech recognition interfaces in a low-resource language
+(LRL) into their applications currently face the hurdle of not finding recognition engines
+trained on their target language. Although tools such as Carnegie Mellon University&#8217;s Sphinx
+simplify the creation of new acoustic models for recognition, they require large amounts of
+training data (audio recordings) in the target language. However, for small-vocabulary
+applications, an existing recognizer for a high-resource language (HRL) can be used to
+perform recognition in the target language. This requires a pronunciation lexicon
+mapping the relevant words in the target language into sequences of sounds in the
+HRL.
+<!--l. 57--><p class="indent" >   Our goal is to build an easy-to-use application that will allow even naive users to
+automatically create a pronunciation lexicon for words in any language, using a small number
+of audio recordings and a pre-existing recognition engine in a HRL such as English. The
+resulting lexicon can then be used to add small-vocabulary speech recognition functionality to
+applications in the LRL.
+<!--l. 60--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>Core functionality</h3>
+<!--l. 61--><p class="noindent" >A simple user interface allows the user to easily specify one orthographic form (text string)
+and and one or more audio samples (<span 
+class="cmtt-10x-x-109">.wav </span>files) for each word in the target vocabulary, and to
+                                                                                
+
+                                                                                
+set other options (e.g. number of pronunciations per word, name/save location of lexicon file,
+etc.). The audio is then passed to a speech recognition engine for a HRL (English). An
+automatic pronunciation generation algorithm such as Salaam [<a 
+href="#X0-chan12">1</a>&#8211;<a 
+href="#X0-sherwani09">3</a>] is employed to find the
+best pronunciation(s) for each word in the LRL vocabulary. The program outputs a
+pronunciation lexicon (<span 
+class="cmtt-10x-x-109">.pls </span>XML file). This lexicon file is then ready for direct inclusion in a
+speech recognition application, as it follows the standard pronunciation lexicon format
+[<a 
+href="#X0-w3cpls">4</a>].
+<!--l. 66--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-30003"></a>Tools and platforms</h3>
+<!--l. 67--><p class="noindent" >The back-end requires an existing high-quality speech recognition engine with a usable
+API. The two main options under consideration are the Microsoft Speech Platform
+(<a 
+href="http://msdn.microsoft.com/en-us/library/hh361572" class="url" ><span 
+class="cmtt-10x-x-109">http://msdn.microsoft.com/en-us/library/hh361572</span></a>) and CMU&#8217;s open-source ASR
+toolkit Sphinx (<a 
+href="http://cmusphinx.sourceforge.net/" class="url" ><span 
+class="cmtt-10x-x-109">http://cmusphinx.sourceforge.net/</span></a>).
+<!--l. 69--><p class="indent" >   The front-end interface will initially be console-based and require no special technology. If
+time allows, a graphical user interface will be implemented in a framework suitable to the
+back-end (see below).
+<!--l. 71--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-40004"></a>Possible extensions</h3>
+     <ul class="itemize1">
+     <li class="itemize">GUI for web or desktop application (using Python or C#/.NET)
+     </li>
+     <li class="itemize">Capability to record audio samples within the application
+     </li>
+     <li class="itemize">Option to choose source HRL (recognizer language)</li></ul>
+<!--l. 81--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-50004"></a>References</h3>
+<!--l. 81--><p class="noindent" >
+    <dl class="thebibliography"><dt id="bib-1" class="thebibliography">
+[1]  </dt><dd 
+id="bib-2" class="thebibliography">
+    <!--l. 81--><p class="noindent" ><a 
+ id="X0-"></a>Hao  Yee  Chan  and  Roni  Rosenfeld.  &#8220;Discriminative  pronunciation  learning  for
+    speech recognition for resource scarce languages&#8221;. In: <span 
+class="cmti-10x-x-109">Proceedings of the 2nd ACM</span>
+    <span 
+class="cmti-10x-x-109">Symposium  on  Computing  for  Development</span>.  ACM  DEV  &#8217;12.  Atlanta,  Georgia:
+    ACM, 2012, 12:1&#8211;12:6. <span 
+class="cmcsc-10x-x-109"><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">l</span></span>: <a 
+href="http://doi.acm.org/10.1145/2160601.2160618" class="url" ><span 
+class="cmtt-10x-x-109">http://doi.acm.org/10.1145/2160601.2160618</span></a>.
+                                                                                
+
+                                                                                
+    </dd><dt id="bib-3" class="thebibliography">
+[2]  </dt><dd 
+id="bib-4" class="thebibliography">
+    <!--l. 81--><p class="noindent" >Fang  Qiao,  Jahanzeb  Sherwani,  and  Roni  Rosenfeld.  &#8220;Small-vocabulary  speech
+    recognition
+    for resource-scarce languages&#8221;. In: <span 
+class="cmti-10x-x-109">Proceedings of the First ACM Symposium on</span>
+    <span 
+class="cmti-10x-x-109">Computing for Development</span>. ACM DEV &#8217;10. London, United Kingdom: ACM, 2010,
+    3:1&#8211;3:8. <span 
+class="cmcsc-10x-x-109"><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">l</span></span>: <a 
+href="http://doi.acm.org/10.1145/1926180.1926184" class="url" ><span 
+class="cmtt-10x-x-109">http://doi.acm.org/10.1145/1926180.1926184</span></a>.
+    </dd><dt id="bib-5" class="thebibliography">
+[3]  </dt><dd 
+id="bib-6" class="thebibliography">
+    <!--l. 81--><p class="noindent" >Jahanzeb Sherwani. &#8220;Speech interfaces for information access by low literate users&#8221;.
+    PhD thesis. Pittsburgh, PA, USA: Carnegie Mellon University, 2009. <span 
+class="cmcsc-10x-x-109"><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">l</span></span>: <a 
+href="http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf" class="url" ><span 
+class="cmtt-10x-x-109">http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf</span></a>.
+    </dd><dt id="bib-7" class="thebibliography">
+[4]  </dt><dd 
+id="bib-8" class="thebibliography">
+    <!--l. 81--><p class="noindent" >World
+    Wide Web Consortium (W3C). <span 
+class="cmti-10x-x-109">Pronunciation Lexicon Specification (PLS) Version</span>
+    <span 
+class="cmti-10x-x-109">1.0</span>. Tech. rep. 2008. <span 
+class="cmcsc-10x-x-109"><span 
+class="small-caps">u</span><span 
+class="small-caps">r</span><span 
+class="small-caps">l</span></span>: <a 
+href="http://www.w3.org/TR/pronunciation-lexicon/" class="url" ><span 
+class="cmtt-10x-x-109">http://www.w3.org/TR/pronunciation-lexicon/</span></a>.</dd></dl>
+    
+</body></html> 
+
+                                                                                
+
+
