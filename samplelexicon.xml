@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+	  
+<lexicon version="1.0" xmlns="http://www.w3.org/2005/01/pronunciation-lexicon"
+		 xml:lang="en-US" alphabet="x-microsoft-ups">
+		 
+  <lexeme>
+    <grapheme>mefa</grapheme>
+    <phoneme>M EH F AX</phoneme>
+  </lexeme>
+  
+  <lexeme>
+    <grapheme>beeni</grapheme>
+    <phoneme>B E NG I</phoneme>
+  </lexeme>
+  
+  <lexeme>
+    <grapheme>duro</grapheme>
+    <phoneme>D U R O</phoneme>
+  </lexeme>
+  
+</lexicon>
