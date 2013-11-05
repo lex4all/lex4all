@@ -1,4 +1,4 @@
-# Pronunciation Lexicons for Any Low-resource Language
+# Speech Recognition for LRLs
 
 ### Anjana Vakil & Max Paulus
 
