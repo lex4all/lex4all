@@ -8,4 +8,4 @@ Developers trying to incorporate speech recognition interfaces in a low-resource
 
 Our goal is to build an easy-to-use application that will allow even naive users to automatically create a pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used to add small-vocabulary speech recognition functionality to applications in the LRL.
 
-Read our [project proposal](http://htmlpreview.github.io/?https://github.com/lex4all/lex4all/blob/master/ProjectProposal.html) for more information!
+Read our [project proposal](http://htmlpreview.github.io/?https://github.com/lex4all/lex4all/blob/master/docs/ProjectProposal.html) for more information!
