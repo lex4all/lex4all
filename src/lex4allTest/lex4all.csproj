@@ -7,7 +7,7 @@
     <ProjectGuid>{94B00D3C-1A2C-4722-B210-45CE67E02158}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>lex4allTest</RootNamespace>
+    <RootNamespace>lex4all</RootNamespace>
     <AssemblyName>lex4allTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

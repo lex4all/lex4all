@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Speech.Recognition;
 
-namespace lex4allTest
+namespace lex4all
 {
     class Program
     {
