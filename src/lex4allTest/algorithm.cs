@@ -22,10 +22,9 @@ namespace lex4all
             SpeechRecognitionEngine engine;
 
             // initialize grammar & prefix list
-            SrgsDocument gramDoc = GrammarControl.GetInitialGramDoc();
+            SrgsDocument gramDoc = GrammarControl.getInitialGrammar("");
             Grammar gram;
             List<string> prefixList;
-
 
             // initialize pass counter
             int passNumber = 0;
@@ -51,7 +50,7 @@ namespace lex4all
                 passNumber += 1; 
 
                 // get new engine and/or unload all grammars
-                engine = EngineControl.GetEngine(lang);
+                engine = EngineControl.getEngine();
                 engine.UnloadAllGrammars();
 
                 // get & load grammar (report time elapsed)

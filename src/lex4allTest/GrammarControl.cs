@@ -7,18 +7,25 @@ using Microsoft.Speech.Recognition.SrgsGrammar;
 
 namespace lex4all
 {
-    class GrammarControl
-    {
-        /* IS USED BY THE ALGORITHM TO CREATE THE SUPER WILDCARD GRAMMAR
-           THE READPATH IS THE PATH TO THE wildcard.txt FILE WHICH CONTAINS ALL POSSIBLE PHONEME COMBINATIONS */
-        public SrgsDocument getInitialGrammar (String readPath) {
+    public class GrammarControl
+    {  
+        /// <summary>
+        /// is used by the algorithm to build the super wildcard grammar
+        /// </summary>
+        /// <param name="readPath">
+        /// location of the wildcard.txt file which contains all possible phoneme combinations
+        /// </param>
+        /// <returns>
+        /// a document object representing the grammar
+        /// </returns>
+        public static SrgsDocument getInitialGrammar (String readPath) {
             
             Console.WriteLine("Building grammar...");
 
-            // SET UP BASIC WILDCARD RULE
+            // set up basic wildcard rule
             SrgsOneOf wildOneOf = new SrgsOneOf();
 
-            // READ PHONEME WILDCARD FROM TEXT FILE. ALL COMBINATIONS ARE THEN ADDED TO THE BASIC RULE
+            // read phoneme wildcard from text file. all combinations are then added to the basic rule
             string[] words = System.IO.File.ReadAllLines(readPath);
             foreach (string word in words) {
                 if (word.Contains("\n"))
@@ -28,7 +35,7 @@ namespace lex4all
                 }
                 else
                 {
-                    // MAKE GRAMMAR ITEM/TOKEN FOR EACH WILDCARD "WORD"
+                    // make grammar item/token for each wildcard "word"
                     string pron = word;
                     string text = word.Replace(" ",".");
                     SrgsToken thisToken = new SrgsToken(text);
@@ -39,7 +46,7 @@ namespace lex4all
                 }
             }
 
-            // CREATE GRAMMAR RULES
+            // create grammar rules
             SrgsRule wildRule = new SrgsRule("Wildcard");
             wildRule.Scope = SrgsRuleScope.Public;
             wildRule.Elements.Add(wildOneOf);
@@ -50,35 +57,44 @@ namespace lex4all
             superItem.Add(wildRef);
             superRule.Elements.Add(superItem);
 
-            // CREATE DOCUMENT AND ADD RULES
+            // create document and add rules
             SrgsDocument gramDoc = new SrgsDocument();
             gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ups;
             gramDoc.Culture = new System.Globalization.CultureInfo(lang);
             gramDoc.Rules.Add(new SrgsRule[] { superRule, wildRule });
             gramDoc.Root = superRule;
 
-            // REPORT
+            // report
             Console.WriteLine("Done.");
 
-            // OUTPUT INITIAL GRAMMAR
+            // output initial grammar
             Console.WriteLine("");
             return gramDoc;
         }
 
-        /* THROUGHOUT THE ALGORITHM'S PASSES THE GRAMMAR IS UPDATED WITH THE RECEIVED PREFIX PHONEMES */
-        public SrgsDocument updateGrammar (String[] prefixes, SrgsDocument doc, int passNum, String preReadPath) {
+        /// <summary>
+        /// throughout the algorithm's passes the grammar is updated with the received prefix phonemes
+        /// </summary>
+        /// <param name="prefixes">phonemes to be added to the front</param>
+        /// <param name="doc">the previous grammar</param>
+        /// <param name="passNum">the current pass number</param>
+        /// <param name="preReadPath">location of an additional grammar file which is smaller to improve computation time</param>
+        /// <returns>
+        /// an updated grammar
+        /// </returns>
+        public static SrgsDocument updateGrammar (String[] prefixes, SrgsDocument doc, int passNum, String preReadPath) {
 
             Console.WriteLine("Prefixing grammar with phonemes from pass {0}...", passNum-1);
 
-            // READ PREFIX WILDCARD FROM TEXT FILE 
+            // read prefix wildcard from text file 
             //(this is a smaller wildcard with just 1 and 2 phonemes which, with the prefix, makes up the first word of superwildcard grammar)
 
             string[] words = System.IO.File.ReadAllLines(preReadPath);
 
-            // SET UP BASIC WILDCARD ONEOF
+            // set up basic wildcard oneof
             SrgsOneOf prefixOneOf = new SrgsOneOf();
 
-            // MAKE GRAMMAR ITEM/TOKEN FOR PREFIX + EACH WILDCARD "WORD"
+            // make grammar item/token for prefix + each wildcard "word"
             foreach (string prefix in prefixes)
             {
                 SrgsToken prefixToken = new SrgsToken(prefix.Replace(" ", "."));
@@ -104,7 +120,7 @@ namespace lex4all
                 }
             }
 
-            // CREATE GRAMMAR RULES
+            // create grammar rules
             SrgsRule prefixRule = new SrgsRule("Prefixes" + (passNum-1).ToString());
             prefixRule.Scope = SrgsRuleScope.Public;
             SrgsItem prefItem = new SrgsItem(prefixOneOf);
@@ -121,12 +137,12 @@ namespace lex4all
             newSuperItem.Add(wildRef);
             newSuperRule.Elements.Add(newSuperItem);
 
-            // UPDATE DOCUMENT BY ADDING PREFIXED RULES
+            // update document by adding prefixed rules
             doc.Rules.Clear();
             doc.Rules.Add(new SrgsRule[] {newSuperRule, prefixRule, wildRule});
             doc.Root = newSuperRule;
 
-            // REPORT
+            // report
             Console.WriteLine("Done.");
             
             return doc;
