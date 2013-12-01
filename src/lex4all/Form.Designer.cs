@@ -1,6 +1,6 @@
 ﻿namespace lex4all
 {
-    partial class Form
+    partial class lex4allForm
     {
         /// <summary>
         /// Required designer variable.

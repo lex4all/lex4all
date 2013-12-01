@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace lex4all
 {
-    public partial class Form : Form
+    public partial class lex4allForm : Form
     {
-        public Form()
+        public lex4allForm()
         {
             InitializeComponent();
         }

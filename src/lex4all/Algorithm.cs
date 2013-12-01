@@ -22,7 +22,7 @@ namespace lex4all
             SpeechRecognitionEngine engine;
 
             // initialize grammar & prefix list
-            SrgsDocument gramDoc = GrammarControl.getInitialGrammar("");
+            SrgsDocument gramDoc = GrammarControl.getInitialGrammar("wildcard.txt");
             Grammar gram;
             List<string> prefixList;
 
@@ -100,7 +100,7 @@ namespace lex4all
                 prefixList = GetPrefixes(passResults, passNumber);
 
                 // update grammar 
-                gramDoc = GrammarControl.UpdateGrammar(prefixList);
+                gramDoc = GrammarControl.updateGrammar(prefixList, gramDoc, passNumber, "prefixWildcard.txt");
 
             }
             

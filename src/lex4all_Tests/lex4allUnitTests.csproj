@@ -56,14 +56,16 @@
   <ItemGroup>
     <Compile Include="TestEngine.cs" />
     <Compile Include="TestGrammar.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\lex4allTest\lex4all.csproj">
+    <ProjectReference Include="..\lex4all\lex4all.csproj">
       <Project>{94b00d3c-1a2c-4722-b210-45ce67e02158}</Project>
       <Name>lex4all</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

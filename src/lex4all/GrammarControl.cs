@@ -60,7 +60,7 @@ namespace lex4all
             // create document and add rules
             SrgsDocument gramDoc = new SrgsDocument();
             gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ups;
-            gramDoc.Culture = new System.Globalization.CultureInfo(lang);
+            gramDoc.Culture = new System.Globalization.CultureInfo("en-US");
             gramDoc.Rules.Add(new SrgsRule[] { superRule, wildRule });
             gramDoc.Root = superRule;
 
@@ -82,7 +82,7 @@ namespace lex4all
         /// <returns>
         /// an updated grammar
         /// </returns>
-        public static SrgsDocument updateGrammar (String[] prefixes, SrgsDocument doc, int passNum, String preReadPath) {
+        public static SrgsDocument updateGrammar (List<String> prefixes, SrgsDocument doc, int passNum, String preReadPath) {
 
             Console.WriteLine("Prefixing grammar with phonemes from pass {0}...", passNum-1);
 

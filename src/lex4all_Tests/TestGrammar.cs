@@ -1,17 +1,24 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Speech.Recognition;
-using lex4all.GrammarControl;
+using lex4all;
+using Microsoft.Speech.Recognition.SrgsGrammar;
 
 namespace lex4allUnitTests
 {
     [TestClass]
-    class TestGrammar
+    public class TestGrammar
     {
         // tests getIntitialGrammar
         [TestMethod]
         public void TestGetInitialGrammar()
         {
+            // arrange
+            SrgsDocument initGrammar = lex4all.GrammarControl.getInitialGrammar(lex4all.Properties.Resources.en_US_wildcard);
+            
+            // assert
+            Assert.AreEqual(2,initGrammar.Rules.Count);
+
         }
 
         // tests updateGrammar

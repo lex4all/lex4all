@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Speech.Recognition;
-using lex4all.EngineControl;
+using lex4all;
 
 namespace lex4allUnitTests
 {
     [TestClass]
-    class TestEngine
+    public class TestEngine
     {
         // tests for exceptions in getEngine()
         [TestMethod]
@@ -18,13 +18,14 @@ namespace lex4allUnitTests
             try
             {
                 // act
-                testEngine.SetInputToWaveFile("01_ookan_A_1.wav");
+                testEngine.SetInputToWaveFile(@"C:\Users\Max\Documents\GitHub\lex4all\src\lex4all_Tests\01_ookan_A_1.wav");
                 RecognitionResult thisResult = testEngine.Recognize();
             }
 
             catch (Exception e)
             {
                 // assert false case
+                Console.WriteLine(e.Message);
                 Assert.IsTrue(false);
             }
 
