@@ -28,9 +28,9 @@ namespace lex4all
 
             // read phoneme wildcard from text file. all combinations are then added to the basic rule
             // string[] sfdasf = System.IO.File.ReadAllLines(readPath);
-            StreamReader rd = new StreamReader(readPath);
-            string allWords = rd.ReadToEnd();
-            string[] words = allWords.Split(new string[] {" ","\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            // StreamReader rd = new StreamReader(readPath);
+            // string allWords = rd.ReadToEnd();
+            string[] words = readPath.Split(new string[] {"\r\n+"}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string word in words) {
                 if (word.Contains("\n"))
                 {
