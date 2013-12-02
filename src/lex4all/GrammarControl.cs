@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Speech.Recognition.SrgsGrammar;
+using System.IO;
 
 namespace lex4all
 {
@@ -26,7 +27,10 @@ namespace lex4all
             SrgsOneOf wildOneOf = new SrgsOneOf();
 
             // read phoneme wildcard from text file. all combinations are then added to the basic rule
-            string[] words = System.IO.File.ReadAllLines(readPath);
+            // string[] sfdasf = System.IO.File.ReadAllLines(readPath);
+            StreamReader rd = new StreamReader(readPath);
+            string allWords = rd.ReadToEnd();
+            string[] words = allWords.Split(new string[] {" ","\r\n"}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string word in words) {
                 if (word.Contains("\n"))
                 {
