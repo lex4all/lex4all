@@ -178,6 +178,112 @@ namespace lex4all.Properties {
         ///AE T
         ///AE [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
+        public static string en_US_prefixwildcard {
+            get {
+                return ResourceManager.GetString("en_US_prefixwildcard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AA
+        ///AE
+        ///AH
+        ///AI
+        ///AO
+        ///AU
+        ///AX
+        ///E
+        ///EH
+        ///EI
+        ///I
+        ///IH
+        ///O
+        ///OI
+        ///U
+        ///UH
+        ///B
+        ///CH
+        ///D
+        ///DH
+        ///F
+        ///G
+        ///H
+        ///J
+        ///JH
+        ///K
+        ///L
+        ///M
+        ///N
+        ///NG
+        ///P
+        ///R
+        ///S
+        ///SH
+        ///T
+        ///TH
+        ///V
+        ///W
+        ///Z
+        ///ZH
+        ///AA AA
+        ///AA AE
+        ///AA AH
+        ///AA AI
+        ///AA AO
+        ///AA AU
+        ///AA AX
+        ///AA E
+        ///AA EH
+        ///AA EI
+        ///AA I
+        ///AA IH
+        ///AA O
+        ///AA OI
+        ///AA U
+        ///AA UH
+        ///AA B
+        ///AA CH
+        ///AA D
+        ///AA DH
+        ///AA F
+        ///AA G
+        ///AA H
+        ///AA J
+        ///AA JH
+        ///AA K
+        ///AA L
+        ///AA M
+        ///AA N
+        ///AA NG
+        ///AA P
+        ///AA R
+        ///AA S
+        ///AA SH
+        ///AA T
+        ///AA TH
+        ///AA V
+        ///AA W
+        ///AA Z
+        ///AA ZH
+        ///AE AA
+        ///AE AE
+        ///AE AH
+        ///AE AI
+        ///AE AO
+        ///AE AU
+        ///AE AX
+        ///AE E
+        ///AE EH
+        ///AE EI
+        ///AE I
+        ///AE IH
+        ///AE O
+        ///AE OI
+        ///AE U
+        ///AE UH
+        ///AE B
+        /// [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
         public static string en_US_wildcard {
             get {
                 return ResourceManager.GetString("en_US_wildcard", resourceCulture);

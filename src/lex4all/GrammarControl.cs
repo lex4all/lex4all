@@ -19,7 +19,7 @@ namespace lex4all
         /// <returns>
         /// a document object representing the grammar
         /// </returns>
-        public static SrgsDocument getInitialGrammar (String readPath) {
+        public static SrgsDocument getInitialGrammar () {
             
             Console.WriteLine("Building grammar...");
 
@@ -30,7 +30,8 @@ namespace lex4all
             // string[] sfdasf = System.IO.File.ReadAllLines(readPath);
             // StreamReader rd = new StreamReader(readPath);
             // string allWords = rd.ReadToEnd();
-            string[] words = readPath.Split(new string[] {"\r\n+"}, StringSplitOptions.RemoveEmptyEntries);
+            string wildcardFile = lex4all.Properties.Resources.en_US_wildcard;
+            string[] words = wildcardFile.Split(new string[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string word in words) {
                 if (word.Contains("\n"))
                 {
@@ -86,14 +87,15 @@ namespace lex4all
         /// <returns>
         /// an updated grammar
         /// </returns>
-        public static SrgsDocument updateGrammar (List<String> prefixes, SrgsDocument doc, int passNum, String preReadPath) {
+        public static SrgsDocument updateGrammar (List<String> prefixes, SrgsDocument doc, int passNum) {
 
             Console.WriteLine("Prefixing grammar with phonemes from pass {0}...", passNum-1);
 
             // read prefix wildcard from text file 
             //(this is a smaller wildcard with just 1 and 2 phonemes which, with the prefix, makes up the first word of superwildcard grammar)
 
-            string[] words = System.IO.File.ReadAllLines(preReadPath);
+            string prefixWildcardFile = lex4all.Properties.Resources.en_US_prefixwildcard;
+            string[] words = prefixWildcardFile.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             // set up basic wildcard oneof
             SrgsOneOf prefixOneOf = new SrgsOneOf();
