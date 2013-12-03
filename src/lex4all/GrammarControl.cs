@@ -19,7 +19,7 @@ namespace lex4all
         /// <returns>
         /// a document object representing the grammar
         /// </returns>
-        public static SrgsDocument getInitialGrammar () {
+        public static SrgsDocument getInitialGrammar() {
             
             Console.WriteLine("Building grammar...");
 

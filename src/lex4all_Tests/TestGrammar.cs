@@ -14,7 +14,7 @@ namespace lex4allUnitTests
         public void TestGetInitialGrammar()
         {
             // arrange
-            SrgsDocument initGrammar = lex4all.GrammarControl.getInitialGrammar(lex4all.Properties.Resources.en_US_wildcard);
+            SrgsDocument initGrammar = lex4all.GrammarControl.getInitialGrammar();
             
             // assert
             Assert.AreEqual(2,initGrammar.Rules.Count);
