@@ -16,7 +16,7 @@ namespace lex4all
         /// <param name="wavFiles">Array of paths to each .wav audio sample</param>
         /// <param name="lang">Culture code for desired source language (e.g. "en-US")</param>
         /// <returns>Array of pronunciations (phoneme sequences)</returns>
-        public String[] GeneratePronunciations (String[] wavFiles, String lang) {
+        public static String[] GeneratePronunciations (String[] wavFiles) {
            
             // initialize recognition engine 
             SpeechRecognitionEngine engine;
@@ -116,7 +116,7 @@ namespace lex4all
         /// <param name="engine">Recognition engine with loaded grammar</param>
         /// <param name="wavFile">Path to .wav audio sample</param>
         /// <returns>RecognitionResult from the recognizer</returns>
-        public RecognitionResult ProcessSample (SpeechRecognitionEngine engine, String wavFile) {
+        public static RecognitionResult ProcessSample (SpeechRecognitionEngine engine, String wavFile) {
             
             Console.Write("Recognizing audio file \"{0}\"...", wavFile);
             engine.SetInputToWaveFile(wavFile);
@@ -137,7 +137,7 @@ namespace lex4all
         /// <param name="engine">Recognition engine with loaded grammar</param>
         /// <param name="wavFiles">Array of paths to each .wav audio sample</param>
         /// <returns>Sorted list of (pronunciation, #samples, totalconfidence) tuples</returns>
-        public List<Tuple<string, int, float>> MakePass (SpeechRecognitionEngine engine, String[] wavFiles) {
+        public static List<Tuple<string, int, float>> MakePass (SpeechRecognitionEngine engine, String[] wavFiles) {
            
             List<Tuple<string, int, float>> passResults = new List<Tuple<string, int, float>>();
             foreach (string wav in wavFiles) {
@@ -175,7 +175,7 @@ namespace lex4all
         /// <param name="passResults">List of (pronunciation, #samples, totalconfidence) tuples</param>
         /// <param name="passNumber">Number of current pass (length of prefixes)</param>
         /// <returns>List of prefixes to be appended to the grammar</returns>
-        public List<string> GetPrefixes(List<Tuple<string, int, float>> passResults, int passNumber)
+        public static List<string> GetPrefixes(List<Tuple<string, int, float>> passResults, int passNumber)
         {
             List<string> prefixes = new List<string>();
             foreach (Tuple<string, int, float> result in passResults)
