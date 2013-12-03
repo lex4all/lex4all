@@ -19,9 +19,10 @@ namespace lex4all
 
             Dictionary<String, String[]> wavDict = GatherData();
 
+
+
             Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
             String lexFile = Console.ReadLine();
-
 
             WriteLexicon(wavDict, lexFile);
 
@@ -77,6 +78,23 @@ namespace lex4all
 
             lexDoc.Save(filename);
             Console.WriteLine("Done.");
+        }
+
+        static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict)
+        {
+            Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
+
+            foreach (KeyValuePair<String, String[]> kvp in wavDict) 
+            {
+                String word = kvp.Key;
+
+                String[] wavs = kvp.Value;
+                String[] prons = Algorithm.GeneratePronunciations(wavs);
+
+                lexDict[word] = prons;
+            }
+
+            return lexDict;
         }
     }
 }
