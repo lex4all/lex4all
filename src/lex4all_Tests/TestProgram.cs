@@ -12,6 +12,7 @@ namespace lex4allUnitTests
             //arrange
             //act
             //assert
+            Assert.IsTrue(true);
         }
     }
 }

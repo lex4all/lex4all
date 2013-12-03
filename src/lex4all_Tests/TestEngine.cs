@@ -18,7 +18,7 @@ namespace lex4allUnitTests
             try
             {
                 // act
-                testEngine.SetInputToWaveFile(@"C:\Users\Max\Documents\GitHub\lex4all\src\lex4all_Tests\01_ookan_A_1.wav");
+                testEngine.SetInputToWaveFile("../../../../data/audio/yor/14_ogorun_B_4.wav");
                 RecognitionResult thisResult = testEngine.Recognize();
             }
 
