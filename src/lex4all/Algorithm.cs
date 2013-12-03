@@ -106,7 +106,7 @@ namespace lex4all
             
             // return array of pronunciation sequences 
             List<Tuple<string, int, float>> bestResultList = resultsByPass[bestPass];
-            String[] prons = (from result in bestResultList select result.Item1).ToArray();
+            String[] prons = (from result in bestResultList select result.Item1.Replace('.',' ')).ToArray();
             return prons;
         }
 
