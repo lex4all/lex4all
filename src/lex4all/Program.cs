@@ -24,7 +24,9 @@ namespace lex4all
             Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
             String lexFile = Console.ReadLine();
 
-            WriteLexicon(wavDict, lexFile);
+            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
+
+            WriteLexicon(lexDict, lexFile);
 
             Console.ReadKey();
 
