@@ -10,9 +10,9 @@ using Microsoft.Speech.Recognition;
 
 namespace lex4all
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the lex4all Lexicon Builder!");
             Console.WriteLine();
@@ -36,7 +36,7 @@ namespace lex4all
         /// Gets the user input of words and audio files
         /// </summary>
         /// <returns>Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</returns>
-        static Dictionary<String, String[]> GatherData()
+        public static Dictionary<String, String[]> GatherData()
         {
             Dictionary<String, String[]> dataDict = new Dictionary<string,string[]>();
 
@@ -73,7 +73,7 @@ namespace lex4all
         /// </summary>
         /// <param name="vocabDict">Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</param>
         /// <param name="filename">Desired name for the output file</param>
-        static void WriteLexicon(Dictionary<String, String[]> vocabDict, String filename)
+        public static void WriteLexicon(Dictionary<String, String[]> vocabDict, String filename)
         {
             Console.Write("Writing lexicon to {0}... ", filename);
             XNamespace ns = @"http://www.w3.org/2005/01/pronunciation-lexicon";
@@ -96,7 +96,7 @@ namespace lex4all
         /// </summary>
         /// <param name="wavDict">Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</param>
         /// <returns>Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</returns>
-        static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict)
+        public static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict)
         {
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
 
