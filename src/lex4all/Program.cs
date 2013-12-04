@@ -19,14 +19,16 @@ namespace lex4all
 
             Dictionary<String, String[]> wavDict = GatherData();
 
+            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
 
+            XDocument lexDoc = DictToXml(lexDict);
 
             Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
             String lexFile = Console.ReadLine();
 
-            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
-
-            WriteLexicon(lexDict, lexFile);
+            Console.Write("Writing lexicon to {0}... ", lexFile);
+            lexDoc.Save(lexFile);
+            Console.WriteLine("Done.");
 
             Console.ReadKey();
 
@@ -72,10 +74,9 @@ namespace lex4all
         /// Writes a dictionary of word:pronunciations kvps to an XML file matching PLS
         /// </summary>
         /// <param name="vocabDict">Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</param>
-        /// <param name="filename">Desired name for the output file</param>
-        public static void WriteLexicon(Dictionary<String, String[]> vocabDict, String filename)
+        /// <returns>XML file as XDocument object</returns>
+        public static XDocument DictToXml(Dictionary<String, String[]> vocabDict)
         {
-            Console.Write("Writing lexicon to {0}... ", filename);
             XNamespace ns = @"http://www.w3.org/2005/01/pronunciation-lexicon";
             XDocument lexDoc = new XDocument(
                 new XDeclaration("1.0", "utf-8", "no"),
@@ -87,8 +88,7 @@ namespace lex4all
                         new XElement(ns + "grapheme", x),
                         vocabDict[x].Select(y => new XElement(ns + "phoneme", y))))));
 
-            lexDoc.Save(filename);
-            Console.WriteLine("Done.");
+            return lexDoc;
         }
 
         /// <summary>
