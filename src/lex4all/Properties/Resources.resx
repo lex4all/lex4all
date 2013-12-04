@@ -124,4 +124,7 @@
   <data name="en_US_wildcard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\en-US_wildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
+  <data name="sampleAudio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\01_ookan_A_1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

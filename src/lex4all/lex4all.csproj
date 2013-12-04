@@ -80,6 +80,7 @@
     <None Include="en-US_prefixwildcard.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\01_ookan_A_1.wav" />
     <Content Include="Resources\samplelexicon.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
