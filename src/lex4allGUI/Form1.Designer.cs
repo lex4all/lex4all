@@ -1,6 +1,6 @@
-﻿namespace lex4all
+﻿namespace lex4allGUI
 {
-    partial class lex4allForm
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form";
+            this.Text = "Form1";
         }
 
         #endregion
     }
 }
+

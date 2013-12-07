@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace lex4all
+namespace lex4allGUI
 {
-    public partial class lex4allForm : Form
+    public partial class Form1 : Form
     {
-        public lex4allForm()
+        public Form1()
         {
             InitializeComponent();
         }
