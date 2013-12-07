@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Speech.Recognition;
-using lex4all;
+using Microsoft.Speech.AudioFormat;
 
 namespace lex4allUnitTests
 {
@@ -18,7 +18,8 @@ namespace lex4allUnitTests
             try
             {
                 // act
-                testEngine.SetInputToWaveFile(@"C:\Users\Max\Documents\GitHub\lex4all\src\lex4all_Tests\01_ookan_A_1.wav");
+                testEngine.SetInputToAudioStream(lex4all.Properties.Resources.sampleAudio, 
+                    new SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono));
                 RecognitionResult thisResult = testEngine.Recognize();
             }
 

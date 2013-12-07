@@ -289,5 +289,14 @@ namespace lex4all.Properties {
                 return ResourceManager.GetString("en_US_wildcard", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.IO.UnmanagedMemoryStream ähnlich wie System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream sampleAudio {
+            get {
+                return ResourceManager.GetStream("sampleAudio", resourceCulture);
+            }
+        }
     }
 }
