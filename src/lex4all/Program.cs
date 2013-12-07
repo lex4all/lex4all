@@ -24,12 +24,18 @@ namespace lex4all
             Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
             String lexFile = Console.ReadLine();
 
-            WriteLexicon(wavDict, lexFile);
+            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
+
+            WriteLexicon(lexDict, lexFile);
 
             Console.ReadKey();
 
         }
 
+        /// <summary>
+        /// Gets the user input of words and audio files
+        /// </summary>
+        /// <returns>Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</returns>
         static Dictionary<String, String[]> GatherData()
         {
             Dictionary<String, String[]> dataDict = new Dictionary<string,string[]>();
@@ -62,6 +68,11 @@ namespace lex4all
             return dataDict;
         }
 
+        /// <summary>
+        /// Writes a dictionary of word:pronunciations kvps to an XML file matching PLS
+        /// </summary>
+        /// <param name="vocabDict">Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</param>
+        /// <param name="filename">Desired name for the output file</param>
         static void WriteLexicon(Dictionary<String, String[]> vocabDict, String filename)
         {
             Console.Write("Writing lexicon to {0}... ", filename);
@@ -80,6 +91,11 @@ namespace lex4all
             Console.WriteLine("Done.");
         }
 
+        /// <summary>
+        /// Passes the training audio files for each word to the Algorithm module for pronunciation generation
+        /// </summary>
+        /// <param name="wavDict">Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</param>
+        /// <returns>Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</returns>
         static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict)
         {
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
