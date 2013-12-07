@@ -34,6 +34,14 @@ namespace lex4all
 
         }
 
+        public static void BuildLexicon(Dictionary<string, string[]> wavDict, string filename)
+        {
+            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
+            XDocument lexDoc = DictToXml(lexDict);
+            lexDoc.Save(filename);
+
+        }
+
         /// <summary>
         /// Gets the user input of words and audio files
         /// </summary>
