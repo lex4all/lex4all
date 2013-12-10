@@ -47,9 +47,10 @@
             // 
             // chooseWav
             // 
-            this.chooseWav.Location = new System.Drawing.Point(272, 47);
+            this.chooseWav.Location = new System.Drawing.Point(363, 58);
+            this.chooseWav.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chooseWav.Name = "chooseWav";
-            this.chooseWav.Size = new System.Drawing.Size(146, 23);
+            this.chooseWav.Size = new System.Drawing.Size(195, 28);
             this.chooseWav.TabIndex = 0;
             this.chooseWav.Text = "Choose .wav file(s)";
             this.chooseWav.UseVisualStyleBackColor = true;
@@ -58,9 +59,10 @@
             // listView1
             // 
             this.listView1.CheckBoxes = true;
-            this.listView1.Location = new System.Drawing.Point(43, 90);
+            this.listView1.Location = new System.Drawing.Point(57, 111);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(375, 76);
+            this.listView1.Size = new System.Drawing.Size(499, 93);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -68,42 +70,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 13);
+            this.label1.Location = new System.Drawing.Point(28, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 13);
+            this.label1.Size = new System.Drawing.Size(229, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "Enter a word and chose .wav file(s)";
             // 
             // word1
             // 
-            this.word1.Location = new System.Drawing.Point(43, 49);
+            this.word1.Location = new System.Drawing.Point(57, 60);
+            this.word1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.word1.Name = "word1";
-            this.word1.Size = new System.Drawing.Size(100, 20);
+            this.word1.Size = new System.Drawing.Size(132, 22);
             this.word1.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 52);
+            this.label2.Location = new System.Drawing.Point(28, 64);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 13);
+            this.label2.Size = new System.Drawing.Size(20, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "1.";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 76);
+            this.label3.Location = new System.Drawing.Point(57, 94);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.Size = new System.Drawing.Size(77, 17);
             this.label3.TabIndex = 8;
             this.label3.Text = "Audio files:";
             // 
             // audioOK
             // 
-            this.audioOK.Location = new System.Drawing.Point(272, 173);
+            this.audioOK.Location = new System.Drawing.Point(363, 213);
+            this.audioOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.audioOK.Name = "audioOK";
-            this.audioOK.Size = new System.Drawing.Size(145, 23);
+            this.audioOK.Size = new System.Drawing.Size(193, 28);
             this.audioOK.TabIndex = 9;
             this.audioOK.Text = "Use these audio files";
             this.audioOK.UseVisualStyleBackColor = true;
@@ -111,9 +118,10 @@
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(348, 285);
+            this.startButton.Location = new System.Drawing.Point(464, 351);
+            this.startButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(160, 23);
+            this.startButton.Size = new System.Drawing.Size(213, 28);
             this.startButton.TabIndex = 10;
             this.startButton.Text = "BUILD LEXICON";
             this.startButton.UseVisualStyleBackColor = true;
@@ -121,9 +129,9 @@
             // 
             // lex4allForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 320);
+            this.ClientSize = new System.Drawing.Size(693, 394);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.audioOK);
             this.Controls.Add(this.label3);
@@ -132,8 +140,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.chooseWav);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "lex4allForm";
             this.Text = "lex4all Lexicon Builder";
+            this.Load += new System.EventHandler(this.lex4allForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -30,7 +30,20 @@ namespace lex4allGUI
             {
                 foreach (string wav in openFileDialog1.FileNames)
                 {
-                    listView1.Items.Add(wav);
+                    int flag = 0;
+
+                    for (int i = 0; i < listView1.Items.Count; i++)
+                    {
+                        if (listView1.Items[i].Text.Equals(wav))
+                        {
+                            flag = 1;
+                        }
+                    }
+
+                    if (flag == 0)
+                    {
+                        listView1.Items.Add(wav);
+                    }
                 }
 
             }
@@ -67,6 +80,11 @@ namespace lex4allGUI
             startButton.Text = "Working...";
             lex4all.Program.BuildLexicon(wavDict, "testGUIoutput.pls");
             startButton.Text = "Done!";
+        }
+
+        private void lex4allForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
