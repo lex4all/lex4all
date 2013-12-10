@@ -11,12 +11,12 @@ using lex4all;
 
 namespace lex4allGUI
 {
-    public partial class lex4allForm : Form
+    public partial class InputForm : Form
     {
-        public Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
+        //public Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
         
 
-        public lex4allForm()
+        public InputForm()
         {
             InitializeComponent();
         }
@@ -42,8 +42,10 @@ namespace lex4allGUI
 
                     if (flag == 0)
                     {
-                        listView1.Items.Add(wav);
-                    }
+                    listView1.Items.Add(wav);
+                   
+                   
+                }
                 }
 
             }
@@ -64,27 +66,20 @@ namespace lex4allGUI
             }
 
             String[] wavs = wavList.ToArray();
-            wavDict[word] = wavs;
+            lex4allGUI.MainForm.wavDict[word] = wavs;
+            lex4allGUI.Program.main.updateListView();
 
-            this.Controls.RemoveByKey("audioOK");
-            this.Controls.RemoveByKey("label3");
-            this.Controls.RemoveByKey("listView1");
+            this.Close();
+            lex4allGUI.Program.main.Show();
 
-            chooseWav.Text = wavDict[word].Length.ToString() + " files selected";
+            //this.Controls.RemoveByKey("audioOK");
+            //this.Controls.RemoveByKey("label3");
+            //this.Controls.RemoveByKey("listView1");
+
+            //chooseWav.Text = wavDict[word].Length.ToString() + " files selected";
             
         }
 
-        private void startButton_Click(object sender, EventArgs e)
-        {
-            startButton.Enabled = false;
-            startButton.Text = "Working...";
-            lex4all.Program.BuildLexicon(wavDict, "testGUIoutput.pls");
-            startButton.Text = "Done!";
-        }
-
-        private void lex4allForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

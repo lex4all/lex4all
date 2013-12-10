@@ -1,6 +1,6 @@
 ﻿namespace lex4allGUI
 {
-    partial class lex4allForm
+    partial class InputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.audioOK = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -79,60 +78,44 @@
             // 
             // word1
             // 
-            this.word1.Location = new System.Drawing.Point(57, 60);
-            this.word1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.word1.Location = new System.Drawing.Point(43, 49);
             this.word1.Name = "word1";
-            this.word1.Size = new System.Drawing.Size(132, 22);
+            this.word1.Size = new System.Drawing.Size(100, 20);
             this.word1.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 64);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(21, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 17);
+            this.label2.Size = new System.Drawing.Size(16, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "1.";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(57, 94);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(43, 76);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Audio files:";
             // 
             // audioOK
             // 
-            this.audioOK.Location = new System.Drawing.Point(363, 213);
-            this.audioOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.audioOK.Location = new System.Drawing.Point(272, 173);
             this.audioOK.Name = "audioOK";
-            this.audioOK.Size = new System.Drawing.Size(193, 28);
+            this.audioOK.Size = new System.Drawing.Size(145, 23);
             this.audioOK.TabIndex = 9;
             this.audioOK.Text = "Use these audio files";
             this.audioOK.UseVisualStyleBackColor = true;
             this.audioOK.Click += new System.EventHandler(this.audioOK_Click);
             // 
-            // startButton
+            // InputForm
             // 
-            this.startButton.Location = new System.Drawing.Point(464, 351);
-            this.startButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(213, 28);
-            this.startButton.TabIndex = 10;
-            this.startButton.Text = "BUILD LEXICON";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // lex4allForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 394);
-            this.Controls.Add(this.startButton);
+            this.ClientSize = new System.Drawing.Size(520, 320);
             this.Controls.Add(this.audioOK);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -140,10 +123,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.chooseWav);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "lex4allForm";
+            this.Name = "InputForm";
             this.Text = "lex4all Lexicon Builder";
-            this.Load += new System.EventHandler(this.lex4allForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,13 +134,12 @@
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button chooseWav;
-        private System.Windows.Forms.ListView listView1;
+        public System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox word1;
+        public System.Windows.Forms.TextBox word1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button audioOK;
-        private System.Windows.Forms.Button startButton;
 
 
     }

@@ -8,6 +8,7 @@ namespace lex4allGUI
 {
     static class Program
     {
+        public static MainForm main;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +17,8 @@ namespace lex4allGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new lex4allForm());
+            main = new MainForm();
+            Application.Run(main);
         }
     }
 }
