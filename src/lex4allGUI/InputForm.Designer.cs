@@ -46,9 +46,10 @@
             // 
             // chooseWav
             // 
-            this.chooseWav.Location = new System.Drawing.Point(272, 47);
+            this.chooseWav.Location = new System.Drawing.Point(363, 58);
+            this.chooseWav.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chooseWav.Name = "chooseWav";
-            this.chooseWav.Size = new System.Drawing.Size(146, 23);
+            this.chooseWav.Size = new System.Drawing.Size(195, 28);
             this.chooseWav.TabIndex = 0;
             this.chooseWav.Text = "Choose .wav file(s)";
             this.chooseWav.UseVisualStyleBackColor = true;
@@ -57,9 +58,10 @@
             // listView1
             // 
             this.listView1.CheckBoxes = true;
-            this.listView1.Location = new System.Drawing.Point(43, 90);
+            this.listView1.Location = new System.Drawing.Point(57, 111);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(375, 76);
+            this.listView1.Size = new System.Drawing.Size(499, 93);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -67,9 +69,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 13);
+            this.label1.Location = new System.Drawing.Point(28, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 13);
+            this.label1.Size = new System.Drawing.Size(229, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "Enter a word and chose .wav file(s)";
             // 
