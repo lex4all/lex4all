@@ -1,6 +1,6 @@
 ﻿namespace lex4allGUI
 {
-    partial class lex4allForm
+    partial class InputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.audioOK = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -109,22 +108,11 @@
             this.audioOK.UseVisualStyleBackColor = true;
             this.audioOK.Click += new System.EventHandler(this.audioOK_Click);
             // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(348, 285);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(160, 23);
-            this.startButton.TabIndex = 10;
-            this.startButton.Text = "BUILD LEXICON";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // lex4allForm
+            // InputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 320);
-            this.Controls.Add(this.startButton);
             this.Controls.Add(this.audioOK);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -132,7 +120,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.chooseWav);
-            this.Name = "lex4allForm";
+            this.Name = "InputForm";
             this.Text = "lex4all Lexicon Builder";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,13 +131,12 @@
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button chooseWav;
-        private System.Windows.Forms.ListView listView1;
+        public System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox word1;
+        public System.Windows.Forms.TextBox word1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button audioOK;
-        private System.Windows.Forms.Button startButton;
 
 
     }
