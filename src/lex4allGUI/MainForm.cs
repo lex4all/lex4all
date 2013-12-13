@@ -22,11 +22,11 @@ namespace lex4allGUI
 
         public void updateListView()
         {
-            listView1.Clear();
+            // listView1.Clear();
             dataGridView1.Rows.Clear();
             foreach (string word in wavDict.Keys)
             {
-                this.listView1.Items.Add(word);
+                // this.listView1.Items.Add(word);
                 dataGridView1.Rows.Add(new string[] { word, wavDict[word].Length.ToString() });
             }
 
@@ -48,18 +48,33 @@ namespace lex4allGUI
             wordInput.Show();
         }
 
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            { //button column is third column
+                    int row = e.RowIndex;
+                    string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
+                    InputForm wordInput = new InputForm();
+                    wordInput.word1.Text = word;
+                    foreach (string wav in wavDict[word])
+                    {
+                        wordInput.listView1.Items.Add(wav);
+                    }
+                    this.Hide();
+                    wordInput.Show();
+                
+            }
+            
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int row = e.RowIndex;
-            string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
-            InputForm wordInput = new InputForm();
-            wordInput.word1.Text = word;
-            foreach (string wav in wavDict[word])
-            {
-                wordInput.listView1.Items.Add(wav);
-            }
-            this.Hide();
-            wordInput.Show();
+
         }
 
         
