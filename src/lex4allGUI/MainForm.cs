@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace lex4allGUI
 {
@@ -35,10 +36,22 @@ namespace lex4allGUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.ShowDialog();
+
             startButton.Enabled = false;
+            addWordButton.Enabled = false;
+            dataGridView1.Enabled = false;
             startButton.Text = "Working...";
-            lex4all.Program.BuildLexicon(wavDict, "testGUIoutput.pls");
-            startButton.Text = "Done!";
+            Stopwatch watch = Stopwatch.StartNew();
+
+            lex4all.Program.BuildLexicon(wavDict, saveFileDialog1.FileName);
+            
+            watch.Stop();
+            System.Console.WriteLine(watch.ElapsedMilliseconds);
+            startButton.Text = "BUILD LEXICON";
+            startButton.Enabled = true;
+            addWordButton.Enabled = true;
+            dataGridView1.Enabled = true;
         }
 
         private void addWordButton_Click(object sender, EventArgs e)
@@ -71,12 +84,6 @@ namespace lex4allGUI
         {
 
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         
     }
 }

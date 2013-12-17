@@ -99,6 +99,11 @@ namespace lex4allGUI
             }
         }
 
+        private void InputForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
         
     }

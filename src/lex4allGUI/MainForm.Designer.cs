@@ -31,10 +31,11 @@
             this.startButton = new System.Windows.Forms.Button();
             this.addWordButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Audio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             this.startButton.TabIndex = 11;
             this.startButton.Text = "BUILD LEXICON";
             this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // addWordButton
             // 
@@ -85,7 +87,26 @@
             this.dataGridView1.Size = new System.Drawing.Size(490, 309);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Word
+            // 
+            this.Word.HeaderText = "Word";
+            this.Word.Name = "Word";
+            this.Word.ReadOnly = true;
+            // 
+            // Audio
+            // 
+            this.Audio.HeaderText = "Audio Files";
+            this.Audio.Name = "Audio";
+            this.Audio.ReadOnly = true;
+            // 
+            // buttonColumn
+            // 
+            this.buttonColumn.HeaderText = "";
+            this.buttonColumn.Name = "buttonColumn";
+            this.buttonColumn.ReadOnly = true;
+            this.buttonColumn.Text = "Edit";
+            this.buttonColumn.UseColumnTextForButtonValue = true;
             // 
             // tableLayoutPanel1
             // 
@@ -104,24 +125,11 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(498, 360);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
-            // Word
+            // saveFileDialog1
             // 
-            this.Word.HeaderText = "Word";
-            this.Word.Name = "Word";
-            this.Word.ReadOnly = true;
-            // 
-            // Audio
-            // 
-            this.Audio.HeaderText = "Audio Files";
-            this.Audio.Name = "Audio";
-            this.Audio.ReadOnly = true;
-            // 
-            // buttonColumn
-            // 
-            this.buttonColumn.HeaderText = "";
-            this.buttonColumn.Name = "buttonColumn";
-            this.buttonColumn.Text = "Edit";
-            this.buttonColumn.UseColumnTextForButtonValue = true;
+            this.saveFileDialog1.DefaultExt = "pls";
+            this.saveFileDialog1.FileName = "sample";
+            this.saveFileDialog1.Filter = "Lexicon Files | *.pls";
             // 
             // MainForm
             // 
@@ -148,6 +156,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Word;
         private System.Windows.Forms.DataGridViewTextBoxColumn Audio;
         private System.Windows.Forms.DataGridViewButtonColumn buttonColumn;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 
 
 
