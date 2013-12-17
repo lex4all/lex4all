@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lex4allUnitTests", "..\lex4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lex4allGUI", "..\lex4allGUI\lex4allGUI.csproj", "{4BA237D5-7FFA-4F3C-B1B8-9AD163133479}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lex4allEval", "..\lex4allEval\lex4allEval.csproj", "{05C00B28-FBAE-48DC-A1A8-FA6DE1361006}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4BA237D5-7FFA-4F3C-B1B8-9AD163133479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BA237D5-7FFA-4F3C-B1B8-9AD163133479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA237D5-7FFA-4F3C-B1B8-9AD163133479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C00B28-FBAE-48DC-A1A8-FA6DE1361006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C00B28-FBAE-48DC-A1A8-FA6DE1361006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C00B28-FBAE-48DC-A1A8-FA6DE1361006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C00B28-FBAE-48DC-A1A8-FA6DE1361006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
