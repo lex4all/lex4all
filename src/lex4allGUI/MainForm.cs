@@ -69,7 +69,7 @@ namespace lex4allGUI
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 2 && e.RowIndex > 0)
+            if (e.ColumnIndex == 2 && e.RowIndex > -1)
             { //button column is third column
                     int row = e.RowIndex;
                     string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
@@ -83,7 +83,7 @@ namespace lex4allGUI
                     wordInput.Show();
                 
             }
-            if (e.ColumnIndex == 3 && e.RowIndex > 0)
+            if (e.ColumnIndex == 3 && e.RowIndex > -1)
             {
                 int row = e.RowIndex;
                 string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
