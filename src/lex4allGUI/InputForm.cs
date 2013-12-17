@@ -45,6 +45,19 @@ namespace lex4allGUI
                     listView1.Items.Add(wav);
                     }
                 }
+
+            }
+        }
+
+        private void listView1_ItemChecked(object sender, EventArgs e)
+        {
+            if (listView1.CheckedItems.Count > 0)
+            {
+                rmCheckedBtn.Enabled = true;
+            }
+            else
+            {
+                rmCheckedBtn.Enabled = false;
             }
         }
 
@@ -96,6 +109,15 @@ namespace lex4allGUI
                 {
                     item.Remove();
                 }
+            }
+
+            if (listView1.CheckedItems.Count > 0)
+            {
+                rmCheckedBtn.Enabled = true;
+            }
+            else
+            {
+                rmCheckedBtn.Enabled = false;
             }
         }
 
