@@ -25,6 +25,11 @@ namespace lex4allGUI
         {
             // listView1.Clear();
             dataGridView1.Rows.Clear();
+            if (wavDict.Count > 0)
+            {
+                startButton.Enabled = true;
+            }
+
             foreach (string word in wavDict.Keys)
             {
                 // this.listView1.Items.Add(word);
@@ -36,22 +41,23 @@ namespace lex4allGUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {  
+                startButton.Enabled = false;
+                addWordButton.Enabled = false;
+                dataGridView1.Enabled = false;
+                startButton.Text = "Working...";
+                Stopwatch watch = Stopwatch.StartNew();
 
-            startButton.Enabled = false;
-            addWordButton.Enabled = false;
-            dataGridView1.Enabled = false;
-            startButton.Text = "Working...";
-            Stopwatch watch = Stopwatch.StartNew();
+                lex4all.Program.BuildLexicon(wavDict, saveFileDialog1.FileName);
 
-            lex4all.Program.BuildLexicon(wavDict, saveFileDialog1.FileName);
-            
-            watch.Stop();
-            System.Console.WriteLine(watch.ElapsedMilliseconds);
-            startButton.Text = "BUILD LEXICON";
-            startButton.Enabled = true;
-            addWordButton.Enabled = true;
-            dataGridView1.Enabled = true;
+                watch.Stop();
+                System.Console.WriteLine(watch.ElapsedMilliseconds);
+                startButton.Text = "BUILD LEXICON";
+                startButton.Enabled = true;
+                addWordButton.Enabled = true;
+                dataGridView1.Enabled = true;
+            }
         }
 
         private void addWordButton_Click(object sender, EventArgs e)
@@ -76,6 +82,16 @@ namespace lex4allGUI
                     this.Hide();
                     wordInput.Show();
                 
+            }
+            if (e.ColumnIndex == 3)
+            {
+                int row = e.RowIndex;
+                string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
+                if (MessageBox.Show("Are you sure you want to delete this word and its audio files?", "Remove word",MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    wavDict.Remove(word);
+                    updateListView();
+                }
             }
             
         }

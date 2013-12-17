@@ -31,11 +31,12 @@
             this.startButton = new System.Windows.Forms.Button();
             this.addWordButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Audio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -43,6 +44,7 @@
             // startButton
             // 
             this.startButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.startButton.Enabled = false;
             this.startButton.Location = new System.Drawing.Point(292, 324);
             this.startButton.Margin = new System.Windows.Forms.Padding(4);
             this.startButton.Name = "startButton";
@@ -75,7 +77,8 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Word,
             this.Audio,
-            this.buttonColumn});
+            this.buttonColumn,
+            this.Delete});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 2);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 4);
@@ -87,26 +90,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(490, 309);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // Word
-            // 
-            this.Word.HeaderText = "Word";
-            this.Word.Name = "Word";
-            this.Word.ReadOnly = true;
-            // 
-            // Audio
-            // 
-            this.Audio.HeaderText = "Audio Files";
-            this.Audio.Name = "Audio";
-            this.Audio.ReadOnly = true;
-            // 
-            // buttonColumn
-            // 
-            this.buttonColumn.HeaderText = "";
-            this.buttonColumn.Name = "buttonColumn";
-            this.buttonColumn.ReadOnly = true;
-            this.buttonColumn.Text = "Edit";
-            this.buttonColumn.UseColumnTextForButtonValue = true;
             // 
             // tableLayoutPanel1
             // 
@@ -131,6 +114,34 @@
             this.saveFileDialog1.FileName = "sample";
             this.saveFileDialog1.Filter = "Lexicon Files | *.pls";
             // 
+            // Word
+            // 
+            this.Word.HeaderText = "Word";
+            this.Word.Name = "Word";
+            this.Word.ReadOnly = true;
+            // 
+            // Audio
+            // 
+            this.Audio.HeaderText = "Audio Files";
+            this.Audio.Name = "Audio";
+            this.Audio.ReadOnly = true;
+            // 
+            // buttonColumn
+            // 
+            this.buttonColumn.HeaderText = "";
+            this.buttonColumn.Name = "buttonColumn";
+            this.buttonColumn.ReadOnly = true;
+            this.buttonColumn.Text = "Edit";
+            this.buttonColumn.UseColumnTextForButtonValue = true;
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Delete";
+            this.Delete.UseColumnTextForButtonValue = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -153,10 +164,11 @@
         private System.Windows.Forms.Button addWordButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Word;
         private System.Windows.Forms.DataGridViewTextBoxColumn Audio;
         private System.Windows.Forms.DataGridViewButtonColumn buttonColumn;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.DataGridViewButtonColumn Delete;
 
 
 
