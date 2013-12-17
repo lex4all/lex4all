@@ -70,6 +70,7 @@
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
+            this.listView1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
             // 
             // label1
             // 
@@ -160,6 +161,7 @@
             this.rmCheckedBtn.Text = "Remove checked files";
             this.rmCheckedBtn.UseVisualStyleBackColor = true;
             this.rmCheckedBtn.Click += new System.EventHandler(this.rmCheckedBtn_Click);
+            this.rmCheckedBtn.Enabled = false;
             // 
             // InputForm
             // 
