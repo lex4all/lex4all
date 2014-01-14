@@ -45,10 +45,9 @@
             // 
             this.startButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(487, 356);
-            this.startButton.Margin = new System.Windows.Forms.Padding(4);
+            this.startButton.Location = new System.Drawing.Point(365, 289);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(202, 28);
+            this.startButton.Size = new System.Drawing.Size(152, 23);
             this.startButton.TabIndex = 11;
             this.startButton.Text = "BUILD LEXICON";
             this.startButton.UseVisualStyleBackColor = true;
@@ -57,10 +56,9 @@
             // addWordButton
             // 
             this.addWordButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.addWordButton.Location = new System.Drawing.Point(4, 356);
-            this.addWordButton.Margin = new System.Windows.Forms.Padding(4);
+            this.addWordButton.Location = new System.Drawing.Point(3, 289);
             this.addWordButton.Name = "addWordButton";
-            this.addWordButton.Size = new System.Drawing.Size(100, 28);
+            this.addWordButton.Size = new System.Drawing.Size(75, 23);
             this.addWordButton.TabIndex = 12;
             this.addWordButton.Text = "Add word";
             this.addWordButton.UseVisualStyleBackColor = true;
@@ -82,15 +80,14 @@
             this.Delete});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 2);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 4);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.MinimumSize = new System.Drawing.Size(0, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.MinimumSize = new System.Drawing.Size(0, 10);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(685, 339);
+            this.dataGridView1.Size = new System.Drawing.Size(514, 275);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -132,11 +129,12 @@
             this.tableLayoutPanel1.Controls.Add(this.startButton, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.09524F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.90476F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 394);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(520, 320);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // saveFileDialog1
@@ -147,16 +145,15 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 394);
+            this.ClientSize = new System.Drawing.Size(520, 320);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "lex4all";
+            this.Text = "lex4all Lexicon Builder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
