@@ -126,17 +126,18 @@ namespace lex4allGUI
             }
         }
 
+        // Record and save a wave file
+        //private void record_Click(object sender, EventArgs e) {
+        //    WaveIn wi = new WaveIn();
+        //    wi.Preload(3000, 256*1024);
+        //    wi.Start();
+        //    wi.Save(fileName);
+        //}
+
         private void InputForm_Load(object sender, EventArgs e)
         {
             this.CenterToScreen();
         }
-
-        private void InputForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
-
-
         
     }
 }

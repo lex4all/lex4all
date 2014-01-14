@@ -100,6 +100,26 @@ namespace lex4allGUI
         {
             this.CenterToScreen();
         }
+
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Quit the program?", "Quit", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+           
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Quit the program?", "Quit", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                Application.Exit();
+            }
+        }
         
     }
 }
