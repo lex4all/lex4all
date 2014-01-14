@@ -43,14 +43,14 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.DefaultExt = "wav";
             this.openFileDialog1.Filter = "WAV files|*.wav";
             this.openFileDialog1.Multiselect = true;
             // 
             // chooseWav
             // 
             this.chooseWav.Location = new System.Drawing.Point(90, 300);
-            this.chooseWav.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.chooseWav.Margin = new System.Windows.Forms.Padding(5);
             this.chooseWav.Name = "chooseWav";
             this.chooseWav.Size = new System.Drawing.Size(176, 28);
             this.chooseWav.TabIndex = 0;
@@ -64,7 +64,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(90, 86);
-            this.listView1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.listView1.Margin = new System.Windows.Forms.Padding(5);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(598, 204);
             this.listView1.TabIndex = 3;
@@ -86,7 +86,7 @@
             // word1
             // 
             this.word1.Location = new System.Drawing.Point(89, 55);
-            this.word1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.word1.Margin = new System.Windows.Forms.Padding(4);
             this.word1.Name = "word1";
             this.word1.Size = new System.Drawing.Size(132, 22);
             this.word1.TabIndex = 6;
@@ -105,7 +105,7 @@
             // 
             this.audioOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.audioOK.Location = new System.Drawing.Point(496, 362);
-            this.audioOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.audioOK.Margin = new System.Windows.Forms.Padding(4);
             this.audioOK.Name = "audioOK";
             this.audioOK.Size = new System.Drawing.Size(193, 28);
             this.audioOK.TabIndex = 9;
@@ -139,7 +139,7 @@
             this.tableLayoutPanel1.Controls.Add(this.audioOK, 2, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.96911F));
@@ -153,15 +153,15 @@
             // 
             // rmCheckedBtn
             // 
+            this.rmCheckedBtn.Enabled = false;
             this.rmCheckedBtn.Location = new System.Drawing.Point(275, 299);
-            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
             this.rmCheckedBtn.Size = new System.Drawing.Size(176, 28);
             this.rmCheckedBtn.TabIndex = 10;
             this.rmCheckedBtn.Text = "Remove checked files";
             this.rmCheckedBtn.UseVisualStyleBackColor = true;
             this.rmCheckedBtn.Click += new System.EventHandler(this.rmCheckedBtn_Click);
-            this.rmCheckedBtn.Enabled = false;
             // 
             // InputForm
             // 
@@ -169,9 +169,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 394);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InputForm";
-            this.Text = "lex4all Lexicon Builder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "lex4all";
             this.Load += new System.EventHandler(this.InputForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

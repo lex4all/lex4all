@@ -66,6 +66,11 @@ namespace lex4allGUI
         {
 
             string word = word1.Text;
+            if (lex4allGUI.MainForm.wavDict.ContainsKey(word)) 
+            {
+                MessageBox.Show("Please choose another word.", "Error: Word does already exist");
+                return;
+            }
             List<String> wavList = new List<string>();
             foreach (ListViewItem item in listView1.Items)
             {
@@ -123,7 +128,12 @@ namespace lex4allGUI
 
         private void InputForm_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
+        }
 
+        private void InputForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
 
 

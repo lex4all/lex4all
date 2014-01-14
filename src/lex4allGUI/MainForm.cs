@@ -98,7 +98,7 @@ namespace lex4allGUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            this.CenterToScreen();
         }
         
     }
