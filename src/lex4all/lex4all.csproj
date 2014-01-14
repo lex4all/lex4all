@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="EngineControl.cs" />
+    <Compile Include="Evaluation.cs" />
     <Compile Include="GrammarControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
