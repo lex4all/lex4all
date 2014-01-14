@@ -8,8 +8,11 @@ using System.IO;
 
 namespace lex4all
 {
-    public class GrammarControl
-    {  
+    public static class GrammarControl
+    {
+        public static string wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
+        public static string prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
+
         /// <summary>
         /// is used by the algorithm to build the super wildcard grammar
         /// </summary>
@@ -30,7 +33,7 @@ namespace lex4all
             // string[] sfdasf = System.IO.File.ReadAllLines(readPath);
             // StreamReader rd = new StreamReader(readPath);
             // string allWords = rd.ReadToEnd();
-            string wildcardFile = lex4all.Properties.Resources.en_US_wildcard;
+            //string wildcardFile = lex4all.Properties.Resources.en_US_wildcard;
             string[] words = wildcardFile.Split(new string[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string word in words) {
                 if (word.Contains("\n"))
@@ -94,7 +97,7 @@ namespace lex4all
             // read prefix wildcard from text file 
             //(this is a smaller wildcard with just 1 and 2 phonemes which, with the prefix, makes up the first word of superwildcard grammar)
 
-            string prefixWildcardFile = lex4all.Properties.Resources.en_US_prefixwildcard;
+            //string prefixWildcardFile = lex4all.Properties.Resources.en_US_prefixwildcard;
             string[] words = prefixWildcardFile.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             // set up basic wildcard oneof
