@@ -9,6 +9,8 @@ namespace lex4allGUI
     static class Program
     {
         public static MainForm main;
+        public static StartForm start;
+        public static EvalForm eval;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,8 +19,10 @@ namespace lex4allGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            main = new MainForm();
-            Application.Run(main);
+            //main = new MainForm();
+            //Application.Run(main);
+            start = new StartForm();
+            Application.Run(start);
         }
     }
 }
