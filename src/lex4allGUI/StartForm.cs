@@ -45,11 +45,16 @@ namespace lex4allGUI
 
         private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Quit lex4all?", "Quit", MessageBoxButtons.OKCancel);
+            DialogResult result = MessageBox.Show("Quit lex4all?", "Confirm", MessageBoxButtons.OKCancel);
             if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
             }
+        }
+
+        private void StartForm_Load(object sender, EventArgs e)
+        {
+            this.CenterToScreen();
         }
 
 

@@ -104,7 +104,7 @@ namespace lex4allGUI
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Quit the lexicon builder?", "Quit", MessageBoxButtons.OKCancel);
+            DialogResult result = MessageBox.Show("Quit the lexicon builder?", "Confirm", MessageBoxButtons.OKCancel);
             if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
