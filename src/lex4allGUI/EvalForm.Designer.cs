@@ -34,13 +34,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.openLexDialog = new System.Windows.Forms.OpenFileDialog();
             this.startButton = new System.Windows.Forms.Button();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.buttonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Audio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.addWordButton = new System.Windows.Forms.Button();
             this.addAudioDialog = new System.Windows.Forms.OpenFileDialog();
+            this.addwordComboBox = new System.Windows.Forms.ComboBox();
+            this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Audio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -48,15 +49,16 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.53846F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.23077F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.19231F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.57692F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.03846F));
-            this.tableLayoutPanel1.Controls.Add(this.addWordButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.selectLexBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lexFileLabel, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.startButton, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.addWordButton, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.addwordComboBox, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -82,7 +84,7 @@
             // 
             this.lexFileLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lexFileLabel.AutoSize = true;
-            this.lexFileLabel.Location = new System.Drawing.Point(89, 8);
+            this.lexFileLabel.Location = new System.Drawing.Point(108, 8);
             this.lexFileLabel.Name = "lexFileLabel";
             this.lexFileLabel.Size = new System.Drawing.Size(80, 13);
             this.lexFileLabel.TabIndex = 1;
@@ -90,9 +92,9 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 8);
+            this.label1.Location = new System.Drawing.Point(3, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
@@ -100,7 +102,8 @@
             // 
             // openLexDialog
             // 
-            this.openLexDialog.FileName = "openFileDialog1";
+            this.openLexDialog.DefaultExt = "pls";
+            this.openLexDialog.Filter = "XML lexicon files (*.pls, *.xml)|*.pls;*.xml";
             // 
             // startButton
             // 
@@ -112,34 +115,6 @@
             this.startButton.TabIndex = 15;
             this.startButton.Text = "START EVALUATION";
             this.startButton.UseVisualStyleBackColor = true;
-            // 
-            // Delete
-            // 
-            this.Delete.HeaderText = "";
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Text = "Delete";
-            this.Delete.UseColumnTextForButtonValue = true;
-            // 
-            // buttonColumn
-            // 
-            this.buttonColumn.HeaderText = "";
-            this.buttonColumn.Name = "buttonColumn";
-            this.buttonColumn.ReadOnly = true;
-            this.buttonColumn.Text = "Edit";
-            this.buttonColumn.UseColumnTextForButtonValue = true;
-            // 
-            // Audio
-            // 
-            this.Audio.HeaderText = "Audio Files";
-            this.Audio.Name = "Audio";
-            this.Audio.ReadOnly = true;
-            // 
-            // Word
-            // 
-            this.Word.HeaderText = "Word";
-            this.Word.Name = "Word";
-            this.Word.ReadOnly = true;
             // 
             // dataGridView1
             // 
@@ -171,18 +146,59 @@
             // 
             this.addWordButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.addWordButton.Enabled = false;
-            this.addWordButton.Location = new System.Drawing.Point(3, 291);
+            this.addWordButton.Location = new System.Drawing.Point(108, 291);
             this.addWordButton.Name = "addWordButton";
-            this.addWordButton.Size = new System.Drawing.Size(80, 23);
+            this.addWordButton.Size = new System.Drawing.Size(98, 23);
             this.addWordButton.TabIndex = 16;
             this.addWordButton.Text = "Add word";
             this.addWordButton.UseVisualStyleBackColor = true;
+            this.addWordButton.Click += new System.EventHandler(this.addWordButton_Click);
             // 
             // addAudioDialog
             // 
             this.addAudioDialog.DefaultExt = "wav";
-            this.addAudioDialog.Filter = "WAV files|*.wav";
+            this.addAudioDialog.Filter = "WAV files (*.wav)|*.wav";
             this.addAudioDialog.Multiselect = true;
+            // 
+            // addwordComboBox
+            // 
+            this.addwordComboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addwordComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.addwordComboBox.Enabled = false;
+            this.addwordComboBox.FormattingEnabled = true;
+            this.addwordComboBox.Location = new System.Drawing.Point(5, 292);
+            this.addwordComboBox.MaxDropDownItems = 30;
+            this.addwordComboBox.Name = "addwordComboBox";
+            this.addwordComboBox.Size = new System.Drawing.Size(97, 21);
+            this.addwordComboBox.TabIndex = 17;
+            // 
+            // Word
+            // 
+            this.Word.HeaderText = "Word";
+            this.Word.Name = "Word";
+            this.Word.ReadOnly = true;
+            // 
+            // Audio
+            // 
+            this.Audio.HeaderText = "Audio Files";
+            this.Audio.Name = "Audio";
+            this.Audio.ReadOnly = true;
+            // 
+            // buttonColumn
+            // 
+            this.buttonColumn.HeaderText = "";
+            this.buttonColumn.Name = "buttonColumn";
+            this.buttonColumn.ReadOnly = true;
+            this.buttonColumn.Text = "Select audio";
+            this.buttonColumn.UseColumnTextForButtonValue = true;
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Remove word";
+            this.Delete.UseColumnTextForButtonValue = true;
             // 
             // EvalForm
             // 
@@ -212,11 +228,12 @@
         private System.Windows.Forms.OpenFileDialog openLexDialog;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button addWordButton;
+        private System.Windows.Forms.OpenFileDialog addAudioDialog;
+        private System.Windows.Forms.ComboBox addwordComboBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn Word;
         private System.Windows.Forms.DataGridViewTextBoxColumn Audio;
         private System.Windows.Forms.DataGridViewButtonColumn buttonColumn;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
-        private System.Windows.Forms.Button addWordButton;
-        private System.Windows.Forms.OpenFileDialog addAudioDialog;
     }
 }
