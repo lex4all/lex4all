@@ -50,7 +50,8 @@ namespace lex4all
         /// Performs recognition and computes accuracy on the given testing files.
         /// </summary>
         /// <param name="TestDict">Keys are words, values are lists of audio file names</param>
-        public static void Evaluate(Dictionary<String, String[]> testDict, string evalGramFilename)
+        /// <param name="evalGram">Grammar object referencing correct lexicon</param>
+        public static Dictionary<string, object> Evaluate(Dictionary<String, String[]> testDict, Grammar evalGram)
         {
             SpeechRecognitionEngine engine;
             int total = testDict.Keys.Count;
@@ -65,21 +66,21 @@ namespace lex4all
                 foreach (string wavfile in testDict[word])
                 {
                     engine = lex4all.EngineControl.getEngine();
-                    Grammar evalGram = new Grammar(evalGramFilename);
+                    //Grammar evalGram = new Grammar(evalGramFilename);
                     engine.LoadGrammar(evalGram);
                     engine.SetInputToWaveFile(wavfile);
 
-                    Console.Write(actual + " ");
+                    Debug.Write(actual + " ");
                     RecognitionResult result = engine.Recognize();
 
                     if (result == null)
                     {
-                        Console.WriteLine("unrecognized");
+                        Debug.WriteLine("unrecognized");
                         unrec++;
                     }
                     else
                     {
-                        Console.WriteLine(result.Text + " " + result.Confidence);
+                        Debug.WriteLine(result.Text + " " + result.Confidence);
                         if (result.Text == actual)
                         {
                             correct++;
@@ -94,8 +95,43 @@ namespace lex4all
                 }
             }
 
-            throw new NotImplementedException();
+            string report = GetReport(total, correct, incorrect, unrec);
 
+            Dictionary<string, object> evalResults = new Dictionary<string, object>();
+            evalResults["report"] = report;
+            evalResults["confusion"] = confusion;
+
+            return evalResults;
+
+        }
+
+        private static string GetReport(int total, int correct, int incorrect, int unrec)
+        {
+            float pctCorrect = (float)correct / (float)total;
+            float pctIncorrect = (float)incorrect / (float)total;
+            float pctUnrec = (float)unrec / (float)total;
+
+            object[] stats = new object[7];
+            stats[0] = total;
+            stats[1] = correct;
+            stats[2] = pctCorrect;
+            stats[3] = incorrect;
+            stats[4] = pctIncorrect;
+            stats[5] = unrec;
+            stats[6] = pctUnrec;
+
+            string template = @"
+Evaluation results:
+
+Words tested:   {0}
+
+Correct:        {1} ({2:0.00}%)
+Incorrect:      {3} ({4:0.00}%)
+Unrecognized:   {5} ({6:0.00}%)";
+
+            string report = String.Format(template, stats);
+
+            return report;
         }
     }
 }
