@@ -10,8 +10,8 @@ namespace lex4all
 {
     public static class GrammarControl
     {
-        public static string wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
-        public static string prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
+        public static string wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+        public static string prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
 
         /// <summary>
         /// is used by the algorithm to build the super wildcard grammar
