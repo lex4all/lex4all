@@ -22,9 +22,9 @@ namespace lex4all
         {
        
 
-            Debug.WriteLine("Starting to read lexicon");
+            //Debug.WriteLine("Starting to read lexicon");
             XDocument lexDoc = XDocument.Load(lexFileName);
-            Debug.WriteLine("lexdoc created");
+            //Debug.WriteLine("lexdoc created");
 
             XNamespace ns = "http://www.w3.org/2005/01/pronunciation-lexicon";
 
@@ -32,13 +32,14 @@ namespace lex4all
                 from el in lexDoc.Root.Elements(ns + "lexeme")
                 select el.Element(ns + "grapheme");
             foreach (XElement e in childList)
-                Debug.WriteLine(e.Value);
-            
+            {
+                //Debug.WriteLine(e.Value);
+            }
             string[] words =
                 (from lexeme in lexDoc.Root.Elements(ns+"lexeme")
                 select lexeme.Element(ns+"grapheme").Value).ToArray();
 
-            Debug.WriteLine(String.Join(",", words));
+            //Debug.WriteLine(String.Join(",", words));
 
             return words;
 
