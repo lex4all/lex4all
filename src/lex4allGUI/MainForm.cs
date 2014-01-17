@@ -43,6 +43,7 @@ namespace lex4allGUI
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {  
+           
                 startButton.Enabled = false;
                 addWordButton.Enabled = false;
                 dataGridView1.Enabled = false;

@@ -44,15 +44,15 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "wav";
-            this.openFileDialog1.Filter = "WAV files|*.wav";
+            this.openFileDialog1.Filter = "WAV files (*.wav)|*.wav";
             this.openFileDialog1.Multiselect = true;
             // 
             // chooseWav
             // 
-            this.chooseWav.Location = new System.Drawing.Point(90, 300);
-            this.chooseWav.Margin = new System.Windows.Forms.Padding(5);
+            this.chooseWav.Location = new System.Drawing.Point(68, 243);
+            this.chooseWav.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chooseWav.Name = "chooseWav";
-            this.chooseWav.Size = new System.Drawing.Size(176, 28);
+            this.chooseWav.Size = new System.Drawing.Size(132, 23);
             this.chooseWav.TabIndex = 0;
             this.chooseWav.Text = "Add .wav file(s)";
             this.chooseWav.UseVisualStyleBackColor = true;
@@ -63,10 +63,10 @@
             this.listView1.CheckBoxes = true;
             this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(90, 86);
-            this.listView1.Margin = new System.Windows.Forms.Padding(5);
+            this.listView1.Location = new System.Drawing.Point(68, 71);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(598, 204);
+            this.listView1.Size = new System.Drawing.Size(464, 164);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -76,38 +76,35 @@
             // 
             this.label1.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
-            this.label1.Location = new System.Drawing.Point(5, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 17);
+            this.label1.Size = new System.Drawing.Size(173, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Enter a word and chose .wav file(s)";
             // 
             // word1
             // 
-            this.word1.Location = new System.Drawing.Point(89, 55);
-            this.word1.Margin = new System.Windows.Forms.Padding(4);
+            this.word1.Location = new System.Drawing.Point(67, 44);
             this.word1.Name = "word1";
-            this.word1.Size = new System.Drawing.Size(132, 22);
+            this.word1.Size = new System.Drawing.Size(100, 20);
             this.word1.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 81);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(3, 67);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Audio files:";
             // 
             // audioOK
             // 
             this.audioOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.audioOK.Location = new System.Drawing.Point(496, 362);
-            this.audioOK.Margin = new System.Windows.Forms.Padding(4);
+            this.audioOK.Location = new System.Drawing.Point(388, 294);
             this.audioOK.Name = "audioOK";
-            this.audioOK.Size = new System.Drawing.Size(193, 28);
+            this.audioOK.Size = new System.Drawing.Size(145, 23);
             this.audioOK.TabIndex = 9;
             this.audioOK.Text = "Save and go back";
             this.audioOK.UseVisualStyleBackColor = true;
@@ -116,10 +113,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 51);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(3, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 17);
+            this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Word:";
             // 
@@ -139,7 +135,6 @@
             this.tableLayoutPanel1.Controls.Add(this.audioOK, 2, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.96911F));
@@ -147,17 +142,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 394);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(520, 320);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // rmCheckedBtn
             // 
             this.rmCheckedBtn.Enabled = false;
-            this.rmCheckedBtn.Location = new System.Drawing.Point(275, 299);
-            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.rmCheckedBtn.Location = new System.Drawing.Point(207, 242);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
-            this.rmCheckedBtn.Size = new System.Drawing.Size(176, 28);
+            this.rmCheckedBtn.Size = new System.Drawing.Size(132, 23);
             this.rmCheckedBtn.TabIndex = 10;
             this.rmCheckedBtn.Text = "Remove checked files";
             this.rmCheckedBtn.UseVisualStyleBackColor = true;
@@ -165,12 +159,11 @@
             // 
             // InputForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 394);
+            this.ClientSize = new System.Drawing.Size(520, 320);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "lex4all";

@@ -129,7 +129,7 @@
             this.tableLayoutPanel1.Controls.Add(this.startButton, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.09524F));
@@ -141,7 +141,7 @@
             // 
             this.saveFileDialog1.DefaultExt = "pls";
             this.saveFileDialog1.FileName = "sample";
-            this.saveFileDialog1.Filter = "Lexicon Files | *.pls";
+            this.saveFileDialog1.Filter = "Pronunciation Lexicon (*.pls) | *.pls|XML file (*.xml)|*.xml";
             // 
             // MainForm
             // 
