@@ -139,7 +139,7 @@ namespace lex4all
             string[] words = testDict.Keys.ToArray();
 
             // set up tally variables
-            int total = words.Count();
+            int total = 0;
             int correct = 0;
             int incorrect = 0;
             int unrec = 0;
@@ -163,8 +163,11 @@ namespace lex4all
 
                 string actual = word;
 
+                // recognize audio & tally results
                 foreach (string wavfile in testDict[word])
                 {
+                    total++;
+
                     engine = lex4all.EngineControl.getEngine();
                     Grammar evalGram = getEvalGram(words, lexFile);
                     engine.LoadGrammar(evalGram);
@@ -225,7 +228,7 @@ namespace lex4all
             string template = @"
 Evaluation results:
 
-Words tested:   {0}
+Audio files tested:   {0}
 
 Correct:        {1} ({2:0.00}%)
 Incorrect:      {3} ({4:0.00}%)
