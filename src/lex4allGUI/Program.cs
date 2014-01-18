@@ -24,5 +24,6 @@ namespace lex4allGUI
             start = new StartForm();
             Application.Run(start);
         }
+
     }
 }
