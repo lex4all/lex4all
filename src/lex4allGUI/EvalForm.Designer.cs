@@ -115,6 +115,7 @@
             this.startButton.TabIndex = 15;
             this.startButton.Text = "START EVALUATION";
             this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // dataGridView1
             // 

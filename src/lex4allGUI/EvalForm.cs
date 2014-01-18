@@ -138,6 +138,11 @@ namespace lex4allGUI
             }
         }
 
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         // Form event handlers
@@ -160,6 +165,8 @@ namespace lex4allGUI
         {
             lex4allGUI.Program.start.Show();
         }
+
+
 
     }
 }
