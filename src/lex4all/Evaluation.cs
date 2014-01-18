@@ -55,8 +55,9 @@ namespace lex4all
         public static Grammar getEvalGram(string[] words, string lexFile)
         {
             // write evaluation grammar to file
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //TODO change to temp path
-            string gramFilePath = Path.Combine(path, "debugEvalGram.xml");
+            //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
+            string path = Path.GetTempPath();
+            string gramFilePath = Path.Combine(path, "lex4allEvalGrammar.xml");
 
             XNamespace ns = @"http://www.w3.org/2001/06/grammar";
             XDocument gramDoc = new XDocument(
@@ -208,9 +209,9 @@ namespace lex4all
         /// </summary>
         private static string GetReport(int total, int correct, int incorrect, int unrec)
         {
-            float pctCorrect = (float)correct / (float)total;
-            float pctIncorrect = (float)incorrect / (float)total;
-            float pctUnrec = (float)unrec / (float)total;
+            float pctCorrect = ((float)correct / (float)total) * 100f;
+            float pctIncorrect = ((float)incorrect / (float)total) * 100f;
+            float pctUnrec = ((float)unrec / (float)total) * 100f;
 
             object[] stats = new object[7];
             stats[0] = total;
