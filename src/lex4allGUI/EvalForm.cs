@@ -163,6 +163,15 @@ namespace lex4allGUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<string, string[]> kvp in evalDict)
+            {
+                if (kvp.Value.Count() == 0)
+                {
+                    MessageBox.Show("Please select at least one audio file for each word.", "Audio file(s) missing");
+                    return;
+                }
+            }
+
             startButton.Enabled = false;
             startButton.Text = "Working...";
             selectLexBtn.Enabled = false;
