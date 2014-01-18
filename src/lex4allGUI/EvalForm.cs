@@ -192,6 +192,24 @@ namespace lex4allGUI
             lex4allGUI.Program.start.Show();
         }
 
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex == 1)
+            {
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[1];
+                string word = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string ttText;
+                if (evalDict[word].Count() > 0)
+                {
+                    string files = String.Join("\n", evalDict[word]);
+                    ttText = "Selected audio files:\n" + files;
+                }
+                else ttText = "No audio files selected.";
+                
+                cell.ToolTipText = ttText;
+            }
+        }
+
 
 
     }
