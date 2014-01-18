@@ -43,6 +43,7 @@ namespace lex4allGUI
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {  
+           
                 startButton.Enabled = false;
                 addWordButton.Enabled = false;
                 dataGridView1.Enabled = false;
@@ -108,21 +109,12 @@ namespace lex4allGUI
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Quit the program?", "Quit", MessageBoxButtons.OKCancel);
+            DialogResult result = MessageBox.Show("Quit the lexicon builder?", "Confirm", MessageBoxButtons.OKCancel);
             if (result == DialogResult.Cancel)
             {
                 e.Cancel = true;
             }
            
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Quit the program?", "Quit", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK)
-            {
-                Application.Exit();
-            }
         }
 
         private void MainForm_HelpButtonClicked(object sender, CancelEventArgs e)
@@ -131,6 +123,11 @@ namespace lex4allGUI
             (MessageBox.Show("This application supports you in building your own lexicon. For further information have a look on our wikipage. Do you want to be be redirected immediately?", "Welcome to lex4all", MessageBoxButtons.YesNo)
                 == DialogResult.Yes)
             {System.Diagnostics.Process.Start("http://lex4all.github.io/lex4all/");}
+        }
+
+        public void UpdateProgressBar(int amount)
+        {
+            //progressBar.Increment(amount);
         }
         
     }

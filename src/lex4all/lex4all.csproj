@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="EngineControl.cs" />
+    <Compile Include="Evaluation.cs" />
     <Compile Include="GrammarControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,11 +72,15 @@
     <None Include="Resources\en-US_wildcard.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="en-US_prefixwildcard.txt" />
+    <None Include="Resources\en-US_prefixwildcard.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\01_ookan_A_1.wav" />
+    <None Include="Resources\en-US_shortwildcard.txt" />
     <Content Include="Resources\samplelexicon.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -107,6 +107,7 @@ namespace lex4all
         public static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict)
         {
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
+            int wordProportion = 100/wavDict.Count;
 
             foreach (KeyValuePair<String, String[]> kvp in wavDict) 
             {
@@ -114,6 +115,9 @@ namespace lex4all
 
                 String[] wavs = kvp.Value;
                 String[] prons = Algorithm.GeneratePronunciations(wavs);
+
+                // update progress bar
+                //lex4allGUI.MainForm.UpdateProgressBar(wordProportion);
 
                 lexDict[word] = prons;
             }
