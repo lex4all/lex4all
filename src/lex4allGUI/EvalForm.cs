@@ -227,6 +227,20 @@ namespace lex4allGUI
             e.PaintHeader(DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentBackground);
         }
 
+        private void EvalForm_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            string helpMsg = @"
+This tool enables you to evaluate the word recognition accuracy of an existing lexicon. To use the tool:
+- Click ""Select lexicon"" and choose the lexicon file you want to evaluate.
+- The words (graphemes) in the lexicon will be automatically added. 
+- Remove or add words using the ""Remove word"" and ""Add word"" buttons (only words in the lexicon may be included).
+- For each word, click ""Select audio"" and choose at least one audio file to be evaluated.
+- Click ""Start Evaluation"".
+- The program will attempt to recognize each audio file against the provided lexicon. After a few seconds, the accuracy results will be displayed.";
+            MessageBox.Show(helpMsg, "lex4all Evaluation Tool");
+            
+        }
+
 
 
     }

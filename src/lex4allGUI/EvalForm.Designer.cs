@@ -209,9 +209,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 320);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.HelpButton = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EvalForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "lex4all Evaluation Tool";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.EvalForm_HelpButtonClicked);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EvalForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EvalForm_FormClosed);
             this.Load += new System.EventHandler(this.EvalForm_Load);
