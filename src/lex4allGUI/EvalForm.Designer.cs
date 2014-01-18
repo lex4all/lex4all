@@ -42,6 +42,7 @@
             this.addwordComboBox = new System.Windows.Forms.ComboBox();
             this.openLexDialog = new System.Windows.Forms.OpenFileDialog();
             this.addAudioDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveLogDialog = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -203,6 +204,11 @@
             this.addAudioDialog.Filter = "WAV files (*.wav)|*.wav";
             this.addAudioDialog.Multiselect = true;
             // 
+            // saveLogDialog
+            // 
+            this.saveLogDialog.DefaultExt = "csv";
+            this.saveLogDialog.Filter = "Comma-Separated Values|*.csv|Text files|*.txt";
+            // 
             // EvalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,5 +248,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Audio;
         private System.Windows.Forms.DataGridViewButtonColumn buttonColumn;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
+        private System.Windows.Forms.SaveFileDialog saveLogDialog;
     }
 }
