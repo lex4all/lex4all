@@ -42,8 +42,19 @@ namespace lex4allGUI
         {
             wordsInLex = lex4all.Evaluation.ReadLexicon(lexFile);
             Debug.WriteLine(String.Format("wordsInLex.Count() = {0}", wordsInLex.Count()));
+
+            if (evalDict.Keys.Count > 0)
+            {
+                DialogResult keepData = MessageBox.Show(@"Keep currently selected audio files? (Select ""No"" to clear all selected audio and specify new files for each word manually.)", "Keep current files?", MessageBoxButtons.YesNo);
+                if (keepData == DialogResult.No)
+                    evalDict.Clear();
+            }
+            
             foreach (string word in wordsInLex)
-                evalDict.Add(word, new string[0]);
+            {
+                if (evalDict.ContainsKey(word) == false)
+                    evalDict.Add(word, new string[0]);
+            }
 
             updateGridView();
         }
@@ -140,9 +151,22 @@ namespace lex4allGUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            startButton.Enabled = false;
+            startButton.Text = "Working...";
+            selectLexBtn.Enabled = false;
+            addwordComboBox.Enabled = false;
+            addWordButton.Enabled = false;
+            dataGridView1.Enabled = false;
+
             string statsMsg;
             Dictionary<string, Dictionary<string, int>> confusMatrix = lex4all.Evaluation.Evaluate(evalDict, lexFile, out statsMsg);
             MessageBox.Show(statsMsg);
+
+            startButton.Text = "START EVALUATION";
+            startButton.Enabled = true;
+            selectLexBtn.Enabled = true;
+            dataGridView1.Enabled = true;
+            updateGridView();
         }
 
 
