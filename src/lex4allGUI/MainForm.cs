@@ -14,6 +14,7 @@ namespace lex4allGUI
     public partial class MainForm : Form
     {
         public static Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
+        public static int numProns = 5;
 
         public MainForm()
         {
@@ -50,7 +51,7 @@ namespace lex4allGUI
                 startButton.Text = "Working...";
                 Stopwatch watch = Stopwatch.StartNew();
 
-                lex4all.Program.BuildLexicon(wavDict, saveFileDialog1.FileName);
+                lex4all.Program.BuildLexicon(wavDict, numProns, saveFileDialog1.FileName);
 
                 watch.Stop();
                 System.Console.WriteLine(watch.ElapsedMilliseconds);
