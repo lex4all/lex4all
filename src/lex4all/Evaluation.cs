@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Speech.Recognition;
+using Microsoft.Speech.Recognition.SrgsGrammar;
 using System.Diagnostics;
+using System.IO;
 
 namespace lex4all
 {
@@ -42,6 +44,42 @@ namespace lex4all
             return words;    
         }
 
+        /// <summary>
+        /// Gets an evaluation grammar with the proper lexicon reference and word choices.
+        /// For some reason (bug in Microsoft.Speech), the grammar has to be written to file
+        /// for this to work. Not sure it makes sense to let the user choose save path.
+        /// </summary>
+        /// <param name="words">Array of words to be included</param>
+        /// <param name="lexFile">Path to lexicon file</param>
+        /// <returns>Grammar object (to be loaded into engine)</returns>
+        public static Grammar getEvalGram(string[] words, string lexFile)
+        {
+            // write evaluation grammar to file
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //TODO change to temp path
+            string gramFilePath = Path.Combine(path, "debugEvalGram.xml");
+
+            XNamespace ns = @"http://www.w3.org/2001/06/grammar";
+            XDocument gramDoc = new XDocument(
+                new XDeclaration("1.0", "utf-8", "no"),
+                new XElement(ns + "grammar",
+                    new XAttribute("version", "1.0"),
+                    new XAttribute(XNamespace.Xml + "lang", "en-US"),
+                    new XAttribute(XNamespace.Xmlns + "sapi", @"http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions"),
+                    new XAttribute("root", "Main"),
+                    new XElement(ns + "lexicon",
+                        new XAttribute("uri", lexFile)),
+                    new XElement(ns + "rule",
+                        new XAttribute("id", "Main"),
+                        new XElement(ns + "one-of",
+                            words.Select(x => new XElement(ns + "item", x))))));
+
+            gramDoc.Save(gramFilePath);
+
+            // read from file and return Grammar object
+            Grammar evalGram = new Grammar(gramFilePath);
+            return evalGram;
+
+        }
 
         /// <summary>
         /// Gets an evaluation grammar with the proper lexicon reference and word choices.
@@ -49,19 +87,53 @@ namespace lex4all
         /// <param name="words">Array of words to be included</param>
         /// <param name="lexFile">Path to lexicon file</param>
         /// <returns>Grammar object (to be loaded into engine)</returns>
-        private static Grammar getEvalGram(string[] words, string lexFile)
-        {
-            throw new NotImplementedException();
-        }
+        //public static Grammar getEvalGram(string[] words, string lexFile)
+        //{
+        //    // one-of object with all words
+        //    SrgsOneOf oneOf = new SrgsOneOf();
+        //    foreach (string word in words)
+        //    {
+        //        SrgsItem wordItem = new SrgsItem(word);
+        //        oneOf.Add(wordItem);
+        //    }
+
+        //    // main rule containing the one-of
+        //    SrgsRule mainRule = new SrgsRule("Main");
+        //    mainRule.Elements.Add(oneOf);
+
+        //    // create document, add relevant properties & main rule
+        //    SrgsDocument evalDoc = new SrgsDocument();
+        //    evalDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ups;
+        //    evalDoc.Culture = new System.Globalization.CultureInfo("en-US");
+        //    evalDoc.AddLexicon(new Uri(lexFile));
+        //    evalDoc.Rules.Add(mainRule);
+        //    evalDoc.Root = mainRule;
+
+        //    // print for debugging
+        //    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        //    XmlWriterSettings settings = new XmlWriterSettings();
+        //    settings.Indent = true;
+        //    string srgsDocumentFile = Path.Combine(path, "debugEvalGram.xml");
+        //    XmlWriter writer = XmlWriter.Create(srgsDocumentFile, settings);
+        //    evalDoc.WriteSrgs(writer);
+        //    writer.Close();
+
+        //    // get Grammar object from SrgsDocument
+        //    Grammar evalGram = new Grammar(srgsDocumentFile);
+        //    return evalGram;
+
+        //}
 
 
         /// <summary>
-        /// Performs recognition and computes accuracy on the given testing files.
+        /// Performs evaluation on given words/audio using the provided lexicon.
+        /// Uses getEvalGram() to make an evaluation grammar with the given words/lexicon.
         /// </summary>
-        /// <param name="TestDict">Keys are words, values are lists of audio file names</param>
-        /// <param name="evalGram">Grammar object referencing correct lexicon</param>
-        /// <returns>Dictionary of form {"report":string, "confusion":Dictionary}</returns>
-        public static Dictionary<string, object> Evaluate(Dictionary<String, String[]> testDict, string lexFile)
+        /// <param name="testDict">Words/audio</param>
+        /// <param name="lexFile">Path to lexicon</param>
+        /// <param name="report">OUTPUT parameter to also return message with eval stats</param>
+        /// <returns>Confusion matrix as dictionary</returns>
+        public static Dictionary<string, Dictionary<string, int>> Evaluate(Dictionary<String, String[]> testDict, string lexFile, out string report)
         {
             string[] words = testDict.Keys.ToArray();
 
@@ -119,13 +191,13 @@ namespace lex4all
                 }
             }
 
-            string report = GetReport(total, correct, incorrect, unrec);
+            report = GetReport(total, correct, incorrect, unrec);
 
-            Dictionary<string, object> evalResults = new Dictionary<string, object>();
-            evalResults["report"] = report;
-            evalResults["confusion"] = confusion;
+            //Dictionary<string, object> evalResults = new Dictionary<string, object>();
+            //evalResults["stats"] = report;
+            //evalResults["confusion"] = confusion;
 
-            return evalResults;
+            return confusion;
 
         }
 
