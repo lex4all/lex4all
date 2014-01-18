@@ -14,29 +14,29 @@ namespace lex4all
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the lex4all Lexicon Builder!");
-            Console.WriteLine();
+            //Console.WriteLine("Welcome to the lex4all Lexicon Builder!");
+            //Console.WriteLine();
 
-            Dictionary<String, String[]> wavDict = GatherData();
+            //Dictionary<String, String[]> wavDict = GatherData();
 
-            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
+            //Dictionary<String, String[]> lexDict = GetLexDict(wavDict, numProns);
 
-            XDocument lexDoc = DictToXml(lexDict);
+            //XDocument lexDoc = DictToXml(lexDict);
 
-            Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
-            String lexFile = Console.ReadLine();
+            //Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
+            //String lexFile = Console.ReadLine();
 
-            Console.Write("Writing lexicon to {0}... ", lexFile);
-            lexDoc.Save(lexFile);
-            Console.WriteLine("Done.");
+            //Console.Write("Writing lexicon to {0}... ", lexFile);
+            //lexDoc.Save(lexFile);
+            //Console.WriteLine("Done.");
 
-            Console.ReadKey();
+            //Console.ReadKey();
 
         }
 
-        public static void BuildLexicon(Dictionary<string, string[]> wavDict, string filename)
+        public static void BuildLexicon(Dictionary<string, string[]> wavDict, int numProns, string filename)
         {
-            Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
+            Dictionary<String, String[]> lexDict = GetLexDict(wavDict, numProns);
             XDocument lexDoc = DictToXml(lexDict);
             lexDoc.Save(filename);
 
@@ -104,7 +104,7 @@ namespace lex4all
         /// </summary>
         /// <param name="wavDict">Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</param>
         /// <returns>Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</returns>
-        public static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict)
+        public static Dictionary<String, String[]> GetLexDict(Dictionary<String, String[]> wavDict, int numProns)
         {
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
 
@@ -115,10 +115,12 @@ namespace lex4all
                 String[] wavs = kvp.Value;
                 String[] prons = Algorithm.GeneratePronunciations(wavs);
 
-                lexDict[word] = prons;
+                lexDict[word] = prons.Take(numProns).ToArray();
             }
 
             return lexDict;
         }
+
+
     }
 }
