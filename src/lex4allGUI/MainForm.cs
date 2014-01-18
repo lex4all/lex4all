@@ -67,10 +67,19 @@ namespace lex4allGUI
 
                 MessageBox.Show("Lexicon was built in " + elapsedTime + "\n" + "Saved as " + saveFileDialog1.FileName, "Done");
                 
-                startButton.Text = "BUILD LEXICON";
-                startButton.Enabled = true;
-                addWordButton.Enabled = true;
-                dataGridView1.Enabled = true;
+                if (MessageBox.Show("Build another lexicon?", "Continue", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    startButton.Text = "BUILD LEXICON";
+                    startButton.Enabled = true;
+                    addWordButton.Enabled = true;
+                    dataGridView1.Enabled = true;
+                }
+                else
+                {
+                    this.Close();
+                }
+
+                
             }
         }
 
@@ -166,6 +175,25 @@ namespace lex4allGUI
         {
             e.PaintHeader(DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentBackground);
 
+        }
+
+        private void shortGramChkBx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (shortGramChkBx.Checked == true)
+            {
+                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+            }
+            else
+            {
+                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
+                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
+            }
+        }
+
+        private void numPronsUpDn_ValueChanged(object sender, EventArgs e)
+        {
+            numProns = (int)numPronsUpDn.Value;
         }
         
     }

@@ -50,8 +50,8 @@
             // 
             // chooseWav
             // 
-            this.chooseWav.Location = new System.Drawing.Point(68, 243);
-            this.chooseWav.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chooseWav.Location = new System.Drawing.Point(68, 417);
+            this.chooseWav.Margin = new System.Windows.Forms.Padding(4);
             this.chooseWav.Name = "chooseWav";
             this.chooseWav.Size = new System.Drawing.Size(132, 23);
             this.chooseWav.TabIndex = 0;
@@ -64,10 +64,10 @@
             this.listView1.CheckBoxes = true;
             this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(68, 71);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listView1.Location = new System.Drawing.Point(68, 122);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(464, 164);
+            this.listView1.Size = new System.Drawing.Size(464, 287);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -75,9 +75,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
-            this.label1.Location = new System.Drawing.Point(4, 0);
+            this.label1.Location = new System.Drawing.Point(4, 26);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(173, 13);
@@ -86,7 +87,7 @@
             // 
             // word1
             // 
-            this.word1.Location = new System.Drawing.Point(67, 44);
+            this.word1.Location = new System.Drawing.Point(67, 68);
             this.word1.Name = "word1";
             this.word1.Size = new System.Drawing.Size(100, 20);
             this.word1.TabIndex = 6;
@@ -94,7 +95,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 67);
+            this.label3.Location = new System.Drawing.Point(3, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 8;
@@ -102,8 +103,8 @@
             // 
             // audioOK
             // 
-            this.audioOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.audioOK.Location = new System.Drawing.Point(388, 294);
+            this.audioOK.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.audioOK.Location = new System.Drawing.Point(388, 473);
             this.audioOK.Name = "audioOK";
             this.audioOK.Size = new System.Drawing.Size(145, 23);
             this.audioOK.TabIndex = 9;
@@ -114,7 +115,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 41);
+            this.label2.Location = new System.Drawing.Point(3, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 7;
@@ -139,19 +140,19 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.96911F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.22248F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.41218F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.08665F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(520, 320);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.286385F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 511);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // rmCheckedBtn
             // 
             this.rmCheckedBtn.Enabled = false;
-            this.rmCheckedBtn.Location = new System.Drawing.Point(207, 242);
+            this.rmCheckedBtn.Location = new System.Drawing.Point(207, 416);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
             this.rmCheckedBtn.Size = new System.Drawing.Size(132, 23);
             this.rmCheckedBtn.TabIndex = 10;
@@ -161,8 +162,8 @@
             // 
             // backButton
             // 
-            this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.backButton.Location = new System.Drawing.Point(458, 3);
+            this.backButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.backButton.Location = new System.Drawing.Point(458, 20);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 24);
             this.backButton.TabIndex = 11;
@@ -174,12 +175,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 320);
+            this.ClientSize = new System.Drawing.Size(534, 511);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "InputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "lex4all";
+            this.Text = "lex4all Lexicon Builder";
             this.Load += new System.EventHandler(this.InputForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
