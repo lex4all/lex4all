@@ -130,6 +130,11 @@ namespace lex4allGUI
         {
             //progressBar.Increment(amount);
         }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lex4allGUI.Program.start.Show();
+        }
         
     }
 }
