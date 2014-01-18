@@ -20,8 +20,6 @@ namespace lex4all
         /// <returns>Array of words</returns>
         public static string[] ReadLexicon(string lexFileName)
         {
-       
-
             //Debug.WriteLine("Starting to read lexicon");
             XDocument lexDoc = XDocument.Load(lexFileName);
             //Debug.WriteLine("lexdoc created");
@@ -41,32 +39,61 @@ namespace lex4all
 
             //Debug.WriteLine(String.Join(",", words));
 
-            return words;
-
-            
+            return words;    
         }
+
+
+        /// <summary>
+        /// Gets an evaluation grammar with the proper lexicon reference and word choices.
+        /// </summary>
+        /// <param name="words">Array of words to be included</param>
+        /// <param name="lexFile">Path to lexicon file</param>
+        /// <returns>Grammar object (to be loaded into engine)</returns>
+        private static Grammar getEvalGram(string[] words, string lexFile)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /// <summary>
         /// Performs recognition and computes accuracy on the given testing files.
         /// </summary>
         /// <param name="TestDict">Keys are words, values are lists of audio file names</param>
         /// <param name="evalGram">Grammar object referencing correct lexicon</param>
-        public static Dictionary<string, object> Evaluate(Dictionary<String, String[]> testDict, Grammar evalGram)
+        /// <returns>Dictionary of form {"report":string, "confusion":Dictionary}</returns>
+        public static Dictionary<string, object> Evaluate(Dictionary<String, String[]> testDict, string lexFile)
         {
-            SpeechRecognitionEngine engine;
-            int total = testDict.Keys.Count;
+            string[] words = testDict.Keys.ToArray();
+
+            // set up tally variables
+            int total = words.Count();
             int correct = 0;
             int incorrect = 0;
             int unrec = 0;
+
+            // set up confusion matrix
             Dictionary<string, Dictionary<string, int>> confusion = new Dictionary<string, Dictionary<string, int>>();
 
-            foreach (string word in testDict.Keys)
+            // set up engine variable
+            SpeechRecognitionEngine engine;
+
+            // iterate through testDict
+            foreach (string word in words)
             {
+                // set up confusion matrix tallies for this word
+                confusion[word] = new Dictionary<string, int>();
+                foreach (string otherWord in words)
+                {
+                    confusion[word][otherWord] = 0;
+                }
+                confusion[word]["UNRECOGNIZED"] = 0;
+
                 string actual = word;
+
                 foreach (string wavfile in testDict[word])
                 {
                     engine = lex4all.EngineControl.getEngine();
-                    //Grammar evalGram = new Grammar(evalGramFilename);
+                    Grammar evalGram = getEvalGram(words, lexFile);
                     engine.LoadGrammar(evalGram);
                     engine.SetInputToWaveFile(wavfile);
 
@@ -77,21 +104,18 @@ namespace lex4all
                     {
                         Debug.WriteLine("unrecognized");
                         unrec++;
+                        confusion[actual]["UNRECOGNIZED"]++;
+
                     }
                     else
                     {
-                        Debug.WriteLine(result.Text + " " + result.Confidence);
-                        if (result.Text == actual)
-                        {
-                            correct++;
-
-                        }
-                        else
-                        {
-                            incorrect++;
-                        }
+                        string recognizedAs = result.Text;
+                        Debug.WriteLine(recognizedAs + " " + result.Confidence);
+                        confusion[actual][recognizedAs]++;
+                        if (recognizedAs == actual) { correct++; }
+                        else { incorrect++; }
+                       
                     }
-
                 }
             }
 
@@ -105,6 +129,11 @@ namespace lex4all
 
         }
 
+
+
+        /// <summary>
+        /// Gets a string reporting the evaluation statistics (to be displayed/written to log).
+        /// </summary>
         private static string GetReport(int total, int correct, int incorrect, int unrec)
         {
             float pctCorrect = (float)correct / (float)total;
