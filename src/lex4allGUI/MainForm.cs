@@ -37,6 +37,14 @@ namespace lex4allGUI
                 dataGridView1.Rows.Add(new string[] { word, wavDict[word].Length.ToString() });
             }
 
+            // update row headers with row numbers
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Index > -1)
+                    row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
+
+            }
+
             
         }
 
@@ -152,6 +160,12 @@ namespace lex4allGUI
 
                 cell.ToolTipText = ttText;
             }
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            e.PaintHeader(DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentBackground);
+
         }
         
     }

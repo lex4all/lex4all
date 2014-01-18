@@ -65,15 +65,18 @@ namespace lex4allGUI
         /// </summary>
         public void updateGridView()
         {
+            // clear data
             dataGridView1.Rows.Clear();
             addwordComboBox.Items.Clear();
 
+            // read in data from evalDict
             foreach (string word in evalDict.Keys)
             {
                 Debug.WriteLine(word + ": " + String.Join(",", evalDict[word]));
                 dataGridView1.Rows.Add(new string[] { word, evalDict[word].Length.ToString() });
             }
 
+            // if there are words left out, add them to the ComboBox
             if (wordsInLex.Count() > evalDict.Keys.Count)
             {
                 string[] leftOut = (from w in wordsInLex
@@ -90,9 +93,18 @@ namespace lex4allGUI
                 addWordButton.Enabled = false;
             }
 
+            // enable startButton if evalDict isn't empty
             if (evalDict.Count > 0)
             {
                 startButton.Enabled = true;
+            }
+
+            // update row headers with row numbers
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Index > -1)
+                    row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
+
             }
         }
 
@@ -208,6 +220,11 @@ namespace lex4allGUI
                 
                 cell.ToolTipText = ttText;
             }
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            e.PaintHeader(DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentBackground);
         }
 
 

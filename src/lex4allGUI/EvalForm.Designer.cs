@@ -32,16 +32,16 @@
             this.selectLexBtn = new System.Windows.Forms.Button();
             this.lexFileLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.openLexDialog = new System.Windows.Forms.OpenFileDialog();
-            this.startButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.addWordButton = new System.Windows.Forms.Button();
-            this.addAudioDialog = new System.Windows.Forms.OpenFileDialog();
-            this.addwordComboBox = new System.Windows.Forms.ComboBox();
             this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Audio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.startButton = new System.Windows.Forms.Button();
+            this.addWordButton = new System.Windows.Forms.Button();
+            this.addwordComboBox = new System.Windows.Forms.ComboBox();
+            this.openLexDialog = new System.Windows.Forms.OpenFileDialog();
+            this.addAudioDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -100,23 +100,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Lexicon file:";
             // 
-            // openLexDialog
-            // 
-            this.openLexDialog.DefaultExt = "pls";
-            this.openLexDialog.Filter = "XML lexicon files (*.pls, *.xml)|*.pls;*.xml";
-            // 
-            // startButton
-            // 
-            this.startButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(391, 291);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(126, 23);
-            this.startButton.TabIndex = 15;
-            this.startButton.Text = "START EVALUATION";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -137,42 +120,13 @@
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(514, 250);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            // 
-            // addWordButton
-            // 
-            this.addWordButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.addWordButton.Enabled = false;
-            this.addWordButton.Location = new System.Drawing.Point(108, 291);
-            this.addWordButton.Name = "addWordButton";
-            this.addWordButton.Size = new System.Drawing.Size(98, 23);
-            this.addWordButton.TabIndex = 16;
-            this.addWordButton.Text = "Add word";
-            this.addWordButton.UseVisualStyleBackColor = true;
-            this.addWordButton.Click += new System.EventHandler(this.addWordButton_Click);
-            // 
-            // addAudioDialog
-            // 
-            this.addAudioDialog.DefaultExt = "wav";
-            this.addAudioDialog.Filter = "WAV files (*.wav)|*.wav";
-            this.addAudioDialog.Multiselect = true;
-            // 
-            // addwordComboBox
-            // 
-            this.addwordComboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.addwordComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.addwordComboBox.Enabled = false;
-            this.addwordComboBox.FormattingEnabled = true;
-            this.addwordComboBox.Location = new System.Drawing.Point(5, 292);
-            this.addwordComboBox.MaxDropDownItems = 30;
-            this.addwordComboBox.Name = "addwordComboBox";
-            this.addwordComboBox.Size = new System.Drawing.Size(97, 21);
-            this.addwordComboBox.TabIndex = 17;
+            this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
             // Word
             // 
@@ -201,6 +155,53 @@
             this.Delete.ReadOnly = true;
             this.Delete.Text = "Remove word";
             this.Delete.UseColumnTextForButtonValue = true;
+            // 
+            // startButton
+            // 
+            this.startButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.startButton.Enabled = false;
+            this.startButton.Location = new System.Drawing.Point(391, 291);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(126, 23);
+            this.startButton.TabIndex = 15;
+            this.startButton.Text = "START EVALUATION";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // addWordButton
+            // 
+            this.addWordButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.addWordButton.Enabled = false;
+            this.addWordButton.Location = new System.Drawing.Point(108, 291);
+            this.addWordButton.Name = "addWordButton";
+            this.addWordButton.Size = new System.Drawing.Size(98, 23);
+            this.addWordButton.TabIndex = 16;
+            this.addWordButton.Text = "Add word";
+            this.addWordButton.UseVisualStyleBackColor = true;
+            this.addWordButton.Click += new System.EventHandler(this.addWordButton_Click);
+            // 
+            // addwordComboBox
+            // 
+            this.addwordComboBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addwordComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.addwordComboBox.Enabled = false;
+            this.addwordComboBox.FormattingEnabled = true;
+            this.addwordComboBox.Location = new System.Drawing.Point(5, 292);
+            this.addwordComboBox.MaxDropDownItems = 30;
+            this.addwordComboBox.Name = "addwordComboBox";
+            this.addwordComboBox.Size = new System.Drawing.Size(97, 21);
+            this.addwordComboBox.TabIndex = 17;
+            // 
+            // openLexDialog
+            // 
+            this.openLexDialog.DefaultExt = "pls";
+            this.openLexDialog.Filter = "XML lexicon files (*.pls, *.xml)|*.pls;*.xml";
+            // 
+            // addAudioDialog
+            // 
+            this.addAudioDialog.DefaultExt = "wav";
+            this.addAudioDialog.Filter = "WAV files (*.wav)|*.wav";
+            this.addAudioDialog.Multiselect = true;
             // 
             // EvalForm
             // 
