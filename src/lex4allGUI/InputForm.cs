@@ -66,11 +66,15 @@ namespace lex4allGUI
         {
 
             string word = word1.Text;
-            if (lex4allGUI.MainForm.wavDict.ContainsKey(word)) 
-            {
-                MessageBox.Show("Please choose another word.", "Error: Word does already exist");
-                return;
-            }
+            //if (lex4allGUI.MainForm.wavDict.ContainsKey(word))
+            //{
+            //    string alreadyInLexMsg = "That word is already in your lexicon. The audio files selected here will replace any audio files previously associated with this word.";
+            //    DialogResult result = MessageBox.Show(alreadyInLexMsg, "Word already in lexicon", MessageBoxButtons.OKCancel);
+            //    if (result == DialogResult.Cancel)
+            //    {
+            //        return;
+            //    }
+            //}
             List<String> wavList = new List<string>();
             foreach (ListViewItem item in listView1.Items)
             {
