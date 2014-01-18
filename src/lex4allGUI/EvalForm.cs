@@ -140,7 +140,9 @@ namespace lex4allGUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string statsMsg;
+            Dictionary<string, Dictionary<string, int>> confusMatrix = lex4all.Evaluation.Evaluate(evalDict, lexFile, out statsMsg);
+            MessageBox.Show(statsMsg);
         }
 
 
