@@ -138,6 +138,16 @@ namespace lex4allGUI
         {
             this.CenterToScreen();
         }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            if
+            (MessageBox.Show("All changes will be discarded. Are you sure?", "Back to Start", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+                lex4allGUI.Program.main.Show();
+            }
+        }
         
     }
 }

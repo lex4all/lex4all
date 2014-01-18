@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.rmCheckedBtn = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,8 +136,9 @@
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.word1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.rmCheckedBtn, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.audioOK, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.rmCheckedBtn, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.backButton, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -162,6 +164,17 @@
             this.rmCheckedBtn.Text = "Remove checked files";
             this.rmCheckedBtn.UseVisualStyleBackColor = true;
             this.rmCheckedBtn.Click += new System.EventHandler(this.rmCheckedBtn_Click);
+            // 
+            // backButton
+            // 
+            this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.backButton.Location = new System.Drawing.Point(615, 3);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 30);
+            this.backButton.TabIndex = 11;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // InputForm
             // 
@@ -193,6 +206,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button rmCheckedBtn;
+        private System.Windows.Forms.Button backButton;
 
 
     }

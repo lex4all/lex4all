@@ -52,7 +52,11 @@ namespace lex4allGUI
                 lex4all.Program.BuildLexicon(wavDict, saveFileDialog1.FileName);
 
                 watch.Stop();
-                System.Console.WriteLine(watch.ElapsedMilliseconds);
+                TimeSpan time = watch.Elapsed;
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds);
+
+                MessageBox.Show("Lexicon was built in " + elapsedTime + "\n" + "Saved as " + saveFileDialog1.FileName, "Done");
+                
                 startButton.Text = "BUILD LEXICON";
                 startButton.Enabled = true;
                 addWordButton.Enabled = true;
@@ -119,6 +123,14 @@ namespace lex4allGUI
             {
                 Application.Exit();
             }
+        }
+
+        private void MainForm_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            if
+            (MessageBox.Show("This application supports you in building your own lexicon. For further information have a look on our wikipage. Do you want to be be redirected immediately?", "Welcome to lex4all", MessageBoxButtons.YesNo)
+                == DialogResult.Yes)
+            {System.Diagnostics.Process.Start("http://lex4all.github.io/lex4all/");}
         }
         
     }
