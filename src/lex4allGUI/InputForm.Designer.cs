@@ -50,8 +50,8 @@
             // 
             // chooseWav
             // 
-            this.chooseWav.Location = new System.Drawing.Point(90, 300);
-            this.chooseWav.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.chooseWav.Location = new System.Drawing.Point(90, 302);
+            this.chooseWav.Margin = new System.Windows.Forms.Padding(5);
             this.chooseWav.Name = "chooseWav";
             this.chooseWav.Size = new System.Drawing.Size(176, 28);
             this.chooseWav.TabIndex = 0;
@@ -65,9 +65,9 @@
             this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(90, 86);
-            this.listView1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.listView1.Margin = new System.Windows.Forms.Padding(5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(617, 204);
+            this.listView1.Size = new System.Drawing.Size(623, 206);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -87,7 +87,7 @@
             // word1
             // 
             this.word1.Location = new System.Drawing.Point(89, 55);
-            this.word1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.word1.Margin = new System.Windows.Forms.Padding(4);
             this.word1.Name = "word1";
             this.word1.Size = new System.Drawing.Size(132, 22);
             this.word1.TabIndex = 6;
@@ -105,10 +105,10 @@
             // audioOK
             // 
             this.audioOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.audioOK.Location = new System.Drawing.Point(515, 362);
-            this.audioOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.audioOK.Location = new System.Drawing.Point(549, 360);
+            this.audioOK.Margin = new System.Windows.Forms.Padding(4);
             this.audioOK.Name = "audioOK";
-            this.audioOK.Size = new System.Drawing.Size(193, 28);
+            this.audioOK.Size = new System.Drawing.Size(165, 32);
             this.audioOK.TabIndex = 9;
             this.audioOK.Text = "Save and go back";
             this.audioOK.UseVisualStyleBackColor = true;
@@ -131,17 +131,17 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.chooseWav, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.word1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.audioOK, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.rmCheckedBtn, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.audioOK, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.chooseWav, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.backButton, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.96911F));
@@ -150,14 +150,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 394);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(718, 396);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // rmCheckedBtn
             // 
             this.rmCheckedBtn.Enabled = false;
-            this.rmCheckedBtn.Location = new System.Drawing.Point(275, 299);
-            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rmCheckedBtn.Location = new System.Drawing.Point(275, 301);
+            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
             this.rmCheckedBtn.Size = new System.Drawing.Size(176, 28);
             this.rmCheckedBtn.TabIndex = 10;
@@ -168,8 +168,8 @@
             // backButton
             // 
             this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.backButton.Location = new System.Drawing.Point(608, 4);
-            this.backButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.backButton.Location = new System.Drawing.Point(614, 4);
+            this.backButton.Margin = new System.Windows.Forms.Padding(4);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(100, 29);
             this.backButton.TabIndex = 11;
@@ -181,10 +181,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 394);
+            this.ClientSize = new System.Drawing.Size(718, 396);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "lex4all";
