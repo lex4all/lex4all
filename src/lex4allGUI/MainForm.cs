@@ -15,8 +15,8 @@ namespace lex4allGUI
 {
     public partial class MainForm : Form
     {
-        public static Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
-        public static int numProns = 5;
+        public Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
+        public int numProns = 5;
 
         public MainForm()
         {
