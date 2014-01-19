@@ -61,6 +61,8 @@ namespace lex4allGUI
                 startButton.Text = "Working...";
                 Stopwatch watch = Stopwatch.StartNew();
 
+                label3.Show();
+                label4.Show();
                 progressBar.Show();
                 BuildLexicon(wavDict, saveFileDialog1.FileName);
 
@@ -71,6 +73,8 @@ namespace lex4allGUI
                 MessageBox.Show("Lexicon was built in " + elapsedTime + "\n" + "Saved as " + saveFileDialog1.FileName, "Done");
                 progressBar.Value = 0;
                 progressBar.Hide();
+                label4.Hide();
+                label3.Hide();
                 
                 if (MessageBox.Show("Build another lexicon?", "Continue", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -154,7 +158,7 @@ namespace lex4allGUI
             int wordProportion = 100/wavDict.Count;
 
             foreach (KeyValuePair<String, String[]> kvp in wavDict)
-        {
+            {
                 String word = kvp.Key;
                 lexDict[word] = lex4all.Program.GetProns(kvp.Value);
                 progressBar.Increment(wordProportion);
@@ -212,6 +216,8 @@ namespace lex4allGUI
         {
             numProns = (int)numPronsUpDn.Value;
         }
+
+        
         
     }
 }
