@@ -56,9 +56,12 @@ namespace lex4allGUI
             {  
            
                 startButton.Enabled = false;
+                startButton.Text = "Working...";
                 addWordButton.Enabled = false;
                 dataGridView1.Enabled = false;
-                startButton.Text = "Working...";
+                label2.Enabled = false;
+                numPronsUpDn.Enabled = false;
+                shortGramChkBx.Enabled = false;
                 Stopwatch watch = Stopwatch.StartNew();
 
                 label3.Show();
@@ -82,6 +85,9 @@ namespace lex4allGUI
                 startButton.Enabled = true;
                 addWordButton.Enabled = true;
                 dataGridView1.Enabled = true;
+                label2.Enabled = true;
+                numPronsUpDn.Enabled = true;
+                shortGramChkBx.Enabled = true;
             }
                 else
                 {
