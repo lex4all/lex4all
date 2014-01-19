@@ -53,7 +53,7 @@
             this.chooseWav.Location = new System.Drawing.Point(90, 302);
             this.chooseWav.Margin = new System.Windows.Forms.Padding(5);
             this.chooseWav.Name = "chooseWav";
-            this.chooseWav.Size = new System.Drawing.Size(176, 28);
+            this.chooseWav.Size = new System.Drawing.Size(132, 23);
             this.chooseWav.TabIndex = 0;
             this.chooseWav.Text = "Add .wav file(s)";
             this.chooseWav.UseVisualStyleBackColor = true;
@@ -75,12 +75,13 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
-            this.label1.Location = new System.Drawing.Point(5, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(4, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 17);
+            this.label1.Size = new System.Drawing.Size(173, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Enter a word and chose .wav file(s)";
             // 
@@ -89,16 +90,15 @@
             this.word1.Location = new System.Drawing.Point(89, 55);
             this.word1.Margin = new System.Windows.Forms.Padding(4);
             this.word1.Name = "word1";
-            this.word1.Size = new System.Drawing.Size(132, 22);
+            this.word1.Size = new System.Drawing.Size(100, 20);
             this.word1.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 81);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(3, 118);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Audio files:";
             // 
@@ -117,10 +117,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 51);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(3, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 17);
+            this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Word:";
             // 
@@ -144,10 +143,9 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.96911F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.22248F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.41218F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.08665F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(718, 396);
@@ -159,7 +157,7 @@
             this.rmCheckedBtn.Location = new System.Drawing.Point(275, 301);
             this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
-            this.rmCheckedBtn.Size = new System.Drawing.Size(176, 28);
+            this.rmCheckedBtn.Size = new System.Drawing.Size(132, 23);
             this.rmCheckedBtn.TabIndex = 10;
             this.rmCheckedBtn.Text = "Remove checked files";
             this.rmCheckedBtn.UseVisualStyleBackColor = true;
@@ -171,7 +169,7 @@
             this.backButton.Location = new System.Drawing.Point(614, 4);
             this.backButton.Margin = new System.Windows.Forms.Padding(4);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(100, 29);
+            this.backButton.Size = new System.Drawing.Size(75, 24);
             this.backButton.TabIndex = 11;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
@@ -179,7 +177,7 @@
             // 
             // InputForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 396);
             this.ControlBox = false;
@@ -187,7 +185,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "lex4all";
+            this.Text = "lex4all Lexicon Builder";
             this.Load += new System.EventHandler(this.InputForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

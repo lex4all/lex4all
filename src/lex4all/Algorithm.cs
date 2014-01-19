@@ -41,7 +41,7 @@ namespace lex4all
             float confGain;
             bool sameAsLastSeq;
             int sameBest = 0;
-            int timeouts = 0;
+            //int timeouts = 0;
 
             // iterate
             while (true)

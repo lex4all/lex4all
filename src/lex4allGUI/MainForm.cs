@@ -16,6 +16,7 @@ namespace lex4allGUI
     public partial class MainForm : Form
     {
         public static Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
+        public static int numProns = 5;
 
         public MainForm()
         {
@@ -37,6 +38,14 @@ namespace lex4allGUI
                 // this.listView1.Items.Add(word);
                 dataGridView1.Rows.Add(new string[] { word, wavDict[word].Length.ToString() });
             }
+
+            // update row headers with row numbers
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Index > -1)
+                    row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
+            
+        }
 
             
         }
@@ -63,10 +72,19 @@ namespace lex4allGUI
                 progressBar.Value = 0;
                 progressBar.Hide();
                 
+                if (MessageBox.Show("Build another lexicon?", "Continue", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
                 startButton.Text = "BUILD LEXICON";
                 startButton.Enabled = true;
                 addWordButton.Enabled = true;
                 dataGridView1.Enabled = true;
+            }
+                else
+                {
+                    this.Close();
+        }
+
+                
             }
         }
 
@@ -136,7 +154,7 @@ namespace lex4allGUI
             int wordProportion = 100/wavDict.Count;
 
             foreach (KeyValuePair<String, String[]> kvp in wavDict)
-            {
+        {
                 String word = kvp.Key;
                 lexDict[word] = lex4all.Program.GetProns(kvp.Value);
                 progressBar.Increment(wordProportion);
@@ -145,6 +163,54 @@ namespace lex4allGUI
             XDocument lexDoc = lex4all.Program.DictToXml(lexDict);
             lexDoc.Save(filename);
             
+        }
+        
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lex4allGUI.Program.start.Show();
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex == 1)
+            {
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[1];
+                string word = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string ttText;
+                if (wavDict[word].Count() > 0)
+                {
+                    string files = String.Join("\n", wavDict[word]);
+                    ttText = "Selected audio files:\n" + files;
+                }
+                else ttText = "No audio files selected.";
+
+                cell.ToolTipText = ttText;
+            }
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            e.PaintHeader(DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentBackground);
+
+        }
+
+        private void shortGramChkBx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (shortGramChkBx.Checked == true)
+            {
+                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+            }
+            else
+            {
+                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
+                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
+            }
+        }
+
+        private void numPronsUpDn_ValueChanged(object sender, EventArgs e)
+        {
+            numProns = (int)numPronsUpDn.Value;
         }
         
     }
