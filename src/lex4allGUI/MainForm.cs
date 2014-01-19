@@ -64,7 +64,7 @@ namespace lex4allGUI
                 label3.Show();
                 label4.Show();
                 progressBar.Show();
-                BuildLexicon(wavDict, saveFileDialog1.FileName);
+                BuildLexicon(wavDict, numProns, saveFileDialog1.FileName);
 
                 watch.Stop();
                 TimeSpan time = watch.Elapsed;
@@ -152,7 +152,7 @@ namespace lex4allGUI
             {System.Diagnostics.Process.Start("http://lex4all.github.io/lex4all/");}
         }
 
-        public void BuildLexicon(Dictionary<string, string[]> wavDict, string filename)
+        public void BuildLexicon(Dictionary<string, string[]> wavDict, int numProns, string filename)
         {   
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
             int wordProportion = 100/wavDict.Count;
@@ -160,7 +160,7 @@ namespace lex4allGUI
             foreach (KeyValuePair<String, String[]> kvp in wavDict)
             {
                 String word = kvp.Key;
-                lexDict[word] = lex4all.Program.GetProns(kvp.Value);
+                lexDict[word] = lex4all.Program.GetProns(kvp.Value).Take(numProns).ToArray();
                 progressBar.Increment(wordProportion);
             }
 
