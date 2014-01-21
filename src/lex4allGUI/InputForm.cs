@@ -94,7 +94,7 @@ namespace lex4allGUI
             }
             else
             {
-                lex4allGUI.MainForm.wavDict[word] = wavs;
+                lex4allGUI.Program.main.wavDict[word] = wavs;
                 lex4allGUI.Program.main.updateListView();
 
                 this.Close();

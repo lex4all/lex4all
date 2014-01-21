@@ -195,6 +195,7 @@ namespace lex4all
                 }
             }
 
+
             report = GetReport(total, correct, incorrect, unrec);
 
             //Dictionary<string, object> evalResults = new Dictionary<string, object>();
@@ -212,6 +213,8 @@ namespace lex4all
         /// </summary>
         private static string GetReport(int total, int correct, int incorrect, int unrec)
         {
+             
+
             float pctCorrect = ((float)correct / (float)total) * 100f;
             float pctIncorrect = ((float)incorrect / (float)total) * 100f;
             float pctUnrec = ((float)unrec / (float)total) * 100f;
@@ -226,7 +229,6 @@ namespace lex4all
             stats[6] = pctUnrec;
 
             string template = @"
-Evaluation results:
 
 Audio files tested:   {0}
 

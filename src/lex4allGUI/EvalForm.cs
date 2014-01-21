@@ -179,15 +179,22 @@ namespace lex4allGUI
             addWordButton.Enabled = false;
             dataGridView1.Enabled = false;
 
+
             string statsMsg;
             Dictionary<string, Dictionary<string, int>> confusMatrix = lex4all.Evaluation.Evaluate(evalDict, lexFile, out statsMsg);
-            
-            DialogResult writeEvalLog = MessageBox.Show(statsMsg + "\n\nSave the evaluation results and confusion matrix to file?", "Evaluation complete", MessageBoxButtons.YesNo);
+
+            string header = String.Format("EVALUATION RESULTS\n\nLexicon file: {0}", lexFile);
+            string saveOrNot = "\n\nSave the evaluation results and confusion matrix to file?";
+
+            DialogResult writeEvalLog = MessageBox.Show(header + statsMsg + saveOrNot, "Evaluation complete", MessageBoxButtons.YesNo);
             if (writeEvalLog == DialogResult.Yes)
             {
                 if (saveLogDialog.ShowDialog() == DialogResult.OK)
                 {
                     List<string> evalLogLines = new List<string>();
+                    evalLogLines.Add("EVALUATION RESULTS");
+                    evalLogLines.Add(String.Format("Lexicon file: {0}", lexFile));
+                    evalLogLines.Add("");
                     evalLogLines.Add(statsMsg.Replace(':',','));
                     evalLogLines.Add("");
                     evalLogLines.Add("actual//recognized," + String.Join(",", confusMatrix.Keys.ToArray()) + ",UNRECOGNIZED");

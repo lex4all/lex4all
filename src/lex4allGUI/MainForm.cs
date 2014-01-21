@@ -15,8 +15,8 @@ namespace lex4allGUI
 {
     public partial class MainForm : Form
     {
-        public static Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
-        public static int numProns = 5;
+        public Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
+        public int numProns = 5;
 
         public MainForm()
         {
@@ -56,15 +56,18 @@ namespace lex4allGUI
             {  
            
                 startButton.Enabled = false;
+                startButton.Text = "Working...";
                 addWordButton.Enabled = false;
                 dataGridView1.Enabled = false;
-                startButton.Text = "Working...";
+                label2.Enabled = false;
+                numPronsUpDn.Enabled = false;
+                shortGramChkBx.Enabled = false;
                 Stopwatch watch = Stopwatch.StartNew();
 
                 label3.Show();
                 label4.Show();
                 progressBar.Show();
-                BuildLexicon(wavDict, saveFileDialog1.FileName);
+                BuildLexicon(wavDict, numProns, saveFileDialog1.FileName);
 
                 watch.Stop();
                 TimeSpan time = watch.Elapsed;
@@ -82,6 +85,9 @@ namespace lex4allGUI
                 startButton.Enabled = true;
                 addWordButton.Enabled = true;
                 dataGridView1.Enabled = true;
+                label2.Enabled = true;
+                numPronsUpDn.Enabled = true;
+                shortGramChkBx.Enabled = true;
             }
                 else
                 {
@@ -152,7 +158,7 @@ namespace lex4allGUI
             {System.Diagnostics.Process.Start("http://lex4all.github.io/lex4all/");}
         }
 
-        public void BuildLexicon(Dictionary<string, string[]> wavDict, string filename)
+        public void BuildLexicon(Dictionary<string, string[]> wavDict, int numProns, string filename)
         {   
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
             int wordProportion = 100/wavDict.Count;
@@ -160,7 +166,7 @@ namespace lex4allGUI
             foreach (KeyValuePair<String, String[]> kvp in wavDict)
             {
                 String word = kvp.Key;
-                lexDict[word] = lex4all.Program.GetProns(kvp.Value);
+                lexDict[word] = lex4all.Program.GetProns(kvp.Value).Take(numProns).ToArray();
                 progressBar.Increment(wordProportion);
             }
 
