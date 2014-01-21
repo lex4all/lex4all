@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using lex4all;
+using lex4allRecording;
 
 namespace lex4allGUI
 {
     public partial class InputForm : Form
     {
         //public Dictionary<String, String[]> wavDict = new Dictionary<string, string[]>();
+        public static lex4allRecording.Recorder recorder;
         
 
         public InputForm()
@@ -130,13 +132,12 @@ namespace lex4allGUI
             }
         }
 
-        // Record and save a wave file
-        //private void record_Click(object sender, EventArgs e) {
-        //    WaveIn wi = new WaveIn();
-        //    wi.Preload(3000, 256*1024);
-        //    wi.Start();
-        //    wi.Save(fileName);
-        //}
+        private void recordButton_Click(object sender, EventArgs e) {
+
+            RecordForm record = new RecordForm();
+            this.Hide();
+            record.Show();
+        }
 
         private void InputForm_Load(object sender, EventArgs e)
         {
@@ -160,6 +161,7 @@ namespace lex4allGUI
                 }
             }
         }
+
         
     }
 }
