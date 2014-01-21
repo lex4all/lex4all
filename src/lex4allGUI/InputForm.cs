@@ -145,11 +145,19 @@ namespace lex4allGUI
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            if
-            (MessageBox.Show("All changes will be discarded. Are you sure?", "Back to Start", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (word1.Text == "" && listView1.Items.Count == 0)
             {
                 this.Close();
                 lex4allGUI.Program.main.Show();
+            }
+            else
+            {
+                if
+                (MessageBox.Show("All changes will be discarded. Are you sure?", "Back to Start", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    this.Close();
+                    lex4allGUI.Program.main.Show();
+                }
             }
         }
         
