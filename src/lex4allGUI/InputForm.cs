@@ -135,7 +135,7 @@ namespace lex4allGUI
         //    WaveIn wi = new WaveIn();
         //    wi.Preload(3000, 256*1024);
         //    wi.Start();
-        //    wi.Save(fileName);
+        //    wi.Save("fileName");
         //}
 
         private void InputForm_Load(object sender, EventArgs e)
