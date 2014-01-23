@@ -49,30 +49,32 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.47565F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.77153F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.56554F));
-            this.tableLayoutPanel1.Controls.Add(this.selectLexBtn, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lexFileLabel, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.71717F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.59446F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.74307F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.selectLexBtn, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.startButton, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.addWordButton, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.startButton, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.addWordButton, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.addwordComboBox, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lexFileLabel, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 511);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // selectLexBtn
             // 
             this.selectLexBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.selectLexBtn.Location = new System.Drawing.Point(442, 14);
+            this.selectLexBtn.Location = new System.Drawing.Point(440, 5);
+            this.selectLexBtn.Margin = new System.Windows.Forms.Padding(5);
             this.selectLexBtn.Name = "selectLexBtn";
             this.selectLexBtn.Size = new System.Drawing.Size(89, 23);
             this.selectLexBtn.TabIndex = 2;
@@ -84,7 +86,8 @@
             // 
             this.lexFileLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lexFileLabel.AutoSize = true;
-            this.lexFileLabel.Location = new System.Drawing.Point(107, 19);
+            this.tableLayoutPanel1.SetColumnSpan(this.lexFileLabel, 2);
+            this.lexFileLabel.Location = new System.Drawing.Point(89, 10);
             this.lexFileLabel.Name = "lexFileLabel";
             this.lexFileLabel.Size = new System.Drawing.Size(80, 13);
             this.lexFileLabel.TabIndex = 1;
@@ -94,7 +97,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 19);
+            this.label1.Location = new System.Drawing.Point(3, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
@@ -114,16 +117,16 @@
             this.Audio,
             this.buttonColumn,
             this.Delete});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 4);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 54);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 36);
             this.dataGridView1.MinimumSize = new System.Drawing.Size(0, 10);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(528, 402);
+            this.dataGridView1.Size = new System.Drawing.Size(528, 439);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -161,7 +164,8 @@
             // 
             this.startButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(405, 473);
+            this.startButton.Location = new System.Drawing.Point(403, 483);
+            this.startButton.Margin = new System.Windows.Forms.Padding(5);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(126, 23);
             this.startButton.TabIndex = 15;
@@ -173,7 +177,8 @@
             // 
             this.addWordButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.addWordButton.Enabled = false;
-            this.addWordButton.Location = new System.Drawing.Point(107, 473);
+            this.addWordButton.Location = new System.Drawing.Point(141, 483);
+            this.addWordButton.Margin = new System.Windows.Forms.Padding(5);
             this.addWordButton.Name = "addWordButton";
             this.addWordButton.Size = new System.Drawing.Size(98, 23);
             this.addWordButton.TabIndex = 16;
@@ -184,13 +189,15 @@
             // addwordComboBox
             // 
             this.addwordComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel1.SetColumnSpan(this.addwordComboBox, 2);
             this.addwordComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.addwordComboBox.Enabled = false;
             this.addwordComboBox.FormattingEnabled = true;
-            this.addwordComboBox.Location = new System.Drawing.Point(3, 474);
+            this.addwordComboBox.Location = new System.Drawing.Point(5, 484);
+            this.addwordComboBox.Margin = new System.Windows.Forms.Padding(5);
             this.addwordComboBox.MaxDropDownItems = 30;
             this.addwordComboBox.Name = "addwordComboBox";
-            this.addwordComboBox.Size = new System.Drawing.Size(96, 21);
+            this.addwordComboBox.Size = new System.Drawing.Size(125, 21);
             this.addwordComboBox.TabIndex = 17;
             // 
             // openLexDialog

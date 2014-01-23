@@ -57,9 +57,10 @@
             // 
             // startButton
             // 
-            this.startButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(379, 481);
+            this.startButton.Location = new System.Drawing.Point(377, 483);
+            this.startButton.Margin = new System.Windows.Forms.Padding(5);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(152, 23);
             this.startButton.TabIndex = 11;
@@ -69,8 +70,9 @@
             // 
             // addWordButton
             // 
-            this.addWordButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.addWordButton.Location = new System.Drawing.Point(456, 3);
+            this.addWordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.addWordButton.Location = new System.Drawing.Point(454, 5);
+            this.addWordButton.Margin = new System.Windows.Forms.Padding(5);
             this.addWordButton.Name = "addWordButton";
             this.addWordButton.Size = new System.Drawing.Size(75, 23);
             this.addWordButton.TabIndex = 12;
@@ -94,14 +96,14 @@
             this.Delete});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 3);
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 32);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 36);
             this.dataGridView1.MinimumSize = new System.Drawing.Size(0, 10);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(528, 380);
+            this.dataGridView1.Size = new System.Drawing.Size(528, 378);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -154,10 +156,10 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.28413F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.749247F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.985397F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.981228F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.3096F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.180739F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.509664F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 511);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
@@ -165,7 +167,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(262, 422);
+            this.label3.Location = new System.Drawing.Point(262, 424);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(269, 13);
             this.label3.TabIndex = 18;
@@ -176,7 +178,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Location = new System.Drawing.Point(3, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 13);
             this.label1.TabIndex = 14;
@@ -188,10 +190,10 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.shortGramChkBx);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 418);
+            this.groupBox1.Location = new System.Drawing.Point(3, 420);
             this.groupBox1.Name = "groupBox1";
             this.tableLayoutPanel1.SetRowSpan(this.groupBox1, 3);
-            this.groupBox1.Size = new System.Drawing.Size(242, 90);
+            this.groupBox1.Size = new System.Drawing.Size(242, 88);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
@@ -223,7 +225,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Location = new System.Drawing.Point(9, 33);
+            this.label2.Location = new System.Drawing.Point(9, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(170, 13);
             this.label2.TabIndex = 0;
@@ -238,7 +240,7 @@
             this.shortGramChkBx.AutoSize = true;
             this.shortGramChkBx.Checked = true;
             this.shortGramChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.shortGramChkBx.Location = new System.Drawing.Point(12, 59);
+            this.shortGramChkBx.Location = new System.Drawing.Point(12, 58);
             this.shortGramChkBx.Name = "shortGramChkBx";
             this.shortGramChkBx.Size = new System.Drawing.Size(92, 17);
             this.shortGramChkBx.TabIndex = 15;
@@ -255,7 +257,7 @@
             this.flowLayoutPanel1.Controls.Add(this.label4);
             this.flowLayoutPanel1.Controls.Add(this.progressBar);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(259, 445);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(259, 447);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(272, 27);
             this.flowLayoutPanel1.TabIndex = 16;
