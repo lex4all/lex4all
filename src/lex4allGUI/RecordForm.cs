@@ -52,5 +52,10 @@ namespace lex4allGUI
         {
             recorder.StopRecording();
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            recorder.GetVolumeControl(trackBar1.Value);
+        }
     }
 }

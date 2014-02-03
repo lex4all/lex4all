@@ -63,6 +63,8 @@ namespace lex4allRecording
                 {
                     // only pass over maximum or minimum
                     ProcessSample(Math.Max(aggregator.MaxSample, Math.Abs(aggregator.MinSample)));
+                    aggregator.MaxSample = 0;
+                    aggregator.MinSample = 0;
                 }
             }
 
@@ -101,6 +103,22 @@ namespace lex4allRecording
             {
                 handler(this, new SampleEventArgs(sample32));
 
+            }
+        }
+
+        public void GetVolumeControl(int percentage)
+        {
+            int waveInDeviceNumber = 0;
+            var mixerLine = new NAudio.Mixer.MixerLine((IntPtr)waveInDeviceNumber,
+                                           0, NAudio.Mixer.MixerFlags.WaveIn);
+            foreach (var control in mixerLine.Controls)
+            {
+                if (control.ControlType == NAudio.Mixer.MixerControlType.Volume)
+                {
+                    NAudio.Mixer.UnsignedMixerControl volumeControl = control as NAudio.Mixer.UnsignedMixerControl;
+                    volumeControl.Percent = percentage;
+                    break;
+                }
             }
         }
 
