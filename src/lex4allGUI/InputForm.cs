@@ -132,18 +132,11 @@ namespace lex4allGUI
             }
         }
 
-        // Record and save a wave file
         private void recordButton_Click(object sender, EventArgs e) {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                recorder = new lex4allRecording.Recorder();
-                recorder.Record(saveFileDialog1.FileName);
-            }
-        }
 
-        private void stopRecButton_Click(object sender, EventArgs e)
-        {
-            recorder.StopRecording();
+            RecordForm record = new RecordForm();
+            this.Hide();
+            record.Show();
         }
 
         private void InputForm_Load(object sender, EventArgs e)

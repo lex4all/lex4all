@@ -40,7 +40,6 @@
             this.rmCheckedBtn = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
             this.recordButton = new System.Windows.Forms.Button();
-            this.stopRecButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -147,7 +146,6 @@
             this.tableLayoutPanel1.Controls.Add(this.chooseWav, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.audioOK, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.recordButton, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.stopRecButton, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
@@ -196,16 +194,6 @@
             this.recordButton.UseVisualStyleBackColor = true;
             this.recordButton.Click += new System.EventHandler(this.recordButton_Click);
             // 
-            // stopRecButton
-            // 
-            this.stopRecButton.Location = new System.Drawing.Point(3, 593);
-            this.stopRecButton.Name = "stopRecButton";
-            this.stopRecButton.Size = new System.Drawing.Size(75, 28);
-            this.stopRecButton.TabIndex = 13;
-            this.stopRecButton.Text = "Stop";
-            this.stopRecButton.UseVisualStyleBackColor = true;
-            this.stopRecButton.Click += new System.EventHandler(this.stopRecButton_Click);
-            // 
             // InputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -239,7 +227,6 @@
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button recordButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button stopRecButton;
 
 
     }
