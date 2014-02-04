@@ -13,9 +13,9 @@ namespace lex4allGUI
 {
     public partial class EvalForm : Form
     {
-        public static string lexFile;
-        public static string[] wordsInLex;
-        public static Dictionary<String, String[]> evalDict = new Dictionary<string, string[]>();
+        public string lexFile;
+        public string[] wordsInLex;
+        public Dictionary<String, String[]> evalDict = new Dictionary<string, string[]>();
 
         public EvalForm()
         {
@@ -30,7 +30,7 @@ namespace lex4allGUI
             if (openLexDialog.ShowDialog() == DialogResult.OK)
             {
                 lexFile = openLexDialog.FileName;
-                lexFileLabel.Text = openLexDialog.SafeFileName;
+                //lexFileLabel.Text = openLexDialog.SafeFileName;
                 updateLexFile();
             }
         }
@@ -38,8 +38,9 @@ namespace lex4allGUI
         /// <summary>
         /// Display the currently selected lexicon file.
         /// </summary>
-        private void updateLexFile()
+        public void updateLexFile()
         {
+            lexFileLabel.Text = System.IO.Path.GetFileName(lexFile);
             wordsInLex = lex4all.Evaluation.ReadLexicon(lexFile);
             Debug.WriteLine(String.Format("wordsInLex.Count() = {0}", wordsInLex.Count()));
 
