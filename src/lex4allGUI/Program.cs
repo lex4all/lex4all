@@ -11,6 +11,7 @@ namespace lex4allGUI
         public static MainForm main;
         public static StartForm start;
         public static EvalForm eval;
+        public static InputForm input;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

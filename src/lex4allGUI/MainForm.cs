@@ -100,9 +100,9 @@ namespace lex4allGUI
 
         private void addWordButton_Click(object sender, EventArgs e)
         {
-            InputForm wordInput = new InputForm();
+            lex4allGUI.Program.input = new InputForm();
             this.Hide();
-            wordInput.Show();
+            lex4allGUI.Program.input.Show();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -111,14 +111,14 @@ namespace lex4allGUI
             { //button column is third column
                     int row = e.RowIndex;
                     string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
-                    InputForm wordInput = new InputForm();
-                    wordInput.word1.Text = word;
+                    lex4allGUI.Program.input = new InputForm();
+                    lex4allGUI.Program.input.word1.Text = word;
                     foreach (string wav in wavDict[word])
                     {
-                        wordInput.listView1.Items.Add(wav);
+                        lex4allGUI.Program.input.listView1.Items.Add(wav);
                     }
                     this.Hide();
-                    wordInput.Show();
+                    lex4allGUI.Program.input.Show();
                 
             }
             if (e.ColumnIndex == 3 && e.RowIndex > -1)
