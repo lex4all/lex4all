@@ -35,13 +35,14 @@ namespace lex4allRecording
 
         public void Record(String filename)
         {
-
-            //waveIn = new NAudio.Wave.WaveIn();
-            //waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
             waveFile = new NAudio.Wave.WaveFileWriter(filename, new NAudio.Wave.WaveFormat(8000, 1));
+
+            waveIn = new NAudio.Wave.WaveIn();
+            waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
+            waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailable);
             waveIn.RecordingStopped += new EventHandler<NAudio.Wave.StoppedEventArgs>(waveIn_RecordingStopped);
 
-            //waveIn.StartRecording();
+            waveIn.StartRecording();
             
             
         }
