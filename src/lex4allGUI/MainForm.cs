@@ -79,8 +79,7 @@ namespace lex4allGUI
                 label4.Hide();
                 label3.Hide();
                 
-                if (MessageBox.Show("Build another lexicon?", "Continue", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
+                
                 startButton.Text = "BUILD LEXICON";
                 startButton.Enabled = true;
                 addWordButton.Enabled = true;
@@ -88,11 +87,16 @@ namespace lex4allGUI
                 label2.Enabled = true;
                 numPronsUpDn.Enabled = true;
                 shortGramChkBx.Enabled = true;
-            }
-                else
+
+                if (MessageBox.Show("Evaluate this lexicon now? (Clicking 'Yes' will quit the Lexicon Builder and open the Evaluation Tool.)", "Continue to evaluation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     this.Close();
-        }
+                    lex4allGUI.Program.eval = new EvalForm();
+                    lex4allGUI.Program.eval.lexFile = saveFileDialog1.FileName;
+                    lex4allGUI.Program.eval.updateLexFile();
+                    lex4allGUI.Program.eval.Show();
+
+                }
 
                 
             }

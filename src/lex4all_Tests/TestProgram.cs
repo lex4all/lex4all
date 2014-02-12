@@ -13,21 +13,21 @@ namespace lex4allUnitTests
     [TestClass]
     public class TestProgram
     {
-        [TestMethod]
-        public void TestGetLexDict()
-        {
-            //arrange
-            Dictionary<String, String[]> ogorunDict = new Dictionary<string, string[]>();
-            ogorunDict.Add("ogorun", new String[] { "../../../../data/audio/yor/14_ogorun_B_4.wav" });
+        //[TestMethod]
+        //public void TestGetLexDict()
+        //{
+        //    //arrange
+        //    Dictionary<String, String[]> ogorunDict = new Dictionary<string, string[]>();
+        //    ogorunDict.Add("ogorun", new String[] { "../../../../data/audio/yor/14_ogorun_B_4.wav" });
             
-            //act
-            var lexDict = lex4all.Program.GetLexDict(ogorunDict);
+        //    //act
+        //    var lexDict = lex4all.Program.GetLexDict(ogorunDict);
 
-            //assert
-            Assert.IsInstanceOfType(lexDict, typeof(Dictionary<String, String[]>));
-            Assert.AreEqual(lexDict.Keys.Count, 1);
-            Assert.IsTrue(lexDict.ContainsKey("ogorun"));
-        }
+        //    //assert
+        //    Assert.IsInstanceOfType(lexDict, typeof(Dictionary<String, String[]>));
+        //    Assert.AreEqual(lexDict.Keys.Count, 1);
+        //    Assert.IsTrue(lexDict.ContainsKey("ogorun"));
+        //}
 
         [TestMethod]
         public void TestDictToXml()
