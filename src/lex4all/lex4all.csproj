@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
+    <Compile Include="DiscriminativeTraining.cs" />
     <Compile Include="EngineControl.cs" />
     <Compile Include="Evaluation.cs" />
     <Compile Include="GrammarControl.cs" />
@@ -75,7 +76,7 @@
     <None Include="Resources\en-US_prefixwildcard.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\01_ookan_A_1.wav" />
+    <None Include="Resources\weather.wav" />
     <None Include="Resources\en-US_shortwildcard.txt" />
     <Content Include="Resources\samplelexicon.xml" />
   </ItemGroup>

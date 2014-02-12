@@ -57,7 +57,7 @@ namespace lex4all
             // write evaluation grammar to file
             //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
             string path = Path.GetTempPath();
-            string gramFilePath = Path.Combine(path, "lex4allEvalGrammar.xml");
+            string gramFilePath = Path.GetTempFileName(); //old: Path.Combine(path, "lex4allEvalGrammar.xml");
 
             XNamespace ns = @"http://www.w3.org/2001/06/grammar";
             XDocument gramDoc = new XDocument(
@@ -76,10 +76,27 @@ namespace lex4all
 
             gramDoc.Save(gramFilePath);
 
-            // read from file and return Grammar object
+            // read from file and then delete the file
             Grammar evalGram = new Grammar(gramFilePath);
+            deleteTempFile(gramFilePath);
+
+            // return Grammar object
             return evalGram;
 
+        }
+
+        public static void deleteTempFile(string tmpFilePath)
+        {
+            try {
+                if (File.Exists(tmpFilePath)) {
+                    File.Delete(tmpFilePath);
+                 Debug.WriteLine("Temporary file deleted.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(String.Format("Error deleting temporary file {0} : ", tmpFilePath) + ex.Message);
+            }
         }
 
         /// <summary>
@@ -147,8 +164,9 @@ namespace lex4all
             // set up confusion matrix
             Dictionary<string, Dictionary<string, int>> confusion = new Dictionary<string, Dictionary<string, int>>();
 
-            // set up engine variable
+            // set up engine variable & get grammar
             SpeechRecognitionEngine engine;
+            Grammar evalGram = getEvalGram(words, lexFile);
 
             // iterate through testDict
             foreach (string word in words)
@@ -169,7 +187,6 @@ namespace lex4all
                     total++;
 
                     engine = lex4all.EngineControl.getEngine();
-                    Grammar evalGram = getEvalGram(words, lexFile);
                     engine.LoadGrammar(evalGram);
                     engine.SetInputToWaveFile(wavfile);
 
