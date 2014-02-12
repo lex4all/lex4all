@@ -38,7 +38,7 @@ namespace lex4all
         /// <param name="e"></param>
         static void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            //Console.WriteLine("Recognized text: " + e.Result.Text);
+            Console.WriteLine("Recognized text: " + e.Result.Text);
             
         }
 
