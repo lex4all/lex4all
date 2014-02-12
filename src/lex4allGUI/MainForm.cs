@@ -174,6 +174,8 @@ namespace lex4allGUI
                 progressBar.Increment(wordProportion);
             }
 
+            // Discriminative training goes here
+
             XDocument lexDoc = lex4all.Program.DictToXml(lexDict);
             lexDoc.Save(filename);
             
