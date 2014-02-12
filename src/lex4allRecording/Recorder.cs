@@ -13,12 +13,15 @@ namespace lex4allRecording
         private NAudio.Wave.WaveIn waveIn;
         private SampleAggregator aggregator;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Recorder()
         {
             // running recorder to determine sound level
-            int waveInDevice = 0;
+            //int waveInDevice = 0;
             waveIn = new NAudio.Wave.WaveIn();
-            waveIn.DeviceNumber = waveInDevice;
+            //waveIn.DeviceNumber = waveInDevice;
             int sampleRate = 8000; // 8 kHz
             int channels = 1; // mono
             waveIn.WaveFormat = new NAudio.Wave.WaveFormat(sampleRate, channels);
@@ -31,10 +34,11 @@ namespace lex4allRecording
 
 
         public void Record(String filename)
-        {           
-   
-            waveFile = new NAudio.Wave.WaveFileWriter(filename, new NAudio.Wave.WaveFormat(8000, 1));
+        {
 
+            //waveIn = new NAudio.Wave.WaveIn();
+            //waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
+            waveFile = new NAudio.Wave.WaveFileWriter(filename, new NAudio.Wave.WaveFormat(8000, 1));
             waveIn.RecordingStopped += new EventHandler<NAudio.Wave.StoppedEventArgs>(waveIn_RecordingStopped);
 
             //waveIn.StartRecording();
@@ -45,6 +49,7 @@ namespace lex4allRecording
         public void StopRecording()
         {
             waveIn.StopRecording();
+            //waveFile = null;
             
         }
 
@@ -54,7 +59,7 @@ namespace lex4allRecording
             // data is passed over to determine sound level and visualize it
             for (int index = 0; index < e.BytesRecorded; index += 2)
             {
-                // transform each sample (16 bit: 2 bytes: 2 index steps) fro the byte buffer
+                // transform each sample (16 bit: 2 bytes: 2 index steps) from the byte buffer
                 short sample = (short)((e.Buffer[index + 1] << 8) |
                                         e.Buffer[index + 0]);
                 float sample32 = sample / 32768f;
@@ -79,11 +84,11 @@ namespace lex4allRecording
         // recording stopped event
         void waveIn_RecordingStopped(object sender, NAudio.Wave.StoppedEventArgs e)
         {
-            if (waveIn != null)
-            {
-                waveIn.Dispose();
-                waveIn = null;
-            }
+            //if (waveIn != null)
+            //{
+            //    waveIn.Dispose();
+            //    waveIn = null;
+            //}
 
             if (waveFile != null)
             {

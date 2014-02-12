@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.recordButton = new System.Windows.Forms.Button();
-            this.stopRecButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -38,6 +37,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.rmCheckedBtn = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
@@ -52,15 +52,10 @@
             this.recordButton.UseVisualStyleBackColor = true;
             this.recordButton.Click += new System.EventHandler(this.recordButton_Click);
             // 
-            // stopRecButton
+            // saveFileDialog1
             // 
-            this.stopRecButton.Location = new System.Drawing.Point(477, 3);
-            this.stopRecButton.Name = "stopRecButton";
-            this.stopRecButton.Size = new System.Drawing.Size(70, 28);
-            this.stopRecButton.TabIndex = 1;
-            this.stopRecButton.Text = "Stop";
-            this.stopRecButton.UseVisualStyleBackColor = true;
-            this.stopRecButton.Click += new System.EventHandler(this.stopRecButton_Click);
+            this.saveFileDialog1.DefaultExt = "wav";
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // tableLayoutPanel1
             // 
@@ -69,13 +64,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.33708F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.36457F));
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.stopRecButton, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.recordButton, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.trackBar1, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.progressBar1, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.saveButton, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.rmCheckedBtn, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.addButton, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.backButton, 2, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
@@ -127,16 +122,18 @@
             // 
             // saveButton
             // 
+            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(83, 53);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 28);
+            this.saveButton.Size = new System.Drawing.Size(123, 28);
             this.saveButton.TabIndex = 5;
-            this.saveButton.Text = "Save";
+            this.saveButton.Text = "Save record";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // rmCheckedBtn
             // 
+            this.rmCheckedBtn.Enabled = false;
             this.rmCheckedBtn.Location = new System.Drawing.Point(83, 515);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
             this.rmCheckedBtn.Size = new System.Drawing.Size(181, 28);
@@ -146,6 +143,7 @@
             // 
             // addButton
             // 
+            this.addButton.Enabled = false;
             this.addButton.Location = new System.Drawing.Point(477, 515);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(122, 28);
@@ -154,15 +152,26 @@
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(477, 53);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 28);
+            this.backButton.TabIndex = 9;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // RecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(712, 629);
+            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "RecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RecordForm";
+            this.Text = "Recording";
             this.Load += new System.EventHandler(this.RecordForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -174,7 +183,6 @@
         #endregion
 
         private System.Windows.Forms.Button recordButton;
-        private System.Windows.Forms.Button stopRecButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ProgressBar progressBar1;
@@ -183,5 +191,6 @@
         public System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button rmCheckedBtn;
         private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button backButton;
     }
 }

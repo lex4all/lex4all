@@ -15,12 +15,18 @@ namespace lex4allGUI
     {
         public lex4allRecording.Recorder recorder;
         string tempPathFile;
+        int tempCounter;
+        
+        // indicates which action is being done 
+        int recFlag;
 
         public RecordForm()
         {
             InitializeComponent();
             recorder = new lex4allRecording.Recorder();
             recorder.PassSampleEvent += HandlePassSampleEvent;
+            recFlag = 0;
+            tempCounter = 0;
 
             int volume = recorder.GetVolume();
             if (!(volume == -1))
@@ -46,9 +52,23 @@ namespace lex4allGUI
         // Record and save a wave file
         private void recordButton_Click(object sender, EventArgs e)
         {
-            tempPathFile = System.IO.Path.GetTempPath() + "lex4allRec";
-            recorder = new lex4allRecording.Recorder();
-            recorder.Record(tempPathFile);            
+            if (recFlag == 0)
+            {
+                //tempPathFile = System.IO.Path.GetTempPath() + "lex4allRec" + tempCounter;
+                tempPathFile = System.IO.Path.GetTempFileName();
+                tempCounter++;
+                recorder.Record(tempPathFile);
+                recFlag = 1;
+                recordButton.Text = "Stop";
+                saveButton.Enabled = false;
+            }
+            else if (recFlag == 1)
+            {
+                recorder.StopRecording();
+                recFlag = 0;
+                recordButton.Text = "Start";
+                saveButton.Enabled = true;
+            }
 
         }
 
@@ -69,10 +89,18 @@ namespace lex4allGUI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            //saveFileDialog1.ShowDialog();
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                if (System.IO.File.Exists(saveFileDialog1.FileName)) {
+                    //System.IO.File.Delete(saveFileDialog1.FileName);
+                    MessageBox.Show("File does already exist");
+                }
+                else {
                 System.IO.File.Move(tempPathFile, saveFileDialog1.FileName);
                 listView1.Items.Add(saveFileDialog1.FileName);
+                addButton.Enabled = true;
+                }
             }
 
         }
@@ -94,6 +122,7 @@ namespace lex4allGUI
             else
             {
                 rmCheckedBtn.Enabled = false;
+                addButton.Enabled = false;
             }
         }
 
@@ -121,6 +150,23 @@ namespace lex4allGUI
             this.Close();
             lex4allGUI.Program.input.Show();            
 
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            //System.IO.File.Move(tempPathFile, saveFileDialog1.FileName);
+            //listView1.Items.Add(saveFileDialog1.FileName);
+            //addButton.Enabled = true;
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            if
+            (MessageBox.Show("All changes will be discarded. Are you sure?", "Back to word", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+                lex4allGUI.Program.input.Show();
+            }
         }
     }
 }
