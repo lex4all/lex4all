@@ -20,16 +20,16 @@ namespace lex4allRecording
         {
             // running recorder to determine sound level
             //int waveInDevice = 0;
-            waveIn = new NAudio.Wave.WaveIn();
+            //waveIn = new NAudio.Wave.WaveIn();
             //waveIn.DeviceNumber = waveInDevice;
             int sampleRate = 8000; // 8 kHz
             int channels = 1; // mono
-            waveIn.WaveFormat = new NAudio.Wave.WaveFormat(sampleRate, channels);
+            //waveIn.WaveFormat = new NAudio.Wave.WaveFormat(sampleRate, channels);
 
-            waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailable);
+            //waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailable);
 
             aggregator = new SampleAggregator();
-            waveIn.StartRecording();
+            //waveIn.StartRecording();
         }
 
 
@@ -58,21 +58,21 @@ namespace lex4allRecording
         void waveIn_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
         {
             // data is passed over to determine sound level and visualize it
-            for (int index = 0; index < e.BytesRecorded; index += 2)
-            {
-                // transform each sample (16 bit: 2 bytes: 2 index steps) from the byte buffer
-                short sample = (short)((e.Buffer[index + 1] << 8) |
-                                        e.Buffer[index + 0]);
-                float sample32 = sample / 32768f;
-                // passing over to visualization if certain amount of samples is reached
-                if (aggregator.passSample(sample32) == 1)
-                {
-                    // only pass over maximum or minimum
-                    ProcessSample(Math.Max(aggregator.MaxSample, Math.Abs(aggregator.MinSample)));
-                    aggregator.MaxSample = 0;
-                    aggregator.MinSample = 0;
-                }
-            }
+            //for (int index = 0; index < e.BytesRecorded; index += 2)
+            //{
+            //    // transform each sample (16 bit: 2 bytes: 2 index steps) from the byte buffer
+            //    short sample = (short)((e.Buffer[index + 1] << 8) |
+            //                            e.Buffer[index + 0]);
+            //    float sample32 = sample / 32768f;
+            //    // passing over to visualization if certain amount of samples is reached
+            //    if (aggregator.passSample(sample32) == 1)
+            //    {
+            //        // only pass over maximum or minimum
+            //        ProcessSample(Math.Max(aggregator.MaxSample, Math.Abs(aggregator.MinSample)));
+            //        aggregator.MaxSample = 0;
+            //        aggregator.MinSample = 0;
+            //    }
+            //}
 
             // if sound is recorded, it is written to file
             if (waveFile != null)
@@ -85,11 +85,11 @@ namespace lex4allRecording
         // recording stopped event
         void waveIn_RecordingStopped(object sender, NAudio.Wave.StoppedEventArgs e)
         {
-            //if (waveIn != null)
-            //{
-            //    waveIn.Dispose();
-            //    waveIn = null;
-            //}
+            if (waveIn != null)
+            {
+                waveIn.Dispose();
+                waveIn = null;
+            }
 
             if (waveFile != null)
             {
