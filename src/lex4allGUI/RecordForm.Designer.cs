@@ -32,17 +32,21 @@
             this.stopRecButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.rmCheckedBtn = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // recordButton
             // 
-            this.recordButton.Location = new System.Drawing.Point(3, 119);
+            this.recordButton.Location = new System.Drawing.Point(83, 3);
             this.recordButton.Name = "recordButton";
-            this.recordButton.Size = new System.Drawing.Size(75, 23);
+            this.recordButton.Size = new System.Drawing.Size(75, 28);
             this.recordButton.TabIndex = 0;
             this.recordButton.Text = "Start";
             this.recordButton.UseVisualStyleBackColor = true;
@@ -50,9 +54,9 @@
             // 
             // stopRecButton
             // 
-            this.stopRecButton.Location = new System.Drawing.Point(143, 119);
+            this.stopRecButton.Location = new System.Drawing.Point(477, 3);
             this.stopRecButton.Name = "stopRecButton";
-            this.stopRecButton.Size = new System.Drawing.Size(75, 23);
+            this.stopRecButton.Size = new System.Drawing.Size(70, 28);
             this.stopRecButton.TabIndex = 1;
             this.stopRecButton.Text = "Stop";
             this.stopRecButton.UseVisualStyleBackColor = true;
@@ -60,46 +64,104 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.recordButton, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.stopRecButton, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.trackBar1, 1, 0);
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.23596F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.33708F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.36457F));
+            this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.stopRecButton, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.recordButton, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.trackBar1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.saveButton, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rmCheckedBtn, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.addButton, 2, 5);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(281, 252);
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.079376F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.0326F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.901489F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.35223F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.05732F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.15287F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(712, 628);
             this.tableLayoutPanel1.TabIndex = 2;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
-            // progressBar1
+            // listView1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(3, 3);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(100, 23);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 2;
+            this.listView1.CheckBoxes = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(87, 281);
+            this.listView1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(618, 225);
+            this.listView1.TabIndex = 6;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(143, 3);
+            this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.trackBar1, 2);
+            this.trackBar1.Location = new System.Drawing.Point(192, 205);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(135, 56);
+            this.trackBar1.Size = new System.Drawing.Size(407, 56);
             this.trackBar1.TabIndex = 4;
             this.trackBar1.Value = 50;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.progressBar1, 2);
+            this.progressBar1.Location = new System.Drawing.Point(191, 156);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(410, 16);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 2;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(83, 53);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 28);
+            this.saveButton.TabIndex = 5;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // rmCheckedBtn
+            // 
+            this.rmCheckedBtn.Location = new System.Drawing.Point(83, 515);
+            this.rmCheckedBtn.Name = "rmCheckedBtn";
+            this.rmCheckedBtn.Size = new System.Drawing.Size(181, 28);
+            this.rmCheckedBtn.TabIndex = 7;
+            this.rmCheckedBtn.Text = "Remove checked files";
+            this.rmCheckedBtn.UseVisualStyleBackColor = true;
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(477, 515);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(122, 28);
+            this.addButton.TabIndex = 8;
+            this.addButton.Text = "Add to word";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // RecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.ClientSize = new System.Drawing.Size(712, 629);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "RecordForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RecordForm";
             this.Load += new System.EventHandler(this.RecordForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -117,5 +179,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button saveButton;
+        public System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button rmCheckedBtn;
+        private System.Windows.Forms.Button addButton;
     }
 }

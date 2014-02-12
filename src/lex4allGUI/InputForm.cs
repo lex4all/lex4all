@@ -162,6 +162,13 @@ namespace lex4allGUI
             }
         }
 
-        
+        public void updateFromRecorder(List<String> files)
+        {
+            foreach (String file in files)
+            {
+                listView1.Items.Add(file);
+            }
+
+        }
     }
 }

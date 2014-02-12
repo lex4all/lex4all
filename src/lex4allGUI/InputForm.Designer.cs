@@ -188,9 +188,9 @@
             // 
             this.recordButton.Location = new System.Drawing.Point(87, 593);
             this.recordButton.Name = "recordButton";
-            this.recordButton.Size = new System.Drawing.Size(75, 28);
+            this.recordButton.Size = new System.Drawing.Size(149, 28);
             this.recordButton.TabIndex = 12;
-            this.recordButton.Text = "Record";
+            this.recordButton.Text = "Record audio";
             this.recordButton.UseVisualStyleBackColor = true;
             this.recordButton.Click += new System.EventHandler(this.recordButton_Click);
             // 

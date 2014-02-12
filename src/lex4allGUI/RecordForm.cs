@@ -14,12 +14,19 @@ namespace lex4allGUI
     public partial class RecordForm : Form
     {
         public lex4allRecording.Recorder recorder;
+        string tempPathFile;
 
         public RecordForm()
         {
             InitializeComponent();
             recorder = new lex4allRecording.Recorder();
             recorder.PassSampleEvent += HandlePassSampleEvent;
+
+            int volume = recorder.GetVolume();
+            if (!(volume == -1))
+            {
+                trackBar1.Value = volume;
+            }
             
         }
 
@@ -34,17 +41,14 @@ namespace lex4allGUI
             
             // update progress bar
             progressBar1.Value = (int)(sample * 100);
-            System.Console.WriteLine((int)(sample * 100));
         }
 
         // Record and save a wave file
         private void recordButton_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                recorder = new lex4allRecording.Recorder();
-                recorder.Record(saveFileDialog1.FileName);
-            }
+            tempPathFile = System.IO.Path.GetTempPath() + "lex4allRec";
+            recorder = new lex4allRecording.Recorder();
+            recorder.Record(tempPathFile);            
 
         }
 
@@ -55,7 +59,68 @@ namespace lex4allGUI
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            recorder.GetVolumeControl(trackBar1.Value);
+            recorder.SetVolume(trackBar1.Value);
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.File.Move(tempPathFile, saveFileDialog1.FileName);
+                listView1.Items.Add(saveFileDialog1.FileName);
+            }
+
+        }
+
+        private void rmCheckedBtn_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listView1.Items)
+            {
+                if (item.Checked)
+                {
+                    item.Remove();
+                }
+            }
+
+            if (listView1.CheckedItems.Count > 0)
+            {
+                rmCheckedBtn.Enabled = true;
+            }
+            else
+            {
+                rmCheckedBtn.Enabled = false;
+            }
+        }
+
+        private void listView1_ItemChecked(object sender, EventArgs e)
+        {
+            if (listView1.CheckedItems.Count > 0)
+            {
+                rmCheckedBtn.Enabled = true;
+            }
+            else
+            {
+                rmCheckedBtn.Enabled = false;
+            }
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            List<String> recList = new List<string>();
+            foreach (ListViewItem item in listView1.Items)
+            {
+                recList.Add(item.Text);
+            }
+
+            lex4allGUI.Program.input.updateFromRecorder(recList);
+            this.Close();
+            lex4allGUI.Program.input.Show();            
+
         }
     }
 }

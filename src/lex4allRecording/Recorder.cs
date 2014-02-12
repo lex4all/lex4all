@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -106,7 +106,7 @@ namespace lex4allRecording
             }
         }
 
-        public void GetVolumeControl(int percentage)
+        public void SetVolume(int percentage)
         {
             int waveInDeviceNumber = 0;
             var mixerLine = new NAudio.Mixer.MixerLine((IntPtr)waveInDeviceNumber,
@@ -116,10 +116,28 @@ namespace lex4allRecording
                 if (control.ControlType == NAudio.Mixer.MixerControlType.Volume)
                 {
                     NAudio.Mixer.UnsignedMixerControl volumeControl = control as NAudio.Mixer.UnsignedMixerControl;
-                    volumeControl.Percent = percentage;
+                    volumeControl.Percent = (double) percentage;
                     break;
                 }
             }
+        }
+
+        public int GetVolume()
+        {
+            int waveInDeviceNumber = 0;
+            var mixerLine = new NAudio.Mixer.MixerLine((IntPtr)waveInDeviceNumber,
+                                           0, NAudio.Mixer.MixerFlags.WaveIn);
+            foreach (var control in mixerLine.Controls)
+            {
+                if (control.ControlType == NAudio.Mixer.MixerControlType.Volume)
+                {
+                    NAudio.Mixer.UnsignedMixerControl volumeControl = control as NAudio.Mixer.UnsignedMixerControl;
+                    return (int)volumeControl.Percent;
+                }
+                
+            }
+
+            return -1;
         }
 
         public static void Main(string[] args)
