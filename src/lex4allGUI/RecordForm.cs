@@ -93,14 +93,13 @@ namespace lex4allGUI
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (System.IO.File.Exists(saveFileDialog1.FileName)) {
-                    //System.IO.File.Delete(saveFileDialog1.FileName);
-                    MessageBox.Show("File does already exist");
+                    System.IO.File.Delete(saveFileDialog1.FileName);
                 }
-                else {
+                
                 System.IO.File.Move(tempPathFile, saveFileDialog1.FileName);
                 listView1.Items.Add(saveFileDialog1.FileName);
                 addButton.Enabled = true;
-                }
+                
             }
 
         }

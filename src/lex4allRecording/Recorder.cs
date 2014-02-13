@@ -14,7 +14,8 @@ namespace lex4allRecording
         private SampleAggregator aggregator;
 
         /// <summary>
-        /// 
+        /// constructs the recorder which means setting up a first input stream 
+        /// that is passed to the volume control
         /// </summary>
         public Recorder()
         {
@@ -32,7 +33,10 @@ namespace lex4allRecording
             //waveIn.StartRecording();
         }
 
-
+        /// <summary>
+        /// saves a recording to a temporary file; a new input stream is used
+        /// </summary>
+        /// <param name="filename"></param>
         public void Record(String filename)
         {
             waveFile = new NAudio.Wave.WaveFileWriter(filename, new NAudio.Wave.WaveFormat(8000, 1));
@@ -47,6 +51,9 @@ namespace lex4allRecording
             
         }
 
+        /// <summary>
+        /// stops recording and triggers the corresponding event
+        /// </summary>
         public void StopRecording()
         {
             waveIn.StopRecording();
@@ -54,7 +61,12 @@ namespace lex4allRecording
             
         }
 
-        // recording event
+        /// <summary>
+        /// input stream event; basically triggered the whole time
+        /// TODO: split in two separate events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void waveIn_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
         {
             // data is passed over to determine sound level and visualize it
@@ -82,7 +94,11 @@ namespace lex4allRecording
             }
         }
 
-        // recording stopped event
+        /// <summary>
+        /// when recording is stopped the current input stream and filewriter are discarded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void waveIn_RecordingStopped(object sender, NAudio.Wave.StoppedEventArgs e)
         {
             if (waveIn != null)
