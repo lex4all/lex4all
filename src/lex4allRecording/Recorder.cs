@@ -20,17 +20,12 @@ namespace lex4allRecording
         public Recorder()
         {
             // running recorder to determine sound level
-            //int waveInDevice = 0;
-            //waveIn = new NAudio.Wave.WaveIn();
-            //waveIn.DeviceNumber = waveInDevice;
-            int sampleRate = 8000; // 8 kHz
-            int channels = 1; // mono
-            //waveIn.WaveFormat = new NAudio.Wave.WaveFormat(sampleRate, channels);
+            waveIn = new NAudio.Wave.WaveIn();
+            waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
 
-            //waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailable);
-
+            waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailableVolume);
             aggregator = new SampleAggregator();
-            //waveIn.StartRecording();
+            waveIn.StartRecording();
         }
 
         /// <summary>
@@ -41,9 +36,13 @@ namespace lex4allRecording
         {
             waveFile = new NAudio.Wave.WaveFileWriter(filename, new NAudio.Wave.WaveFormat(8000, 1));
 
+            // unbound any resources flowing to the volume control
+            if (waveIn != null) {
+                waveIn.Dispose();
+            }
             waveIn = new NAudio.Wave.WaveIn();
             waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
-            waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailable);
+            waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailableRecording);
             waveIn.RecordingStopped += new EventHandler<NAudio.Wave.StoppedEventArgs>(waveIn_RecordingStopped);
 
             waveIn.StartRecording();
@@ -67,30 +66,33 @@ namespace lex4allRecording
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void waveIn_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
+        void waveIn_DataAvailableRecording(object sender, NAudio.Wave.WaveInEventArgs e)
         {
-            // data is passed over to determine sound level and visualize it
-            //for (int index = 0; index < e.BytesRecorded; index += 2)
-            //{
-            //    // transform each sample (16 bit: 2 bytes: 2 index steps) from the byte buffer
-            //    short sample = (short)((e.Buffer[index + 1] << 8) |
-            //                            e.Buffer[index + 0]);
-            //    float sample32 = sample / 32768f;
-            //    // passing over to visualization if certain amount of samples is reached
-            //    if (aggregator.passSample(sample32) == 1)
-            //    {
-            //        // only pass over maximum or minimum
-            //        ProcessSample(Math.Max(aggregator.MaxSample, Math.Abs(aggregator.MinSample)));
-            //        aggregator.MaxSample = 0;
-            //        aggregator.MinSample = 0;
-            //    }
-            //}
-
             // if sound is recorded, it is written to file
             if (waveFile != null)
             {
                 waveFile.Write(e.Buffer, 0, e.BytesRecorded);
                 waveFile.Flush();
+            }
+        }
+
+        void waveIn_DataAvailableVolume(object sender, NAudio.Wave.WaveInEventArgs e)
+        {
+            // data is passed over to determine sound level and visualize it
+            for (int index = 0; index < e.BytesRecorded; index += 2)
+            {
+                // transform each sample (16 bit: 2 bytes: 2 index steps) from the byte buffer
+                short sample = (short)((e.Buffer[index + 1] << 8) |
+                                        e.Buffer[index + 0]);
+                float sample32 = sample / 32768f;
+                // passing over to visualization if certain amount of samples is reached
+                if (aggregator.passSample(sample32) == 1)
+                {
+                    // only pass over maximum or minimum
+                    ProcessSample(Math.Max(aggregator.MaxSample, Math.Abs(aggregator.MinSample)));
+                    aggregator.MaxSample = 0;
+                    aggregator.MinSample = 0;
+                }
             }
         }
 
@@ -104,7 +106,13 @@ namespace lex4allRecording
             if (waveIn != null)
             {
                 waveIn.Dispose();
-                waveIn = null;
+                //waveIn = null;
+                waveIn = new NAudio.Wave.WaveIn();
+                waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
+
+                waveIn.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(waveIn_DataAvailableVolume);
+                aggregator = new SampleAggregator();
+                waveIn.StartRecording();
             }
 
             if (waveFile != null)

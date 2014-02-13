@@ -54,7 +54,10 @@ namespace lex4allGUI
         {
             if (recFlag == 0)
             {
-                //tempPathFile = System.IO.Path.GetTempPath() + "lex4allRec" + tempCounter;
+                // disable volume control
+                progressBar1.Enabled = false;
+                trackBar1.Enabled = false;
+
                 tempPathFile = System.IO.Path.GetTempFileName();
                 tempCounter++;
                 recorder.Record(tempPathFile);
@@ -68,6 +71,8 @@ namespace lex4allGUI
                 recFlag = 0;
                 recordButton.Text = "Start";
                 saveButton.Enabled = true;
+                progressBar1.Enabled = true;
+                trackBar1.Enabled = true;
             }
 
         }
@@ -89,13 +94,20 @@ namespace lex4allGUI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            //saveFileDialog1.ShowDialog();
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (System.IO.File.Exists(saveFileDialog1.FileName)) {
                     System.IO.File.Delete(saveFileDialog1.FileName);
+                    // remove an overridden file from the list
+                    foreach (ListViewItem item in listView1.Items) {
+                        if (item.Text == saveFileDialog1.FileName)
+                        {
+                            listView1.Items.Remove(item);
+                        }
+                    }
                 }
-                
+
+                saveButton.Enabled = false;
                 System.IO.File.Move(tempPathFile, saveFileDialog1.FileName);
                 listView1.Items.Add(saveFileDialog1.FileName);
                 addButton.Enabled = true;
@@ -149,13 +161,6 @@ namespace lex4allGUI
             this.Close();
             lex4allGUI.Program.input.Show();            
 
-        }
-
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-            //System.IO.File.Move(tempPathFile, saveFileDialog1.FileName);
-            //listView1.Items.Add(saveFileDialog1.FileName);
-            //addButton.Enabled = true;
         }
 
         private void backButton_Click(object sender, EventArgs e)
