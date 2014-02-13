@@ -52,12 +52,15 @@ namespace lex4all
         /// <param name="words">Array of words to be included</param>
         /// <param name="lexFile">Path to lexicon file</param>
         /// <returns>Grammar object (to be loaded into engine)</returns>
-        public static Grammar getEvalGram(string[] words, string lexFile)
+        public static string getEvalGram(string[] words, string lexFile)
         {
+            //string[] words = ReadLexicon(lexFile);
+
             // write evaluation grammar to file
             //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
             string path = Path.GetTempPath();
-            string gramFilePath = Path.GetTempFileName(); //old: Path.Combine(path, "lex4allEvalGrammar.xml");
+            //string gramFilePath = Path.GetTempFileName(); //old: 
+            string gramFilePath = Path.Combine(path, "lex4allEvalGrammar.xml");
 
             XNamespace ns = @"http://www.w3.org/2001/06/grammar";
             XDocument gramDoc = new XDocument(
@@ -75,13 +78,7 @@ namespace lex4all
                             words.Select(x => new XElement(ns + "item", x))))));
 
             gramDoc.Save(gramFilePath);
-
-            // read from file and then delete the file
-            Grammar evalGram = new Grammar(gramFilePath);
-            deleteTempFile(gramFilePath);
-
-            // return Grammar object
-            return evalGram;
+            return gramFilePath;
 
         }
 
@@ -153,7 +150,8 @@ namespace lex4all
         /// <returns>Confusion matrix as dictionary</returns>
         public static Dictionary<string, Dictionary<string, int>> Evaluate(Dictionary<String, String[]> testDict, string lexFile, out string report)
         {
-            string[] words = testDict.Keys.ToArray();
+            string[] realWords = testDict.Keys.ToArray();
+            string[] expectedWords = ReadLexicon(lexFile); //will be the same as realWords except during Discriminative Training
 
             // set up tally variables
             int total = 0;
@@ -166,14 +164,15 @@ namespace lex4all
 
             // set up engine variable & get grammar
             SpeechRecognitionEngine engine;
-            Grammar evalGram = getEvalGram(words, lexFile);
+            string evalGramFile = getEvalGram(expectedWords, lexFile);
+            Grammar evalGram;
 
             // iterate through testDict
-            foreach (string word in words)
+            foreach (string word in realWords)
             {
                 // set up confusion matrix tallies for this word
                 confusion[word] = new Dictionary<string, int>();
-                foreach (string otherWord in words)
+                foreach (string otherWord in expectedWords)
                 {
                     confusion[word][otherWord] = 0;
                 }
@@ -187,6 +186,7 @@ namespace lex4all
                     total++;
 
                     engine = lex4all.EngineControl.getEngine();
+                    evalGram = new Grammar(evalGramFile);
                     engine.LoadGrammar(evalGram);
                     engine.SetInputToWaveFile(wavfile);
 
@@ -218,6 +218,9 @@ namespace lex4all
             //Dictionary<string, object> evalResults = new Dictionary<string, object>();
             //evalResults["stats"] = report;
             //evalResults["confusion"] = confusion;
+
+            Debug.WriteLine("evalGramFile: " + evalGramFile);
+            //deleteTempFile(evalGramFile);
 
             return confusion;
 

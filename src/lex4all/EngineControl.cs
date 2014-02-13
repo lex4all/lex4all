@@ -26,6 +26,7 @@ namespace lex4all
 
             // add event handlers
             sre.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(sre_SpeechRecognized);
+            sre.SpeechRecognitionRejected += new EventHandler<SpeechRecognitionRejectedEventArgs>(sre_SpeechRecognitionRejected);
 
             Console.WriteLine("Done.");
             return sre; 
@@ -38,9 +39,21 @@ namespace lex4all
         /// <param name="e"></param>
         static void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            //Console.WriteLine("Recognized text: " + e.Result.Text);
+            Console.Write("Recognized text: " + e.Result.Text);
+            Console.WriteLine("\tPronunciation: " + e.Result.Words[0].Pronunciation);
             
         }
+
+        static void sre_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
+        {
+            Console.WriteLine("Recognition rejected.");
+        }
+
+        static void sre_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)
+        {
+            Console.WriteLine("Hypothesized: " + e.Result.Text + "\t" + e.Result.Words[0].Pronunciation + "\t" + e.Result.Confidence.ToString());
+        }
+
 
     }
 }

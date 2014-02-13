@@ -61,7 +61,7 @@ namespace lex4allGUI
                 dataGridView1.Enabled = false;
                 label2.Enabled = false;
                 numPronsUpDn.Enabled = false;
-                shortGramChkBx.Enabled = false;
+                discrimTrainChkBx.Enabled = false;
                 Stopwatch watch = Stopwatch.StartNew();
 
                 label3.Show();
@@ -86,7 +86,7 @@ namespace lex4allGUI
                 dataGridView1.Enabled = true;
                 label2.Enabled = true;
                 numPronsUpDn.Enabled = true;
-                shortGramChkBx.Enabled = true;
+                discrimTrainChkBx.Enabled = true;
 
                 if (MessageBox.Show("Evaluate this lexicon now? (Clicking 'Yes' will quit the Lexicon Builder and open the Evaluation Tool.)", "Continue to evaluation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -174,7 +174,10 @@ namespace lex4allGUI
                 progressBar.Increment(wordProportion);
             }
 
-            // Discriminative training goes here
+            if (discrimTrainChkBx.Checked)
+            {
+                lexDict = lex4all.DiscriminativeTraining.RunTraining(lexDict, wavDict, (int)discrimPassesUpDn.Value);
+            }
 
             XDocument lexDoc = lex4all.Program.DictToXml(lexDict);
             lexDoc.Save(filename);
@@ -210,19 +213,22 @@ namespace lex4allGUI
 
         }
 
-        private void shortGramChkBx_CheckedChanged(object sender, EventArgs e)
-        {
-            if (shortGramChkBx.Checked == true)
-            {
-                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
-                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
-            }
-            else
-            {
-                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
-                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
-            }
-        }
+        /// <summary>
+        /// Old event handler for the "Faster training" (short grammar) option
+        /// </summary>
+        //private void shortGramChkBx_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (discrimTrainChkBx.Checked == true)
+        //    {
+        //        lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+        //        lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+        //    }
+        //    else
+        //    {
+        //        lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
+        //        lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
+        //    }
+        //}
 
         private void numPronsUpDn_ValueChanged(object sender, EventArgs e)
         {

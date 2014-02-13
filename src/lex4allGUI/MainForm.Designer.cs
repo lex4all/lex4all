@@ -42,17 +42,20 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numPronsUpDn = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.shortGramChkBx = new System.Windows.Forms.CheckBox();
+            this.discrimTrainChkBx = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.discrimPassesUpDn = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPronsUpDn)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.discrimPassesUpDn)).BeginInit();
             this.SuspendLayout();
             // 
             // startButton
@@ -186,9 +189,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.discrimPassesUpDn);
             this.groupBox1.Controls.Add(this.numPronsUpDn);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.shortGramChkBx);
+            this.groupBox1.Controls.Add(this.discrimTrainChkBx);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 420);
             this.groupBox1.Name = "groupBox1";
@@ -196,7 +201,9 @@
             this.groupBox1.Size = new System.Drawing.Size(242, 88);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Options";
+            this.groupBox1.Text = "Advanced options";
+            this.toolTip1.SetToolTip(this.groupBox1, "These options give you greater control over the lexicon-building process. If you\'" +
+        "re not sure what settings to use, just leave them at the default settings.");
             // 
             // numPronsUpDn
             // 
@@ -209,7 +216,7 @@
             this.numPronsUpDn.Name = "numPronsUpDn";
             this.numPronsUpDn.Size = new System.Drawing.Size(47, 20);
             this.numPronsUpDn.TabIndex = 1;
-            this.numPronsUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numPronsUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.numPronsUpDn, "The maximum number of alternative pronunciations that will be included in the lex" +
         "icon. Generally (but not always), more pronunciations enable higher recognition " +
         "accuracy.");
@@ -234,22 +241,20 @@
         "icon. Generally (but not always), more pronunciations enable higher recognition " +
         "accuracy.");
             // 
-            // shortGramChkBx
+            // discrimTrainChkBx
             // 
-            this.shortGramChkBx.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.shortGramChkBx.AutoSize = true;
-            this.shortGramChkBx.Checked = true;
-            this.shortGramChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.shortGramChkBx.Location = new System.Drawing.Point(12, 58);
-            this.shortGramChkBx.Name = "shortGramChkBx";
-            this.shortGramChkBx.Size = new System.Drawing.Size(92, 17);
-            this.shortGramChkBx.TabIndex = 15;
-            this.shortGramChkBx.Text = "Faster training";
-            this.toolTip1.SetToolTip(this.shortGramChkBx, "If checked, a shorter pronunciation discovery grammar will be used during trainin" +
-        "g. This makes training much faster, but may produce slightly less accurate pronu" +
-        "nciations.");
-            this.shortGramChkBx.UseVisualStyleBackColor = true;
-            this.shortGramChkBx.CheckedChanged += new System.EventHandler(this.shortGramChkBx_CheckedChanged);
+            this.discrimTrainChkBx.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.discrimTrainChkBx.AutoSize = true;
+            this.discrimTrainChkBx.Checked = true;
+            this.discrimTrainChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.discrimTrainChkBx.Location = new System.Drawing.Point(12, 58);
+            this.discrimTrainChkBx.Name = "discrimTrainChkBx";
+            this.discrimTrainChkBx.Size = new System.Drawing.Size(128, 17);
+            this.discrimTrainChkBx.TabIndex = 15;
+            this.discrimTrainChkBx.Text = "Discriminative training";
+            this.toolTip1.SetToolTip(this.discrimTrainChkBx, "If checked, any pronunciations that might cause confusion between words in the le" +
+        "xicon will be removed. Improves accuracy, but slightly increases training time.");
+            this.discrimTrainChkBx.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -292,6 +297,29 @@
             this.saveFileDialog1.FileName = "lexicon";
             this.saveFileDialog1.Filter = "Pronunciation Lexicon (*.pls) | *.pls|XML file (*.xml)|*.xml";
             // 
+            // discrimPassesUpDn
+            // 
+            this.discrimPassesUpDn.Location = new System.Drawing.Point(185, 57);
+            this.discrimPassesUpDn.Name = "discrimPassesUpDn";
+            this.discrimPassesUpDn.Size = new System.Drawing.Size(47, 20);
+            this.discrimPassesUpDn.TabIndex = 16;
+            this.discrimPassesUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.discrimPassesUpDn.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(146, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Passes:";
+            this.toolTip1.SetToolTip(this.label5, "Number of times the Discriminative Training process will be run.");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,6 +345,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numPronsUpDn)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.discrimPassesUpDn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -334,7 +363,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox shortGramChkBx;
+        private System.Windows.Forms.CheckBox discrimTrainChkBx;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -342,6 +371,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown discrimPassesUpDn;
 
 
 

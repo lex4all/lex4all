@@ -75,7 +75,8 @@ namespace lex4all
                 string word = kvp.Key;
                 foreach (string pron in kvp.Value)
                 {
-                    string fakeWord = String.Format("{0}-{1}", word, pron);
+
+                    string fakeWord = String.Format("{0}-{1}", word, pron.Replace(' ', '_'));
                     traininglexDict[fakeWord] = new string[] {pron};
                     Debug.WriteLine(String.Format("Added to trainingLexDict: {0}, {1} prons: {2}", fakeWord, traininglexDict[fakeWord].Length, traininglexDict[fakeWord][0]));
 
@@ -135,21 +136,27 @@ namespace lex4all
             // Go through the confusion matrix and flag confusing prons
             foreach (string realWord in confusMatrix.Keys)
             {
+                Debug.WriteLine("realWord: " + realWord);
                 foreach (KeyValuePair<string, int> kvp in confusMatrix[realWord])
                 {
                     string fakeWord = kvp.Key;
-                    string[] wordParts = fakeWord.Split('-');
-                    string foundWord = wordParts[0];
-                    string foundPron = wordParts[1];
-
-                    bool same = (fakeWord == foundWord);
-
-                    Debug.WriteLine(String.Format("actual: {0}\t\t recognized: {1}\t\t same: {2}", realWord, foundWord, same));
-
-                    if (same == false)
+                    Debug.Write("\tfakeWord: " + fakeWord + "\t");
+                    Debug.WriteLine("count: " + kvp.Value.ToString());
+                    if (fakeWord != "UNRECOGNIZED" && kvp.Value > 0) //ignore unrecognized words
                     {
-                        flagged.Add(foundPron);
-                        Debug.WriteLine(String.Format("Flagging this pronunciation: {0}", foundPron));
+                        string[] wordParts = fakeWord.Split('-');
+                        string foundWord = wordParts[0];
+                        string foundPron = wordParts[1].Replace('_', ' ');
+
+                        bool same = (realWord == foundWord);
+
+                        Debug.WriteLine(String.Format("actual: {0}\t\t recognized: {1}\t\t same: {2}", realWord, foundWord, same));
+
+                        if (same == false)
+                        {
+                            flagged.Add(foundPron);
+                            Debug.WriteLine(String.Format("Flagging this pronunciation: {0}", foundPron));
+                        }
                     }
                 }
             }
@@ -177,6 +184,7 @@ namespace lex4all
             {
                 Debug.WriteLine(String.Format("pass #{0}", pass));
                 newLexDict = RunTrainingPass(fullLexDict, wavDict);
+                pass++;
             }
 
             return newLexDict;
