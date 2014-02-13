@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using lex4allRecording;
 
 namespace lex4allGUI
@@ -55,12 +56,14 @@ namespace lex4allGUI
             if (recFlag == 0)
             {
                 // disable volume control
-                progressBar1.Enabled = false;
                 trackBar1.Enabled = false;
 
                 tempPathFile = System.IO.Path.GetTempFileName();
                 tempCounter++;
                 recorder.Record(tempPathFile);
+
+                progressBar1.Style = ProgressBarStyle.Marquee;
+
                 recFlag = 1;
                 recordButton.Text = "Stop";
                 saveButton.Enabled = false;
@@ -68,10 +71,12 @@ namespace lex4allGUI
             else if (recFlag == 1)
             {
                 recorder.StopRecording();
+
+                progressBar1.Style = ProgressBarStyle.Continuous;
+
                 recFlag = 0;
                 recordButton.Text = "Start";
                 saveButton.Enabled = true;
-                progressBar1.Enabled = true;
                 trackBar1.Enabled = true;
             }
 
