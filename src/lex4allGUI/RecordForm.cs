@@ -42,7 +42,7 @@ namespace lex4allGUI
 
         private void RecordForm_Load(object sender, EventArgs e)
         {
-            
+            this.CenterToScreen();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace lex4allGUI
         }
 
         /// <summary>
-        /// 
+        /// upload wav file to word
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -54,6 +54,11 @@ namespace lex4allGUI
             }
         }
 
+        /// <summary>
+        /// enable or disable remove button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listView1_ItemChecked(object sender, EventArgs e)
         {
             if (listView1.CheckedItems.Count > 0)
@@ -66,7 +71,11 @@ namespace lex4allGUI
             }
         }
 
-        
+        /// <summary>
+        /// add word to lexicon
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void audioOK_Click(object sender, EventArgs e)
         {
 
@@ -112,9 +121,12 @@ namespace lex4allGUI
                 //chooseWav.Text = wavDict[word].Length.ToString() + " files selected";
             }
         }
-
-        
-
+     
+        /// <summary>
+        /// remove checked items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rmCheckedBtn_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem item in listView1.Items)
@@ -135,6 +147,11 @@ namespace lex4allGUI
             }
         }
 
+        /// <summary>
+        /// record audio
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void recordButton_Click(object sender, EventArgs e) {
 
             RecordForm record = new RecordForm();
@@ -147,6 +164,11 @@ namespace lex4allGUI
             this.CenterToScreen();
         }
 
+        /// <summary>
+        /// go back and discard all
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backButton_Click(object sender, EventArgs e)
         {
             if (word1.Text == "" && listView1.Items.Count == 0)
@@ -165,6 +187,10 @@ namespace lex4allGUI
             }
         }
 
+        /// <summary>
+        /// add recorded data to word
+        /// </summary>
+        /// <param name="files">audio files passed from recording</param>
         public void updateFromRecorder(List<String> files)
         {
             foreach (String file in files)
