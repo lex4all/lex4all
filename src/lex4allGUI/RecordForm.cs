@@ -18,9 +18,12 @@ namespace lex4allGUI
         string tempPathFile;
         int tempCounter;
         
-        // indicates which action is being done 
+        // indicates which action (start recording or stop) is being done 
         int recFlag;
 
+        /// <summary>
+        /// initialize input stream for volume control
+        /// </summary>
         public RecordForm()
         {
             InitializeComponent();
@@ -42,6 +45,11 @@ namespace lex4allGUI
             
         }
 
+        /// <summary>
+        /// if volume sample is passed it is shown on the progressbar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void HandlePassSampleEvent(object sender, lex4allRecording.SampleEventArgs e)
         {
             float sample = e.sample32;
@@ -50,7 +58,11 @@ namespace lex4allGUI
             progressBar1.Value = (int)(sample * 100);
         }
 
-        // Record and save a wave file
+        /// <summary>
+        /// record and stop recording
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void recordButton_Click(object sender, EventArgs e)
         {
             if (recFlag == 0)
@@ -82,11 +94,21 @@ namespace lex4allGUI
 
         }
 
+        /// <summary>
+        /// stop rec
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stopRecButton_Click(object sender, EventArgs e)
         {
             recorder.StopRecording();
         }
 
+        /// <summary>
+        /// set volume
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             recorder.SetVolume(trackBar1.Value);
@@ -97,6 +119,11 @@ namespace lex4allGUI
 
         }
 
+        /// <summary>
+        /// save sound to file after recording
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -121,6 +148,11 @@ namespace lex4allGUI
 
         }
 
+        /// <summary>
+        /// remove checked items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rmCheckedBtn_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem item in listView1.Items)
@@ -142,6 +174,11 @@ namespace lex4allGUI
             }
         }
 
+        /// <summary>
+        /// check items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listView1_ItemChecked(object sender, EventArgs e)
         {
             if (listView1.CheckedItems.Count > 0)
@@ -154,6 +191,11 @@ namespace lex4allGUI
             }
         }
 
+        /// <summary>
+        /// add audio to word
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
             List<String> recList = new List<string>();
@@ -168,6 +210,11 @@ namespace lex4allGUI
 
         }
 
+        /// <summary>
+        /// go back and discard all
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backButton_Click(object sender, EventArgs e)
         {
             if

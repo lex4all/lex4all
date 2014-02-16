@@ -19,7 +19,6 @@ namespace lex4allRecording
         /// </summary>
         public Recorder()
         {
-            // running recorder to determine sound level
             waveIn = new NAudio.Wave.WaveIn();
             waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
 
@@ -61,8 +60,7 @@ namespace lex4allRecording
         }
 
         /// <summary>
-        /// input stream event; basically triggered the whole time
-        /// TODO: split in two separate events
+        /// input stream event for recording 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -76,6 +74,11 @@ namespace lex4allRecording
             }
         }
 
+        /// <summary>
+        /// inout stream event for volume control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void waveIn_DataAvailableVolume(object sender, NAudio.Wave.WaveInEventArgs e)
         {
             // data is passed over to determine sound level and visualize it
@@ -106,7 +109,6 @@ namespace lex4allRecording
             if (waveIn != null)
             {
                 waveIn.Dispose();
-                //waveIn = null;
                 waveIn = new NAudio.Wave.WaveIn();
                 waveIn.WaveFormat = new NAudio.Wave.WaveFormat(8000, 1);
 
@@ -123,9 +125,15 @@ namespace lex4allRecording
 
         }
 
+        /// <summary>
+        /// event that is subscribed by the GUI in order to display the volume
+        /// </summary>
         public event EventHandler<SampleEventArgs> PassSampleEvent;
 
-        // when a sample is passed an event is triggered which is subscribed by the GUI (progress bar)
+        /// <summary>
+        /// triggers the volume event when a sample is passed
+        /// </summary>
+        /// <param name="sample32"></param>
         public void ProcessSample(float sample32)
         {
             EventHandler<SampleEventArgs> handler = PassSampleEvent;
@@ -136,6 +144,10 @@ namespace lex4allRecording
             }
         }
 
+        /// <summary>
+        /// sets the volume when a value is passed by the GUIs trackbar
+        /// </summary>
+        /// <param name="percentage">the volume value passed</param>
         public void SetVolume(int percentage)
         {
             int waveInDeviceNumber = 0;
@@ -152,6 +164,10 @@ namespace lex4allRecording
             }
         }
 
+        /// <summary>
+        /// gets the volume level to show it on the trackbar
+        /// </summary>
+        /// <returns></returns>
         public int GetVolume()
         {
             int waveInDeviceNumber = 0;

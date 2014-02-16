@@ -23,8 +23,11 @@ namespace lex4allGUI
             InitializeComponent();
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chooseWav_Click(object sender, EventArgs e)
         {
             
