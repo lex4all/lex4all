@@ -1,13 +1,11 @@
-# Speech Recognition for Low-Resource Languages
+# Speech Recognition in Any Language
 
 ### Anjana Vakil & Max Paulus
-
-#### Software Project "NLP Tools for Low-Resource Languages", Winter semester 2013-2014
-#### Department of Computational Linguistics, University of Saarland
+### Department of Computational Linguistics, University of Saarland
 
 Developers trying to incorporate speech recognition interfaces in a low-resource language (LRL) into their applications currently face the hurdle of not finding recognition engines trained on their target language. Although tools such as Carnegie Mellon University's Sphinx simplify the creation of new acoustic models for recognition, they require large amounts of training data (audio recordings) in the target language. However, for small-vocabulary applications, an existing recognizer for a high-resource language (HRL) can be used to perform recognition in the target language. This requires a pronunciation lexicon mapping the relevant words in the target language into sequences of sounds in the HRL.
 
-**lex4all** is an easy-to-use desktop application for Windows that will allow even naive users to automatically create a pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used to add small-vocabulary speech recognition functionality to applications in the LRL.
+[lex4all](https://github.com/lex4all/lex4all) is an easy-to-use desktop application for Windows that will allow even naive users to automatically create a pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used to add small-vocabulary speech recognition functionality to applications in the LRL.
 
 #### How it works
 
@@ -17,7 +15,7 @@ A simple user interface allows the user to easily specify one written form (text
 
 * Simple graphical interface
 * Use existing `.wav` audio files, or use the built-in audio recorder
-* Advanced options (number of pronunciations per word, discriminative training [3] on/off)
+* Advanced options (number of pronunciations per word, discriminative training [3])
 * Evaluation module for testing/research
 
 
