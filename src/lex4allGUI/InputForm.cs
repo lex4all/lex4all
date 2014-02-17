@@ -102,10 +102,10 @@ namespace lex4allGUI
                 MessageBox.Show("Please enter a word.", "Error: Word field is empty");
                 return;
             }
-            else if (wavs.Length == 0)
-            {
-                MessageBox.Show("Please choose one or more audio files.", "Error: No audio files selected");
-            }
+            //else if (wavs.Length == 0)
+            //{
+            //    MessageBox.Show("Please choose one or more audio files.", "Error: No audio files selected");
+            //}
             else
             {
                 lex4allGUI.Program.main.wavDict[word] = wavs;

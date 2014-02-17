@@ -52,9 +52,20 @@ namespace lex4allGUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            //Check that all words have at least one audio file
+            foreach (string[] wavs in wavDict.Values)
+            {
+                if (wavs.Length == 0)
+                {
+                    MessageBox.Show("Please choose one or more audio files for each word.", "Error: Not all words have audio!");
+                    return;
+                }
+            }
+
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {  
-           
+                
+
                 startButton.Enabled = false;
                 startButton.Text = "Working...";
                 addWordButton.Enabled = false;
