@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.startButton = new System.Windows.Forms.Button();
             this.addWordButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -40,22 +41,23 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.discrimPassesUpDn = new System.Windows.Forms.NumericUpDown();
             this.numPronsUpDn = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.discrimTrainChkBx = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.discrimPassesUpDn = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
+            this.shortWildcardChkBx = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.discrimPassesUpDn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPronsUpDn)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.discrimPassesUpDn)).BeginInit();
             this.SuspendLayout();
             // 
             // startButton
@@ -189,6 +191,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.shortWildcardChkBx);
             this.groupBox1.Controls.Add(this.discrimPassesUpDn);
             this.groupBox1.Controls.Add(this.numPronsUpDn);
             this.groupBox1.Controls.Add(this.label2);
@@ -205,9 +208,22 @@
             this.toolTip1.SetToolTip(this.groupBox1, "These options give you greater control over the lexicon-building process. If you\'" +
         "re not sure what settings to use, just leave them at the default settings.");
             // 
+            // discrimPassesUpDn
+            // 
+            this.discrimPassesUpDn.Location = new System.Drawing.Point(185, 66);
+            this.discrimPassesUpDn.Name = "discrimPassesUpDn";
+            this.discrimPassesUpDn.Size = new System.Drawing.Size(47, 20);
+            this.discrimPassesUpDn.TabIndex = 16;
+            this.discrimPassesUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.discrimPassesUpDn.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
             // numPronsUpDn
             // 
-            this.numPronsUpDn.Location = new System.Drawing.Point(185, 29);
+            this.numPronsUpDn.Location = new System.Drawing.Point(185, 18);
             this.numPronsUpDn.Minimum = new decimal(new int[] {
             1,
             0,
@@ -232,7 +248,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Location = new System.Drawing.Point(9, 32);
+            this.label2.Location = new System.Drawing.Point(9, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(170, 13);
             this.label2.TabIndex = 0;
@@ -247,7 +263,7 @@
             this.discrimTrainChkBx.AutoSize = true;
             this.discrimTrainChkBx.Checked = true;
             this.discrimTrainChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.discrimTrainChkBx.Location = new System.Drawing.Point(12, 58);
+            this.discrimTrainChkBx.Location = new System.Drawing.Point(12, 67);
             this.discrimTrainChkBx.Name = "discrimTrainChkBx";
             this.discrimTrainChkBx.Size = new System.Drawing.Size(128, 17);
             this.discrimTrainChkBx.TabIndex = 15;
@@ -255,6 +271,17 @@
             this.toolTip1.SetToolTip(this.discrimTrainChkBx, "If checked, any pronunciations that might cause confusion between words in the le" +
         "xicon will be removed. Improves accuracy, but slightly increases training time.");
             this.discrimTrainChkBx.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(145, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Passes:";
+            this.toolTip1.SetToolTip(this.label5, "Number of times the Discriminative Training process will be run (i.e. the lexicon" +
+        " will be evaluated and \"confusing\" pronunciations will be removed).");
             // 
             // flowLayoutPanel1
             // 
@@ -297,28 +324,18 @@
             this.saveFileDialog1.FileName = "lexicon";
             this.saveFileDialog1.Filter = "Pronunciation Lexicon (*.pls) | *.pls|XML file (*.xml)|*.xml";
             // 
-            // discrimPassesUpDn
+            // shortWildcardChkBx
             // 
-            this.discrimPassesUpDn.Location = new System.Drawing.Point(185, 57);
-            this.discrimPassesUpDn.Name = "discrimPassesUpDn";
-            this.discrimPassesUpDn.Size = new System.Drawing.Size(47, 20);
-            this.discrimPassesUpDn.TabIndex = 16;
-            this.discrimPassesUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.discrimPassesUpDn.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(146, 59);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Passes:";
-            this.toolTip1.SetToolTip(this.label5, "Number of times the Discriminative Training process will be run.");
+            this.shortWildcardChkBx.AutoSize = true;
+            this.shortWildcardChkBx.Checked = true;
+            this.shortWildcardChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.shortWildcardChkBx.Location = new System.Drawing.Point(12, 42);
+            this.shortWildcardChkBx.Name = "shortWildcardChkBx";
+            this.shortWildcardChkBx.Size = new System.Drawing.Size(92, 17);
+            this.shortWildcardChkBx.TabIndex = 18;
+            this.shortWildcardChkBx.Text = "Faster training";
+            this.toolTip1.SetToolTip(this.shortWildcardChkBx, resources.GetString("shortWildcardChkBx.ToolTip"));
+            this.shortWildcardChkBx.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -342,10 +359,10 @@
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.discrimPassesUpDn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPronsUpDn)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.discrimPassesUpDn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -373,6 +390,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown discrimPassesUpDn;
+        private System.Windows.Forms.CheckBox shortWildcardChkBx;
 
 
 
