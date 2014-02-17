@@ -46,9 +46,34 @@ namespace lex4allGUI
 
             if (evalDict.Keys.Count > 0)
             {
-                DialogResult keepData = MessageBox.Show(@"Keep currently selected audio files? (Select ""No"" to clear all selected audio and specify new files for each word manually.)", "Keep current files?", MessageBoxButtons.YesNo);
-                if (keepData == DialogResult.No)
+                // Check if new lexicon has same words as old one; if so, give user option to keep selected audio
+                List<string> notInNewLex = new List<string>();
+                foreach (string word in evalDict.Keys)
+                {
+                    if (wordsInLex.Contains(word) == false)
+                    {
+                        notInNewLex.Add(word);
+                    }
+                }
+                if (notInNewLex.Count < evalDict.Keys.Count)
+                {
+                    DialogResult keepData = MessageBox.Show(@"The lexicon you selected has some of the same words as the last lexicon you used. Would you like to keep the currently selected audio files?", "Keep current files?", MessageBoxButtons.YesNo);
+                    if (keepData == DialogResult.Yes)
+                    {
+                        foreach (string word in notInNewLex)
+                        {
+                            evalDict.Remove(word); //Only keep the words in evalDict that are also in the new lexicon
+                        }
+                    }
+                    else
+                    {
+                        evalDict.Clear();
+                    }
+                }
+                else
+                {
                     evalDict.Clear();
+                }
             }
             
             foreach (string word in wordsInLex)
