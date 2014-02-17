@@ -35,9 +35,9 @@ To automatically discover the pronunciation mappings we implement the Salaam alg
 
 [1] Jahanzeb Sherwani. “Speech interfaces for information access by low literate users”. PhD thesis. Pittsburgh, PA, USA: Carnegie Mellon University, 2009. [\[pdf\]](http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf).
 
-[2] Fang Qiao, Jahanzeb Sherwani, and Roni Rosenfeld. “Small-vocabulary speech recognition for resource-scarce languages”. In: Proceedings of the First ACM Symposium on Computing for Development. ACM DEV ’10. London, United Kingdom: ACM, 2010, 3:1–3:8. [\[pdf\]](http://doi.acm.org/10.1145/1926180.1926184).
+[2] Fang Qiao, Jahanzeb Sherwani, and Roni Rosenfeld. “Small-vocabulary speech recognition for resource-scarce languages”. In: Proceedings of the First ACM Symposium on Computing for Development. ACM DEV ’10. London, United Kingdom: ACM, 2010, 3:1–3:8. [\[pdf\]](http://www.cs.cmu.edu/~roni/papers/salaam-DEV2010.pdf).
 
-[3] Hao Yee Chan and Roni Rosenfeld. “Discriminative pronunciation learning for speech recognition for resource scarce languages”. In: Proceedings of the 2nd ACM Symposium on Computing for Development. ACM DEV ’12. Atlanta, Georgia: ACM, 2012, 12:1–12:6. [\[pdf\]](http://doi.acm.org/10.1145/2160601.2160618).
+[3] Hao Yee Chan and Roni Rosenfeld. “Discriminative pronunciation learning for speech recognition for resource scarce languages”. In: Proceedings of the 2nd ACM Symposium on Computing for Development. ACM DEV ’12. Atlanta, Georgia: ACM, 2012, 12:1–12:6. [\[pdf\]](http://www.cs.cmu.edu/~roni/papers/salaam-DEV2012.pdf).
 
 [4] World Wide Web Consortium (W3C). Pronunciation Lexicon Specification (PLS) Version 1.0. Tech. rep. 2008. [\[url\]](http://www.w3.org/TR/pronunciation-lexicon/).
 
