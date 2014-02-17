@@ -23,10 +23,8 @@
         </header>
 
         <section id="downloads" class="clearfix">
-          <!--
           <a href="https://github.com/lex4all/lex4all/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
           <a href="https://github.com/lex4all/lex4all/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          -->
           <a href="https://github.com/lex4all/lex4all" id="view-on-github" class="button"><span>View on GitHub</span></a>
         </section>
 
@@ -34,19 +32,56 @@
 
         <section id="main_content">
           <h1>
-<a name="speech-recognition-for-lrls" class="anchor" href="#speech-recognition-for-lrls"><span class="octicon octicon-link"></span></a>Speech Recognition for LRLs</h1>
-
-<h3>
-<a name="anjana-vakil--max-paulus" class="anchor" href="#anjana-vakil--max-paulus"><span class="octicon octicon-link"></span></a>Anjana Vakil &amp; Max Paulus</h3>
+<a name="speech-recognition-in-any-language" class="anchor" href="#speech-recognition-in-any-language"><span class="octicon octicon-link"></span></a>Speech Recognition in Any Language</h1>
 
 <h4>
-<a name="cl4lrl-software-project-university-of-saarland" class="anchor" href="#cl4lrl-software-project-university-of-saarland"><span class="octicon octicon-link"></span></a>CL4LRL Software Project, University of Saarland</h4>
+<a name="anjana-vakil--max-paulus" class="anchor" href="#anjana-vakil--max-paulus"><span class="octicon octicon-link"></span></a><a href="mailto:anjanav@coli.uni-saarland.de">Anjana Vakil</a> &amp; <a href="mailto:mpaulus@coli.uni-saarland.de">Max Paulus</a>
+</h4>
 
-<p>Developers trying to incorporate speech recognition interfaces in a low-resource language (LRL) into their applications currently face the hurdle of not finding recognition engines trained on their target language. Although tools such as Carnegie Mellon University's Sphinx simplify the creation of new acoustic models for recognition, they require large amounts of training data (audio recordings) in the target language. However, for small-vocabulary applications, an existing recognizer for a high-resource language (HRL) can be used to perform recognition in the target language. This requires a pronunciation lexicon mapping the relevant words in the target language into sequences of sounds in the HRL.</p>
+<h5>
+<a name="department-of-computational-linguistics-university-of-saarland" class="anchor" href="#department-of-computational-linguistics-university-of-saarland"><span class="octicon octicon-link"></span></a>Department of Computational Linguistics, University of Saarland</h5>
 
-<p>Our goal is to build an easy-to-use application that will allow even naive users to automatically create a pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used to add small-vocabulary speech recognition functionality to applications in the LRL.</p>
+<hr><p>Developers trying to incorporate speech recognition interfaces in a low-resource language (LRL) into their applications currently face the hurdle of not finding recognition engines trained on their target language. Although tools such as Carnegie Mellon University's Sphinx simplify the creation of new acoustic models for recognition, they require large amounts of training data (audio recordings) in the target language. However, for small-vocabulary applications, an existing recognizer for a high-resource language (HRL) can be used to perform recognition in the target language. This requires a pronunciation lexicon mapping the relevant words in the target language into sequences of sounds in the HRL.</p>
 
-<p>Read our <a href="http://htmlpreview.github.io/?https://github.com/lex4all/lex4all/blob/master/docs/ProjectProposal.html">project proposal</a> for more information!</p>
+<p><a href="https://github.com/lex4all/lex4all">lex4all</a> is an easy-to-use desktop application for Windows that will allow even naive users to automatically create a pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used to add small-vocabulary speech recognition functionality to applications in the LRL.</p>
+
+<h4>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h4>
+
+<p>A simple user interface allows the user to easily specify one written form (text string) and and one or more audio samples (<code>.wav</code> files) for each word in the target vocabulary, and to set other options (e.g. number of pronunciations per word, name/save location of lexicon file, etc.). The audio is then passed to a speech recognition engine for a HRL (English). An automatic pronunciation generation algorithm (the Salaam method, [2–3]) finds the best pronunciation(s) for each word in the LRL vocabulary. The program outputs a pronunciation lexicon (<code>.pls</code> XML file). This lexicon file follows the standard pronunciation lexicon format [4], so it can be directly included in a speech recognition application, e.g. one built using the <a href="http://msdn.microsoft.com/en-us/library/hh361572">Microsoft Speech Platform</a> API.</p>
+
+<p><img src="https://docs.google.com/drawings/d/1eBPzBluKxJkQLYjMdbYRxi5z1Ez8OgwcMUtmbnbwQpk/pub?w=960&amp;h=582" alt="lex4all System Diagram"></p>
+
+<h4>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h4>
+
+<ul>
+<li>Simple graphical interface</li>
+<li>Use existing <code>.wav</code> audio files, or use the built-in audio recorder</li>
+<li>Advanced options (number of pronunciations per word, discriminative training [3])</li>
+<li>Evaluation module for testing/research</li>
+</ul><h4>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<p>(Info coming soon!)</p>
+
+<h4>
+<a name="backend" class="anchor" href="#backend"><span class="octicon octicon-link"></span></a>Backend</h4>
+
+<p>This approach to language-independent recognition requires an existing high-quality speech recognition engine with a usable API; we chose to use the English recognition engine of the <a href="http://msdn.microsoft.com/en-us/library/hh361572">Microsoft Speech Platform</a>, so lex4all is written in C#. The audio recording feature was built using the <a href="http://naudio.codeplex.com/">NAudio API</a>.</p>
+
+<p>To automatically discover the pronunciation mappings we implement the Salaam algorithm as presented in [2-3]; a slight modification was made to reduce the algorithm's running time. In addition to the basic discovery algorithm [2], users have the choice of applying the discriminative training algorithm [3] as well. </p>
+
+<h4>
+<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h4>
+
+<p>[1] Jahanzeb Sherwani. “Speech interfaces for information access by low literate users”. PhD thesis. Pittsburgh, PA, USA: Carnegie Mellon University, 2009. <a href="http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf">[pdf]</a>.</p>
+
+<p>[2] Fang Qiao, Jahanzeb Sherwani, and Roni Rosenfeld. “Small-vocabulary speech recognition for resource-scarce languages”. In: Proceedings of the First ACM Symposium on Computing for Development. ACM DEV ’10. London, United Kingdom: ACM, 2010, 3:1–3:8. <a href="http://doi.acm.org/10.1145/1926180.1926184">[pdf]</a>.</p>
+
+<p>[3] Hao Yee Chan and Roni Rosenfeld. “Discriminative pronunciation learning for speech recognition for resource scarce languages”. In: Proceedings of the 2nd ACM Symposium on Computing for Development. ACM DEV ’12. Atlanta, Georgia: ACM, 2012, 12:1–12:6. <a href="http://doi.acm.org/10.1145/2160601.2160618">[pdf]</a>.</p>
+
+<p>[4] World Wide Web Consortium (W3C). Pronunciation Lexicon Specification (PLS) Version 1.0. Tech. rep. 2008. <a href="http://www.w3.org/TR/pronunciation-lexicon/">[url]</a>.</p>
         </section>
 
         <footer>
