@@ -25,6 +25,10 @@
 \pdfpagewidth=\paperwidth
 \pdfpageheight=\paperheight
 
+
+%%%%%% EXTRA PACKAGES
+\usepackage{graphicx}
+
 %\setlength\titlebox{5cm}
 
 % You can expand the titlebox if you need extra space
@@ -77,7 +81,7 @@ However, in the absence of a recognition engine trained for the target low-resou
 %of the type required in grammar-controlled applications (e.g. for accessing information or conducting basic transactions), which may require the system to distinguish a few dozen terms in the URL. 
 All that is needed is a pronunciation lexicon mapping each term in the target vocabulary to one or more sequences of phonemes in the HRL, i.e. phonemes which the recognizer can model. 
 
-...
+This is the motivation behind \textit{lex4all}, an open-source desktop application for Windows that allows even naive users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL. This paper describes the \textit{lex4all} application and its utility as a tool for rapid, simple creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
 
 \section{Background and related work}
 \label{sec:background}
@@ -87,7 +91,14 @@ While many such individuals or organizations in the developing world may be inte
 And though many effective techniques for training or adapting recognizers for new languages exist (see e.g. the CMUSphinx toolkit\footnote{\url{http://www.cmusphinx.org}} or the Rapid Language Adaptation Toolkit\footnote{\url{http://i19pc5.ira.uka.de/rlat-dev}}), these typically require hours of training audio to produce effective models, and even the highest-level tools for building new models still require a nontrivial amount of expertise with speech technologies; such data and expertise may not be available to the small-scale developers in question.
 
 However, many useful development-oriented applications (e.g. for accessing information or conducting basic transactions) require only small-vocabulary recognition tasks, by which we mean those requiring discrimination between a few dozen terms.
-For such tasks, an unmodified HRL recognizer can be used as-is to perform recognition of the LRL terms; we simply need an application specific grammar describing the allowable combinations and sequences of words/phrases to be recognized, and a pronunciation lexicon which maps each of the target words/phrases to a sequence of phonemes in the source language for which the recognizer has been trained.
+For such tasks, an unmodified HRL recognizer can be used as-is to perform recognition of the LRL terms; we simply need an application-specific grammar describing the allowable combinations and sequences of words/phrases to be recognized, and a pronunciation lexicon which maps each of the target words/phrases to a sequence of phonemes in the source language for which the recognizer has been trained (see Figure~\ref{fig:background}).
+
+\begin{figure}[tb]
+\begin{center}
+\includegraphics[width=\columnwidth]{../img/background-diagram-cropped.png}
+\caption{Given a pronunciation lexicon and application-specific grammar, an existing recognizer for a HRL can be used to recognize speech in a LRL.\label{fig:background}}
+\end{center}
+\end{figure}
 
 This is the thinking behind the Speech-based Automated Learning of Accent and Articulation Mapping (Salaam) method \cite{Sherwani09,Qiao10,Chan12}. This method of cross-language phoneme-mapping enables the automatic discovery of source-language pronunciation sequences for words or phrases in the (unrelated) target language, and thus constitutes the foundation on which the lex4all tool is built.
 
@@ -104,12 +115,20 @@ Compared to expert-crafted pronunciations, using pronunciations generated automa
 In sum, the Salaam method is fully automatic, requiring expertise neither in speech technology (to modify acoustic models) nor in linguistics (to manually generate seed pronunciations), and for each new target language it requires only a few minutes' worth of training data from one or more speakers, an amount that can be collected in a short time with little effort or expense. At the same time, it enables the construction of pronunciation lexicons that can help bring speech recognition applications to LRLs. This has been demonstrated in at least two developing-world projects that have successfully used the Salaam method to add voice interfaces to real applications: an Urdu telephone-based health information system in Pakistan \cite{Sherwani09}, and a text-free Hindi smartphone application to deliver agricultural information to farmers in rural India \cite{bali13}.
 
 
-Our work directly builds on the Salaam method, wrapping it in an easy-to-use graphical application so that non-expert users can take advantage of this algorithm to quickly and easily create the pronunciation lexicons necessary for creating speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the modified implementation of the Salaam method which is at its core.
+Given the established success of the Salaam method for pronunciation discovery, our contribution is to build an easy-to-use graphical application around these algorithms, so that non-expert users can quickly and easily create the pronunciation lexicons necessary for developing speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the modified implementation of the Salaam method which is at its core.
 
 
 \section{System overview}
 \label{sec:overview}
+(TODO: CHANGE THIS TEXT)
+A simple user interface allows the user to easily specify one written form (text string) and and one or more audio samples (.wav files) for each word in the target vocabulary, and to set other options (e.g. number of pronunciations per word, name/save location of lexicon file, etc.). The audio is then passed to a speech recognition engine for a HRL (English). An automatic pronunciation generation algorithm (the Salaam method) finds the best pronunciation(s) for each word in the LRL vocabulary. The program outputs a pronunciation lexicon (.pls XML file). This lexicon file follows the standard pronunciation lexicon format \cite{pls}, so it can be directly included in a speech recognition application, e.g. one built using the Microsoft Speech Platform API.
 
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\columnwidth]{../img/SystemOverview.png}
+\caption{Overview of the core components of the lex4all lexicon-building system.\label{fig:system}}
+\end{center}
+\end{figure}
 
 \section{User interface}
 \label{sec:frontend}
