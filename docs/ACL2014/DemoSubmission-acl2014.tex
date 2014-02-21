@@ -29,6 +29,9 @@
 %%%%%% EXTRA PACKAGES
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{tabularx}
+\usepackage{ctable}
+\usepackage{booktabs}
 
 
 %\setlength\titlebox{5cm}
@@ -83,7 +86,7 @@ However, in the absence of a recognition engine trained for the target low-resou
 %of the type required in grammar-controlled applications (e.g. for accessing information or conducting basic transactions), which may require the system to distinguish a few dozen terms in the URL. 
 All that is needed is a pronunciation lexicon mapping each term in the target vocabulary to one or more sequences of phonemes in the HRL, i.e. phonemes which the recognizer can model. 
 
-This is the motivation behind \textit{lex4all}, an open-source desktop application for Windows that allows even naive users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL. This paper describes the \textit{lex4all} application and its utility as a tool for rapid, simple creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
+This is the motivation behind \textit{lex4all}, an open-source desktop application for Windows that allows users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility as a tool for rapid, simple creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
 
 \section{Background and related work}
 \label{sec:background}
@@ -192,7 +195,41 @@ Things to mention (Max, please add to this):
 
 \subsection{Running time}
 \label{sec:runningtime}
-Evaluation results in table/graph
+
+Text goes here
+
+\begin{table*}[tb]
+\begin{center}
+
+\begin{tabular}{lrccrr}
+%{
+%\toprule
+ &  & \multicolumn{2}{c}{Mean Accuracy (\%)} & Difference & $p$-value \\
+\cmidrule(rl){3-4}
+& & Old wildcard & New wildcard & &  \\
+\midrule
+\addlinespace
+Same-speaker & Female (avg.) & 72.8 & \textbf{73.6} &+0.8 & 0.75 \\
+(leave-one-out)		& Male (avg.) & \textbf{90.4} & \textbf{90.4} & 0.0 & 1.00 \\
+			& Overall average & 81.6 & \textbf{82} &  +0.4 & 0.81 \\
+\addlinespace
+\addlinespace
+
+%\midrule
+\addlinespace
+Cross-speaker	&Male $\rightarrow$ Female & \textbf{70.4} & 66.4 & -4.0 & \\
+(train $\rightarrow$ test)		& Female $\rightarrow$ male & 76.8 & \textbf{77.6}& +0.8	&  \\
+			&Average & \textbf{73.6} & 72 	&-1.6	& 0.63 \\
+\addlinespace
+%\addlinespace
+\midrule
+%}
+\end{tabular}
+\end{center}
+\caption{Word recognition accuracy using American English recognizer on Yoruba audio (25~words, 2~speakers, 5~samples per word per speaker), with results of paired two-tailed $t$-test for significance.\label{tab:accuracy}}
+\end{table*}
+
+
 
 \subsection{Discriminative training}
 \label{sec:discrimtrain}
