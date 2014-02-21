@@ -176,12 +176,20 @@ Audio input: use existing or new
 \subsection{Audio recording}
 \label{sec:recording}
 
-Things to mention (Max, please add to this):
-\begin{itemize}
-\item{NAudio}
-\end{itemize}
+%Things to mention (Max, please add to this):
+%\begin{itemize}
+%\item{NAudio}
+%\end{itemize}
 
+The idea we had in mind was that in addition to uploading existing .wav files it would be interesting to let users record their own audio or ask friends and colleagues to support them. Especially in an international research context such as the one we were developing our tool in that was valuable. 
 
+As a backend for our recording feature we used the open-source audio library \textit{NAudio}. The package offers classes and methods for a variety of audio-related tasks. Essential for us was the access to I/O and volume control, in particular the classes \textit{waveIn}, \textit{waveFileWriter} and \textit{mixerLine}. 
+
+The recorder takes the default input device as its data source and records one channel with a sampling rate of 8 kHz. This fixed setup is due to the fact that we simply prefer low-quality audio because the MS speech recognition aims better results with it.  
+
+Basically two events are handling the input flow. The first one is triggered whenever the record button is not pressed, i.e. whenever the input is not redirected from source to file. Instead it is forwarded to a sample aggregator which stores the maximum volume level of a fixed amount of samples and transmits this value after the amount of samples is reached. The volume level is then displayed on an integrated bar. The reason for the usage of the aggregator is that it would simply overflow the GUI, namely 8000 samples per second. Now we only show 80 samples each second.
+
+When sound is recorded the data flows straight from the source to a temporary file. Temporary because it is up to the user if we wants to store the file permanently or override it with a subsequent recording. If the first option was chosen the file is also added to the corresponding word as training audio.
 
 \section{Pronunciation mapping}
 \label{sec:backend}
@@ -205,8 +213,10 @@ Evaluation results in table/graph
 \section{Conclusion and future work}
 \label{sec:future}
 
+% future work on the recording function
+It would be advantageous to display the volume while recording which is at the moment not possible because data is redirected either way. Unfortunately we had issues when doing both simultaneously which resulted in disturbances in the recorded audio.
 
-
+A major advantage would it be to play back what has been recorded, so the user does not have to save the file first in order to check its quality and content.
 
 %\section*{Acknowledgments}
 %
