@@ -45,7 +45,7 @@
             this.numPronsUpDn = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.discrimTrainChkBx = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.discrimPassesLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -196,7 +196,7 @@
             this.groupBox1.Controls.Add(this.numPronsUpDn);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.discrimTrainChkBx);
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.discrimPassesLabel);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 420);
             this.groupBox1.Name = "groupBox1";
@@ -271,16 +271,17 @@
             this.toolTip1.SetToolTip(this.discrimTrainChkBx, "If checked, any pronunciations that might cause confusion between words in the le" +
         "xicon will be removed. Improves accuracy, but slightly increases training time.");
             this.discrimTrainChkBx.UseVisualStyleBackColor = true;
+            this.discrimTrainChkBx.CheckedChanged += new System.EventHandler(this.discrimTrainChkBx_CheckedChanged);
             // 
-            // label5
+            // discrimPassesLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(145, 68);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Passes:";
-            this.toolTip1.SetToolTip(this.label5, "Number of times the Discriminative Training process will be run (i.e. the lexicon" +
+            this.discrimPassesLabel.AutoSize = true;
+            this.discrimPassesLabel.Location = new System.Drawing.Point(145, 68);
+            this.discrimPassesLabel.Name = "discrimPassesLabel";
+            this.discrimPassesLabel.Size = new System.Drawing.Size(44, 13);
+            this.discrimPassesLabel.TabIndex = 17;
+            this.discrimPassesLabel.Text = "Passes:";
+            this.toolTip1.SetToolTip(this.discrimPassesLabel, "Number of times the Discriminative Training process will be run (i.e. the lexicon" +
         " will be evaluated and \"confusing\" pronunciations will be removed).");
             // 
             // flowLayoutPanel1
@@ -336,6 +337,7 @@
             this.shortWildcardChkBx.Text = "Faster training";
             this.toolTip1.SetToolTip(this.shortWildcardChkBx, resources.GetString("shortWildcardChkBx.ToolTip"));
             this.shortWildcardChkBx.UseVisualStyleBackColor = true;
+            this.shortWildcardChkBx.CheckedChanged += new System.EventHandler(this.shortWildcardChkBx_CheckedChanged);
             // 
             // MainForm
             // 
@@ -388,7 +390,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label discrimPassesLabel;
         private System.Windows.Forms.NumericUpDown discrimPassesUpDn;
         private System.Windows.Forms.CheckBox shortWildcardChkBx;
 

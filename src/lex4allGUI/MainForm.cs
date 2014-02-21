@@ -248,6 +248,20 @@ namespace lex4allGUI
             numProns = (int)numPronsUpDn.Value;
         }
 
+        private void discrimTrainChkBx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (discrimTrainChkBx.Checked == true)
+            {
+                discrimPassesLabel.Enabled = true;
+                discrimPassesUpDn.Enabled = true;
+            }
+            else
+            {
+                discrimPassesLabel.Enabled = false;
+                discrimPassesUpDn.Enabled = false;
+            }
+        }
+
         
         
     }
