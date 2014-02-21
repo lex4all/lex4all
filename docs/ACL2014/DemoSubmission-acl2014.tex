@@ -184,15 +184,22 @@ Audio input: use existing or new
 %\item{NAudio}
 %\end{itemize}
 
-The idea we had in mind was that in addition to uploading existing .wav files it would be interesting to let users record their own audio or ask friends and colleagues to support them. Especially in an international research context such as the one we were developing our tool in that was valuable. 
+%The idea we had in mind was that in addition to uploading existing .wav files it would be interesting to let users record their own audio or ask friends and colleagues to support them. Especially in an international research context such as the one we were developing our tool in that was valuable. 
+As described above, the GUI allows users to easily select pre-recorded audio samples for lexicon training. However, as lex4all has been designed as a language-independent tool, it should enable the development of applications even in zero-resource languages for which no recorded audio is yet available; to this end, the application includes a built-in audio recorder, to simplify the process of collecting audio samples from native speakers.
 
-As a backend for our recording feature we used the open-source audio library \textit{NAudio}. The package offers classes and methods for a variety of audio-related tasks. Essential for us was the access to I/O and volume control, in particular the classes \textit{waveIn}, \textit{waveFileWriter} and \textit{mixerLine}. 
+As the backend for the recording feature we use the open-source library NAudio.\footnote{\url{http://naudio.codeplex.com/}}
+% The package offers classes and methods for a variety of audio-related tasks. Essential for us was the access to I/O and volume control, in particular the classes \textit{waveIn}, \textit{waveFileWriter} and \textit{mixerLine}. 
+The recorder takes the user's default audio input device as its data source and records one channel with a sampling rate of 8 kHz. 
+This low sampling rate was chosen for two reasons: (a) the Microsoft Speech Platform recognition engine we use is designed for server-side recognition of low-quality audio, and (b) the ultimate goal of lex4all is to enable the creation of useful applications for low-resource languages, including those spoken in developing-world communities, and such applications will most likely need to cope with low-quality audio (e.g. for telephone-based deployment).
+%This fixed setup is due to the fact that we simply prefer low-quality audio because the MS speech recognition aims better results with it.  
 
-The recorder takes the default input device as its data source and records one channel with a sampling rate of 8 kHz. This fixed setup is due to the fact that we simply prefer low-quality audio because the MS speech recognition aims better results with it.  
+A simple GUI form allows users to record audio samples for a given word that has been or is being added to the lexicon vocabulary. Recorded files can be used immediately for lexicon training and/or saved for future use, and can be combined with pre-recorded audio files for training. 
 
-Basically two events are handling the input flow. The first one is triggered whenever the record button is not pressed, i.e. whenever the input is not redirected from source to file. Instead it is forwarded to a sample aggregator which stores the maximum volume level of a fixed amount of samples and transmits this value after the amount of samples is reached. The volume level is then displayed on an integrated bar. The reason for the usage of the aggregator is that it would simply overflow the GUI, namely 8000 samples per second. Now we only show 80 samples each second.
+%Although lex4all's audio recording functionality is simple, ...
 
-When sound is recorded the data flows straight from the source to a temporary file. Temporary because it is up to the user if we wants to store the file permanently or override it with a subsequent recording. If the first option was chosen the file is also added to the corresponding word as training audio.
+%Basically two events are handling the input flow. The first one is triggered whenever the record button is not pressed, i.e. whenever the input is not redirected from source to file. Instead it is forwarded to a sample aggregator which stores the maximum volume level of a fixed amount of samples and transmits this value after the amount of samples is reached. The volume level is then displayed on an integrated bar. The reason for the usage of the aggregator is that it would simply overflow the GUI, namely 8000 samples per second. Now we only show 80 samples each second.
+
+%When sound is recorded the data flows straight from the source to a temporary file. Temporary because it is up to the user if we wants to store the file permanently or override it with a subsequent recording. If the first option was chosen the file is also added to the corresponding word as training audio.
 
 \section{Pronunciation mapping}
 \label{sec:backend}
@@ -212,7 +219,7 @@ Text goes here
 \begin{tabular}{lrccrr}
 %{
 %\toprule
- &  & \multicolumn{2}{c}{Mean Accuracy (\%)} & Difference & $p$-value \\
+ &  & \multicolumn{2}{c}{Word Recognition Accuracy (\%)} & Difference & $p$-value \\
 \cmidrule(rl){3-4}
 & & Old wildcard & New wildcard & &  \\
 \midrule
@@ -251,6 +258,7 @@ Cross-speaker	&Male $\rightarrow$ Female & \textbf{70.4} & 66.4 & -4.0 & \\
 \label{sec:future}
 
 We have presented lex4all, an open-source Windows desktop application that enables the rapid automatic creation of pronunciation lexicons in any (low-resource) language, using an out-of-the-box commercial recognizer \cite{mspsdk} for a high-resource language (English) and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since the algorithm requires only minutes of training audio; combined with the built-in audio recorder, lexicons can be constructed even for zero-resource languages. We hope that this tool will help developers create speech-driven applications in LRLs, as well as facilitate research in language-independent small-vocabulary recognition.
+
 % future work on the recording function
 It would be advantageous to display the volume while recording which is at the moment not possible because data is redirected either way. Unfortunately we had issues when doing both simultaneously which resulted in disturbances in the recorded audio.
 
