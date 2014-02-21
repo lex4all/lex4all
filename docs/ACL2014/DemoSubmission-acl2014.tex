@@ -86,7 +86,7 @@ However, in the absence of a recognition engine trained for the target low-resou
 %of the type required in grammar-controlled applications (e.g. for accessing information or conducting basic transactions), which may require the system to distinguish a few dozen terms in the URL. 
 All that is needed is a pronunciation lexicon mapping each term in the target vocabulary to one or more sequences of phonemes in the HRL, i.e. phonemes which the recognizer can model. 
 
-This is the motivation behind \textit{lex4all}, an open-source desktop application for Windows that allows users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility as a tool for rapid, simple creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
+This is the motivation behind \textit{lex4all},\footnote{[Link removed to preserve submission anonymity]} an open-source desktop application for Windows that allows users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility as a tool for rapid, simple creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
 
 \section{Background and related work}
 \label{sec:background}
@@ -173,6 +173,13 @@ A simple user interface allows the user to easily specify one written form (text
 \section{User interface}
 \label{sec:frontend}
 Easy for non-experts (include informative screenshot)
+
+\begin{figure}[tb]
+\begin{center}
+\includegraphics[width=\columnwidth]{../screenshots/LexiconBuilder-Main-Filled.PNG}
+\caption{TODO: UPDATE SCREENSHOT Screenshot of the lexicon builder interface.\label{fig:mainform}}
+\end{center}
+\end{figure}
 
 Audio input: use existing or new
 
