@@ -262,6 +262,11 @@ namespace lex4allGUI
             }
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
         
         
     }
