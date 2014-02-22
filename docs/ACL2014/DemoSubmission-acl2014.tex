@@ -190,6 +190,84 @@ Once pronunciations for all terms in the vocabulary have been generated, the app
 
 
 
+\section{Pronunciation mapping}
+\label{sec:backend}
+
+\subsection{Recognition engine}
+\label{sec:engine}
+As described above, lex4all uses a recognition engine trained for a HRL to map audio in the target LRL to pronunciations (phoneme sequences) in the source HRL. 
+In the current implementation, we use the English (US) speech recognition engine developed by Microsoft for server-side recognition of telephone-quality audio, accessed via the Microsoft Speech Platform SDK 11 \cite{mspsdk}. 
+In keeping with the overall objective of the Salaam approach, the engine is used as-is, with no modifications to its underlying models. 
+We choose the Microsoft Speech Platform for its robustness and ease of use, as well as to maintain comparability with the work of \newcite{Qiao10} and \newcite{Chan12}, who also used Microsoft's server-side American English recognizer. 
+We use an engine designed to recognize low-quality audio since we aim to enable the creation of useful applications for LRLs, including those spoken in developing-world communities, and such applications will most likely need to cope with low-quality audio, e.g. for telephone-based deployment (see e.g. \newcite{case4st4d}).
+
+
+
+\subsection{Implementation of the Salaam method}
+\label{sec:implementation}
+
+Pronunciations for each term in the target vocabulary are generated using the iterative Salaam algorithm of \newcite[§4.1]{Qiao10}, described in Section~\ref{sec:background} above. In our implementation, 
+%we follow \newcite[p. 2]{Chan12} in taking all sequences returned in a given pass as input for the following pass, and 
+%we slightly modify the algorithm's stopping condition to terminate 
+we stop iterations
+if the top-scoring phoneme sequence for a given word has not changed for three consecutive iterations, or -- following \newcite[p. 4]{Qiao10} --  if the best result from the $i^{th}$ pass has a lower score than the best result of the ${i - 1}^{th}$ pass (with the ${i - 1}^{th}$ results returned as the best pronunciations). In both cases, at least three passes are required. 
+
+To determine the best pronunciation sequences for a given term from each pass, the results for all training samples of that term are naively combined into a set, and sorted by the confidence score assigned to each pronunciation (phoneme sequence). If a given pronunciation matches more than one sample, the overall score for that sequence in that pass is simply the sum of confidence scores for all samples it was associated with. In future work, it may be worth exploring more intelligent heuristics for ranking the set of sequences (see Section~\ref{sec:future}).
+
+After the iterative training has completed, the $n$-best pronunciation sequences (with $n$ specified by the user -- see Section~\ref{sec:options}) for each term are written to the lexicon, each comprising a \texttt{phoneme} element corresponding to the single \texttt{grapheme} element containing the word's orthographic form (e.g. Listing~\ref{lst:lexicon}).
+
+\subsection{Running time}
+\label{sec:runningtime}
+
+A major challenge we faced in engineering a user-friendly application based on the Salaam pronunciation-mapping algorithm \cite{Qiao10} was the long running time of the algorithm. As described in Section~\ref{sec:background}, the algorithm described by \newcite{Qiao10} depends on a ``super-wildcard'' grammar that allows the recognizer to match the training audio sample to a ``phrase'' of 0-10 ``sub-words'', and each sub-word to any possible sequence of 1, 2, or 3 source-language phonemes. Given the 40 phonemes of American English, this results in 64,000 possibilities for each sub-word, which results in a huge training grammar and thus a long processing time. For a 25-word vocabulary with 5 training audio samples per word, we found the lexicon-building process to take approximately 1-2 hours. This is well beyond the amount of time that a developer will wish to spend creating just one component (the lexicon) of their speech-driven application, especially for a meager 25-word lexicon. 
+
+Therefore, we limit the length of each sub-word in the grammar to only one phoneme, instead of up to 3, giving e.g. 40 possibilities for each sub-word instead of the previous 64,000. Despite the shorter sub-word sequences, this implementation of the algorithm can nonetheless still discover pronunciation sequences of an arbitrary length, since, in each iteration, the phonemes discovered so far are prepended to the super-wildcard grammar, just as before \cite[p.~4]{Qiao10}. However, using this new implementation, constructing the same 25-word vocabulary with the same 5 samples per word takes approximately 2-5 \textit{minutes}. The new implementation is thus an order of magnitude faster than the old implementation.
+
+To ensure that the new implementation's vastly improved running time does not come at the cost of reduced recognition accuracy using the resulting lexicon, we evaluate and compare word recognition accuracy rates using lexicons built with the old and new implementations. The data we use for this evaluation is a subset of the Yoruba data collected by \newcite[§5.1]{Qiao10}, comprising 25 Yoruba words uttered by 2 speakers (1 male, 1 female), with 5 samples of each word per speaker. 
+To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per word per speaker (this amounts to a five-fold evaluation, reserving one sample per word per speaker for testing, and training on the other four). Cross-speaker accuracy is evaluated by training the system on all five samples of each word recorded by one speaker, and testing on all five samples from the other speaker.
+We use the R software environment\footnote{\url{http://www.r-project.org/}} 
+for statistical analysis of the difference in accuracy in each condition.
+
+The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this small modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy. The lex4all application therefore uses the new implementation by default, although for research purposes we leave users the option of using the original (slower) implementation (see Section~\ref{sec:options}).
+
+
+\begin{table*}[t]
+\begin{center}
+
+\begin{tabular}{lrccrr}
+%{
+%\toprule
+ &  & \multicolumn{2}{c}{Word Recognition Accuracy (\%)} & Difference & $p$-value \\
+\cmidrule(rl){3-4}
+& & Old wildcard & New wildcard & &  \\
+\midrule
+\addlinespace
+Same-speaker & Female (avg.) & 72.8 & \textbf{73.6} &+0.8 & 0.75 \\
+(leave-one-out)		& Male (avg.) & \textbf{90.4} & \textbf{90.4} & 0.0 & 1.00 \\
+			& Overall average & 81.6 & \textbf{82} &  +0.4 & 0.81 \\
+\addlinespace
+\addlinespace
+
+%\midrule
+\addlinespace
+Cross-speaker	&Male $\rightarrow$ Female & \textbf{70.4} & 66.4 & -4.0 & \\
+(train $\rightarrow$ test)		& Female $\rightarrow$ male & 76.8 & \textbf{77.6}& +0.8	&  \\
+			&Average & \textbf{73.6} & 72 	&-1.6	& 0.63 \\
+\addlinespace
+%\addlinespace
+\midrule
+%}
+\end{tabular}
+\end{center}
+\caption{Word recognition accuracy using American English recognizer on Yoruba audio (25~words, 2~speakers, 5~samples per word per speaker), with results of paired two-tailed $t$-test for significance.\label{tab:accuracy}}
+\end{table*}
+
+
+
+\subsection{Discriminative training}
+\label{sec:discrimtrain}
+We implement the iterative discriminative training algorithm of \newcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. \newcite[p.~5]{Chan12} obtain a significant increases in accuracy with up to 8 iterations of the algorithm. lex4all therefore applies this discriminative training (TODO: DEFAULT NUMBER OF PASSES) by default, though users may change the number of passes or disable discriminative training entirely, as mentioned in Section~\ref{sec:options}.
+
 
 
 
@@ -225,7 +303,7 @@ The GUI allows users to easily browse their file system for pre-recorded audio s
 As the backend for the recording feature we use the open-source library NAudio.\footnote{\url{http://naudio.codeplex.com/}}
 % The package offers classes and methods for a variety of audio-related tasks. Essential for us was the access to I/O and volume control, in particular the classes \textit{waveIn}, \textit{waveFileWriter} and \textit{mixerLine}. 
 The recorder takes the user's default audio input device as its data source and records one channel with a sampling rate of 8 kHz. 
-This low sampling rate was chosen for two reasons: (a) the server-side  Microsoft Speech Platform recognition engine we use is designed for recognition of low-quality audio, and (b) the ultimate goal of lex4all is to enable the creation of useful applications for low-resource languages, including those spoken in developing-world communities, and such applications will most likely need to cope with low-quality audio (e.g. for telephone-based deployment).
+We use this low sampling rate because the recognition engine we employ is for low-quality audio input (see Section~\ref{sec:engine}).
 %This fixed setup is due to the fact that we simply prefer low-quality audio because the MS speech recognition aims better results with it.  
 
 A simple GUI form allows users to record audio samples for a given word that has been or is being added to the lexicon vocabulary. Recorded files can be used immediately for lexicon training and/or saved for future use, and can be combined with pre-recorded audio files for training. 
@@ -242,90 +320,19 @@ A simple GUI form allows users to record audio samples for a given word that has
 The lower left corner of the screenshot in Figure~\ref{fig:mainform} shows the parameters and additional options which users can easily modify, if they so choose. First of all, users
 %\begin{itemize}
 %\item Users 
-can specify maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to \newcite[\S5.2.3]{Qiao10} and \newcite[\S4.2.1]{Chan12}, a higher number of pronunciations per word in the lexicon may improve the resulting recognition accuracy.
+can specify the maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to \newcite[\S5.2.3]{Qiao10} and \newcite[\S4.2.1]{Chan12}, a higher number of pronunciations per word in the lexicon may improve the resulting recognition accuracy.
 
 %\item Users 
-Secondly, we give users the choice of training the lexicon using our modified, much faster implementation of the Salaam algorithm instead of an implementation more closely following \newcite{Qiao10}. See Section~\ref{sec:backend} for a detailed explanation of the alternative implementations.
+Secondly, we give users the choice of training the lexicon using our modified, much faster implementation of the Salaam algorithm instead of an implementation more closely following \newcite{Qiao10}, as explained in Section~\ref{sec:backend}.
 
 %\item Users 
-Finally, users may choose whether or not the discriminative training algorithm of \newcite{Chan12} is applied, and if so, how many passes are run. See Section~\ref{sec:discrimtrain} for more information.
+Finally, as mentioned in Section~\ref{sec:discrimtrain}, users may choose whether or not discriminative training 
+%algorithm of \newcite{Chan12} 
+is applied, and if so, how many passes are run.
 %\end{itemize}
 
 We make these options easily modifiable via the graphical interface for users who wish to fine-tune the lexicon-building process, possibly to experiment with different settings to achieve the highest possible recognition accuracy. In conjunction with the application's evaluation module (see Section~\ref{sec:evaluation}), this expedites further research into language-independent small-vocabulary recognition. However, users who do not wish to change the default settings (shown in Figure~\ref{fig:mainform}) may simply ignore these controls.
 
-\section{Pronunciation mapping}
-\label{sec:backend}
-
-\subsection{Recognition engine}
-\label{sec:engine}
-As described above, lex4all uses a recognition engine trained for a HRL to map audio in the target LRL to pronunciations (phoneme sequences) in the source HRL. In the current implementation, we use the English (US) speech recognition engine developed by Microsoft for server-side recognition of telephone-quality audio, accessed via the Microsoft Speech Platform SDK 11 \cite{mspsdk}. This system was chosen for its robustness and to maintain comparability with the work of \newcite{Qiao10} and \newcite{Chan12}, who also used Microsoft's server-side American English recognizer. In keeping with the overall objective of the Salaam approach, the recognition engine is used as-is, with no modifications to underlying models. 
-
-
-\subsection{Implementation of the Salaam method}
-\label{sec:implementation}
-
-Pronunciations for each term in the target vocabulary are generated using the iterative Salaam algorithm of \newcite[§4.1]{Qiao10}, described in Section~\ref{sec:background} above. In our implementation, 
-%we follow \newcite[p. 2]{Chan12} in taking all sequences returned in a given pass as input for the following pass, and 
-%we slightly modify the algorithm's stopping condition to terminate 
-we stop iterations
-if the top-scoring phoneme sequence for a given word has not changed for three consecutive iterations, or -- following \newcite[p. 4]{Qiao10} --  if the best result from the $i^{th}$ pass has a lower score than the best result of the ${i - 1}^{th}$ pass (with the ${i - 1}^{th}$ results returned as the best pronunciations). In both cases, at least three passes are required. 
-
-To determine the best pronunciation sequences for a given term from each pass, the results for all training samples of that term are naively combined into a set, and sorted by the confidence score assigned to each pronunciation (phoneme sequence). If a given pronunciation matches more than one sample, the overall score for that sequence in that pass is simply the sum of confidence scores for all samples it was associated with. In future work, it may be worth exploring more intelligent heuristics for ranking the set of sequences (see Section~\ref{sec:future}).
-
-After the iterative training has completed, the $n$-best pronunciation sequences (with $n$ specified by the user as described in Section~\ref{sec:options}) for each term are written to the lexicon, each comprising a \texttt{phoneme} element corresponding to the single \texttt{grapheme} element containing the word's orthographic form (e.g. Listing~\ref{lst:lexicon}).
-
-\subsection{Running time}
-\label{sec:runningtime}
-
-A major challenge we faced in engineering a user-friendly application based on the Salaam pronunciation-mapping algorithm \cite{Qiao10} was the long running time of the algorithm. As described in Section~\ref{sec:background}, the algorithm described by \newcite{Qiao10} depends on a ``super-wildcard'' grammar that allows the recognizer to match the training audio sample to a ``phrase'' of 0-10 ``sub-words'', and each sub-word to any possible sequence of 1, 2, or 3 source-language phonemes. Given the 40 phonemes of American English, this results in 64,000 possibilities for each sub-word, which results in a huge training grammar and thus a long processing time. For a 25-word vocabulary with 5 training audio samples per word, we found the lexicon-building process to take approximately 1-2 hours. This is well beyond the amount of time that a developer will wish to spend creating just one component (the lexicon) of their speech-driven application, especially for a meager 25-word lexicon. 
-
-Therefore, we limit the length of each sub-word in the grammar to only one phoneme, instead of up to 3, giving e.g. 40 possibilities for each sub-word instead of the previous 64,000. Despite the shorter sub-word sequences, this implementation of the algorithm can nonetheless still discover pronunciation sequences of an arbitrary length, since, in each iteration, the phonemes discovered so far are prepended to the super-wildcard grammar, just as before \cite[p.~4]{Qiao10}. However, using this new implementation, constructing the same 25-word vocabulary with the same 5 samples per word takes approximately 2-5 \textit{minutes}. In other words, the new implementation runs some 20+ times faster than the old implementation.
-
-To ensure that the new implementation's vastly improved running time does not come at the cost of reduced recognition accuracy using the resulting lexicon, we evaluate and compare word recognition accuracy rates using lexicons built using the old and new implementations. The data we use for this evaluation is a subset of the Yoruba data collected by \newcite[§5.1]{Qiao10}, comprising 25 Yoruba words uttered by 2 speakers (1 male, 1 female), with 5 samples of each word per speaker. 
-
-To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per word per speaker (this amounts to a five-fold evaluation, reserving one sample per word per speaker for testing, and training on the other four). Cross-speaker accuracy is evaluated by training the system on all five samples of each word recorded by one speaker, and testing on all five samples from the other speaker.
-We use the R software environment\footnote{\url{http://www.r-project.org/}} 
-for statistical analysis of the difference in accuracy in each condition.
-
-The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this small modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy. The lex4all application therefore uses the new implementation by default, although (as mentioned in Section~\ref{sec:options}) we leave users the option of using the original (slower) implementation, so that they may perform their own assessment.
-
-
-\begin{table*}[tb]
-\begin{center}
-
-\begin{tabular}{lrccrr}
-%{
-%\toprule
- &  & \multicolumn{2}{c}{Word Recognition Accuracy (\%)} & Difference & $p$-value \\
-\cmidrule(rl){3-4}
-& & Old wildcard & New wildcard & &  \\
-\midrule
-\addlinespace
-Same-speaker & Female (avg.) & 72.8 & \textbf{73.6} &+0.8 & 0.75 \\
-(leave-one-out)		& Male (avg.) & \textbf{90.4} & \textbf{90.4} & 0.0 & 1.00 \\
-			& Overall average & 81.6 & \textbf{82} &  +0.4 & 0.81 \\
-\addlinespace
-\addlinespace
-
-%\midrule
-\addlinespace
-Cross-speaker	&Male $\rightarrow$ Female & \textbf{70.4} & 66.4 & -4.0 & \\
-(train $\rightarrow$ test)		& Female $\rightarrow$ male & 76.8 & \textbf{77.6}& +0.8	&  \\
-			&Average & \textbf{73.6} & 72 	&-1.6	& 0.63 \\
-\addlinespace
-%\addlinespace
-\midrule
-%}
-\end{tabular}
-\end{center}
-\caption{Word recognition accuracy using American English recognizer on Yoruba audio (25~words, 2~speakers, 5~samples per word per speaker), with results of paired two-tailed $t$-test for significance.\label{tab:accuracy}}
-\end{table*}
-
-
-
-\subsection{Discriminative training}
-\label{sec:discrimtrain}
-As mentioned above, we implement the iterative discriminative training algorithm of \newcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. \newcite[p.~5]{Chan12} obtain a significant increases in accuracy with up to 8 iterations of the algorithm. lex4all therefore applies this discriminative training (TODO: DEFAULT NUMBER OF PASSES) by default, though users may change the number of passes or disable discriminative training entirely, as mentioned in Section~\ref{sec:options}.
 
 
 \section{Evaluation module for research}
