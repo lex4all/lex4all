@@ -253,13 +253,19 @@ depends on a ``super-wildcard'' grammar that allows the recognizer to match each
 
 Therefore, we limit the length of each ``word'' in the grammar to only one phoneme, instead of up to 3, giving e.g. 40 possibilities instead of tens of thousands. 
 Despite the shorter word sequences, this implementation of the algorithm can nonetheless still discover pronunciation sequences of an arbitrary length, since, in each iteration, the phonemes discovered so far are prepended to the super-wildcard grammar, such that phoneme sequence of the first ``word'' in the phrase grows longer with each pass \cite[p.~4]{Qiao10}. 
-However, this new implementation is an order of magnitude faster: constructing the same 25-term lexicon on the same hardware takes only approximately 2-5 \textit{minutes}. 
+However, the new implementation is an order of magnitude faster: constructing the same 25-term lexicon on the same hardware takes only approximately 2-5 \textit{minutes}. 
 
 To ensure that the new implementation's vastly improved running time does not come at the cost of reduced recognition accuracy, we evaluate and compare word recognition accuracy rates using lexicons built with the old and new implementations. The data we use for this evaluation is a subset of the Yoruba data collected by \newcite[\S5.1]{Qiao10}, comprising 25 Yoruba terms (words) uttered by 2 speakers (1 male, 1 female), with 5 samples of each term per speaker. 
-To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per term per speaker (this amounts to a five-fold evaluation, reserving one sample per term per speaker for testing, and training on the other four). Cross-speaker accuracy is evaluated by training the system on all five samples of each term recorded by one speaker, and testing on all five samples from the other speaker.
-Using R\footnote{\url{http://www.r-project.org/}} we perform a paired two-tailed $t$-test on the results to assess the significance of the difference in accuracy in each condition.
+To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per term per speaker. 
+%(this amounts to a five-fold evaluation, reserving one sample per term per speaker for testing, and training on the other four). 
+Cross-speaker accuracy is evaluated by training the system on all five samples of each term recorded by one speaker, and testing on all five samples from the other speaker.
+Using R\footnote{\url{http://www.r-project.org/}} we perform a paired two-tailed $t$-test on the results to assess the significance of the differences in accuracy.
 
-The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this simple modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy. The lex4all application therefore uses the new implementation by default, although for research purposes we leave users the option of using the original (slower) implementation (see \S\ref{sec:options}).
+The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference in accuracy between the two conditions (all $p$-values are well above any reasonable significance threshold).  
+%by making this simple modification to the wildcard grammar used for pronunciation discovery, we achieve an
+As our new, modified implementation of the Salaam algorithm 
+is much faster than the original, yet equally accurate,
+lex4all uses the new implementation by default, although for research purposes we leave users the option of using the original (slower) implementation (see \S\ref{sec:options}).
 
 \begin{table}
 \begin{center}
@@ -386,23 +392,25 @@ We use this low sampling rate because the recognition engine we employ is for lo
 \subsection{Additional options}
 \label{sec:options}
 
-The lower left corner of the screenshot in Figure~\ref{fig:mainform} shows the parameters and additional options which users can easily modify, if they so choose. 
+The lower left corner of the screenshot in Figure~\ref{fig:mainform} shows 
+%the parameters and additional options which users can easily modify, if they so choose. 
+optional controls for quick and easy fine-tuning of the lexicon-building process (the default settings are pictured).
 
 First of all, users
-%\begin{itemize}
-%\item Users 
-can specify the maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to \newcite[\S5.2.3]{Qiao10} and \newcite[\S4.2.1]{Chan12}, more pronunciations per word in the lexicon may make the lexicon more robust and thus improve recognition accuracy.
-%\item Users 
-Secondly, users may train the lexicon using our modified, much faster implementation of the Salaam algorithm or the original implementation more closely following \newcite{Qiao10}, as explained in \S\ref{sec:backend}.
-%\item Users 
+can specify the maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to \newcite[\S5.2.3]{Qiao10} and \newcite[\S4.2.1]{Chan12}, more pronunciations per word in the lexicon may 
+%make the lexicon more robust and thus 
+improve recognition accuracy.
+Secondly, users may train the lexicon using our modified, much faster implementation of the Salaam algorithm or the original implementation 
+%more closely 
+following \newcite{Qiao10}, as explained in \S\ref{sec:backend}.
 Finally, as mentioned in \S\ref{sec:discrimtrain}, users may choose whether or not discriminative training 
 %algorithm of \newcite{Chan12} 
 is applied, and if so, how many passes are run.
-%\end{itemize}
 
-We make these options easily controlled via the GUI for users who wish to fine-tune the lexicon-building process
+%We offer access to these options via the GUI so that users can quickly and easily fine-tune the lexicon-building process
 %, possibly to experiment with different settings to achieve the highest possible recognition accuracy. 
-In conjunction with the application's evaluation module (see \S\ref{sec:evaluation}), this expedites further research into language-independent small-vocabulary recognition. However, users who do not wish to change the default settings (shown in Figure~\ref{fig:mainform}) may simply ignore these controls.
+
+%In conjunction with the application's evaluation module (see \S\ref{sec:evaluation}), this expedites further research into language-independent small-vocabulary recognition. However, users who do not wish to change the default settings (shown in Figure~\ref{fig:mainform}) may simply ignore these controls.
 
 
 
