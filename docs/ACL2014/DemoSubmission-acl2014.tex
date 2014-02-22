@@ -96,14 +96,16 @@ While many such individuals or organizations in the developing world may be inte
 And though many effective techniques for training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{\url{http://www.cmusphinx.org}} or the Rapid Language Adaptation Toolkit\footnote{\url{http://i19pc5.ira.uka.de/rlat-dev}}), these typically require hours of training audio to produce effective models, and even the highest-level tools for building new models still require a nontrivial amount of expertise with speech technologies; such data and expertise may not be available to the small-scale developers in question.
 
 However, many useful development-oriented applications (e.g. for accessing information or conducting basic transactions) require only small-vocabulary recognition tasks, by which we mean those requiring discrimination between a few dozen terms.
-For such tasks, an unmodified HRL recognizer can be used as-is to perform recognition of the LRL terms; as Figure~\ref{fig:background} illustrates, we simply need an application-specific grammar describing the allowable combinations and sequences of words/phrases to be recognized, and a pronunciation lexicon which maps each of the target words/phrases to a sequence of phonemes in the source language for which the recognizer has been trained. 
+For such tasks, an unmodified HRL recognizer can be used as-is to perform recognition of the LRL terms; 
+%as Figure~\ref{fig:background} illustrates, 
+we simply provide the recognizer with an application-specific grammar describing the allowable combinations and sequences of words/phrases to be recognized, and a pronunciation lexicon which maps each of the target words/phrases to a sequence of phonemes in the source language for which the recognizer has been trained. 
 
-\begin{figure}[tb]
-\begin{center}
-\includegraphics[width=\columnwidth]{../img/background-diagram-cropped.png}
-\caption{Given a pronunciation lexicon and application-specific grammar, an existing recognizer for a HRL can be used to recognize speech in a LRL.\label{fig:background}}
-\end{center}
-\end{figure}
+%\begin{figure}[tb]
+%\begin{center}
+%\includegraphics[width=\columnwidth]{../img/background-diagram-cropped.png}
+%\caption{Given a pronunciation lexicon and application-specific grammar, an existing recognizer for a HRL can be used to recognize speech in a LRL.\label{fig:background}}
+%\end{center}
+%\end{figure}
 
 
 
