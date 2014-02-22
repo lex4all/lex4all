@@ -204,9 +204,9 @@
             this.groupBox1.Size = new System.Drawing.Size(242, 88);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Advanced options";
+            this.groupBox1.Text = "Options";
             this.toolTip1.SetToolTip(this.groupBox1, "These options give you greater control over the lexicon-building process. If you\'" +
-        "re not sure what settings to use, just leave them at the default settings.");
+        "re not sure what settings to use, just leave them at the default values.");
             // 
             // discrimPassesUpDn
             // 
@@ -216,7 +216,7 @@
             this.discrimPassesUpDn.TabIndex = 16;
             this.discrimPassesUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.discrimPassesUpDn.Value = new decimal(new int[] {
-            8,
+            4,
             0,
             0,
             0});
@@ -324,6 +324,12 @@
             this.saveFileDialog1.DefaultExt = "pls";
             this.saveFileDialog1.FileName = "lexicon";
             this.saveFileDialog1.Filter = "Pronunciation Lexicon (*.pls) | *.pls|XML file (*.xml)|*.xml";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 20000;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // shortWildcardChkBx
             // 
