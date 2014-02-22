@@ -189,27 +189,26 @@ Once pronunciations for all terms in the vocabulary have been generated, the app
 
 %Listing~\ref{lst:lexicon} shows a sample lexicon XML file conforming to the Pronunciation Lexicon Specification \cite{pls}. A lexicon is composed of one \texttt{lexeme} element for each term-sound pairing. In a lexicon intended for speech recognition, each \texttt{lexeme} consists of one \texttt{grapheme} element, representing the term's orthographic form, and one or more \texttt{phoneme} elements, each containing a sequence of phonemes that constitutes an acceptable pronunciation of the term. 
 
+% TODO: add colors
 \lstset{
 	%language=xml,
-	basicstyle={\footnotesize\ttfamily},
-	%frame=tb,
+	basicstyle={\scriptsize\ttfamily},
+	%frame=tblr,
 	numbers=none,
 	linewidth=\columnwidth,
 	breaklines=true,
 	captionpos=b,
 	}
 \begin{figure}
-\begin{lstlisting}[caption=Example lexicon file mapping the Yoruba word \textit{beeni} (``yes'') to two possible sequences of American English phonemes., label=lst:lexicon]
+\begin{lstlisting}[caption=Sample lexicon mapping the Yoruba word \textit{beeni} (``yes'') to two possible sequences of American English phonemes., label=lst:lexicon]
 <?xml version="1.0" encoding="utf-8"?>
 	  
-<lexicon version="1.0" xmlns="http://www.w3.org/2005/01/pronunciation-lexicon" 
-	xml:lang="en-US" 
-	alphabet="x-microsoft-ups">
+<lexicon version="1.0" xmlns="http://www.w3.org/2005/01/pronunciation-lexicon" xml:lang="en-US" alphabet="x-microsoft-ups">
 		 
   <lexeme>
     <grapheme>beeni</grapheme>
     <phoneme>B E NG I</phoneme>
-    <phoneme>TODO:ANOTHER PRON</phoneme>
+    <phoneme>B EI N I I</phoneme>
   </lexeme>
   
 </lexicon>
@@ -334,7 +333,7 @@ $t$-tests. \label{tab:accuracy}}
 
 \subsection{Discriminative training}
 \label{sec:discrimtrain}
-We implement the iterative discriminative training algorithm of \newcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. \newcite[p.~5]{Chan12} obtain a significant increases in accuracy with up to 8 iterations of the algorithm. lex4all therefore applies this discriminative training (TODO: DEFAULT NUMBER OF PASSES) by default, though users may change the number of passes or disable discriminative training entirely, as mentioned in \S\ref{sec:options}.
+We implement the iterative discriminative training algorithm of \newcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. \newcite[p.~5]{Chan12} obtain a significant increases in accuracy with up to 8 iterations of the algorithm. In lex4all, discriminative training is applied by default, though users may change the number of passes (4 by default) or disable discriminative training entirely, as mentioned in \S\ref{sec:options}.
 
 
 
@@ -352,8 +351,8 @@ Once the target vocabulary and training audio have been specified, and the addit
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=.9\columnwidth]{../screenshots/LexiconBuilder-Main-Filled.PNG}
-\caption{TODO: UPDATE SCREENSHOT Screenshot of the lexicon builder.\label{fig:mainform}}
+\includegraphics[width=\columnwidth]{../screenshots/LexiconBuilder-Main-Filled-scrolling.PNG}
+\caption{Screenshot of the lexicon builder.\label{fig:mainform}}
 \end{center}
 \end{figure}
 
