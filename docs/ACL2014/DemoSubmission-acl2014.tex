@@ -78,7 +78,9 @@ This paper describes \textit{lex4all}, an open-source PC application for the gen
 \section{Introduction\footnote{Parts of this paper (Sections \ref{sec:intro} and \ref{sec:background}) overlap with a paper submitted to the 4th Workshop on Spoken Language Technologies for Under-resourced languages (SLTU '14, \url{http://www.mica.edu.vn/sltu2014}). That paper, which is currently under review, concerns related research not reported here, and makes no mention of the lex4all application.}}
 \label{sec:intro}
 
-In recent years it has been demonstrated that speech recognition interfaces can be extremely beneficial for applications in the developing world, particularly in communities where literacy rates are low or where PCs and internet connections are not always available \cite{case4st4d,bali13,Sherwani09}. 
+In recent years it has been demonstrated that speech recognition interfaces can be extremely beneficial for applications in the developing world, particularly in communities where literacy rates are low 
+%or where PCs and internet connections are not always available
+ \cite{case4st4d,bali13,Sherwani09}. 
 Typically, the languages spoken in such communities are under-resourced, such that the large audio corpora typically needed to train or adapt recognition engines are unavailable.
 %, and collecting such vast amounts of data is generally infeasible for individuals or small organizations interested in developing speech-driven applications for their communities. 
 However, in the absence of a recognition engine trained for the target low-resource language (LRL), an existing recognizer for a completely unrelated high-resource language (HRL), such as English, can be used to perform small-vocabulary recognition tasks in the LRL. 
@@ -86,19 +88,34 @@ However, in the absence of a recognition engine trained for the target low-resou
 %of the type required in grammar-controlled applications (e.g. for accessing information or conducting basic transactions), which may require the system to distinguish a few dozen terms in the URL. 
 All that is needed is a pronunciation lexicon mapping each term in the target vocabulary to one or more sequences of phonemes in the HRL, i.e. phonemes which the recognizer can model. 
 
-This is the motivation behind \textit{lex4all},\footnote{[Link removed to preserve submission anonymity]} an open-source desktop application for Windows that allows users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility as a tool for rapid, simple creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
+This is the motivation behind \textit{lex4all},\footnote{[Link removed to preserve submission anonymity]} an open-source desktop application for Windows that allows users to automatically create a mapped pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility as a tool for rapid
+%, simple 
+creation and evaluation of mapped pronunciation lexicons for small-vocabulary speech recognition in any language.
 
 \section{Background and related work}
 \label{sec:background}
-Many commercial speech recognition systems offer high-level Application Programming Interfaces (APIs) that make adding voice recognition capabilities to an application as simple as specifying (in text) the words/phrases that should be recognized; this requires very little general technical expertise, and virtually no knowledge of the inner workings of the recognition engine. If the target language is supported by the system -- the Microsoft Speech Platform, for example, currently supports recognition and synthesis for 26 languages/dialects \cite{mspsdk} -- this makes it very easy for small-scale software developers (i.e. individuals or small organizations without much funding) to create new speech-driven applications. 
+Many commercial speech recognition systems offer high-level Application Programming Interfaces (APIs) that make adding voice recognition capabilities to an application 
+%as simple as specifying (in text) the words/phrases that should be recognized; this requires 
+extremely simple,
+and require very little general technical expertise and virtually no knowledge of the inner workings of the recognition engine. If the target language is supported by the system -- the Microsoft Speech Platform, for example, currently supports  
+%recognition and synthesis for 
+26 languages/dialects \cite{mspsdk} -- this makes it very easy for small-scale software developers (i.e. individuals or small organizations without much funding) to create speech-driven applications. 
 
-While many such individuals or organizations in the developing world may be interested in using such platforms to create speech-driven applications for use in their communities, the low-resource languages typically spoken in these areas are obviously not supported by such commercial systems. 
-And though many effective techniques for training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{\url{http://www.cmusphinx.org}} or the Rapid Language Adaptation Toolkit\footnote{\url{http://i19pc5.ira.uka.de/rlat-dev}}), these typically require hours of training audio to produce effective models, and even the highest-level tools for building new models still require a nontrivial amount of expertise with speech technologies; such data and expertise may not be available to the small-scale developers in question.
+While many such individuals or organizations in the developing world may be interested in using such platforms to build applications for use in their communities, the LRLs typically spoken in these areas are obviously not supported by such commercial systems. 
+And though tools for quickly training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{\url{http://www.cmusphinx.org}} or the Rapid Language Adaptation Toolkit\footnote{\url{http://i19pc5.ira.uka.de/rlat-dev}}), these typically require hours of training audio to produce effective models, and even the highest-level tools still require a nontrivial amount of expertise with speech technologies. This data and expertise may not be available to the small-scale developers in question.
 
-However, many useful development-oriented applications (e.g. for accessing information or conducting basic transactions) require only small-vocabulary recognition tasks, by which we mean those requiring discrimination between a few dozen terms.
-For such tasks, an unmodified HRL recognizer can be used as-is to perform recognition of the LRL terms; 
+However, many useful development-oriented applications (e.g. for accessing information or conducting basic transactions) require only small-vocabulary recognition tasks, by which we mean 
+%those requiring discrimination between
+tasks requiring recognition of 
+a few dozen terms (words or short phrases).
+For such tasks, 
+%an unmodified HRL recognizer 
+an engine designed to recognize speech in a HRL
+can be used as-is to perform recognition of the LRL terms,
 %as Figure~\ref{fig:background} illustrates, 
-we simply provide the recognizer with an application-specific grammar describing the allowable combinations and sequences of words/phrases to be recognized, and a pronunciation lexicon which maps each of the target words/phrases to a sequence of phonemes in the source language for which the recognizer has been trained. 
+%we simply provide the recognizer with 
+given
+an application-specific grammar describing the allowable combinations and sequences of terms to be recognized, and a pronunciation lexicon which maps each target term to a sequence of phonemes in the HRL for which the recognizer has been trained. 
 
 %\begin{figure}[tb]
 %\begin{center}
@@ -109,28 +126,41 @@ we simply provide the recognizer with an application-specific grammar describing
 
 
 
-This is the thinking behind Speech-based Automated Learning of Accent and Articulation Mapping, or ``Salaam'' \cite{Sherwani09,Qiao10,Chan12}. This method of cross-language phoneme-mapping enables the automatic discovery of source-language pronunciation sequences for words or phrases in the (unrelated) target language, and 
+This is the thinking behind Speech-based Automated Learning of Accent and Articulation Mapping, or ``Salaam'' \cite{Sherwani09,Qiao10,Chan12}, a
+%. This 
+method of cross-language phoneme-mapping 
+that
+enables the automatic discovery of source-language pronunciations (phoneme sequences) for words or phrases in the (unrelated) target language. 
 %thus constitutes the foundation on which the lex4all tool is built.
-is the technique at the core of the lex4all lexicon-building tool.
+%The Salaam method is at the core of the lex4all lexicon-building tool.
 
-The basic idea of phoneme-mapping is to discover the best pronunciation sequence for a given word in the target language by using the source language recognizer to perform phone decoding on one or more audio samples of the target word. However, the APIs for commercial recognizers such as Microsoft's are designed for word-decoding, and do not usually enable the use of the phone-decoding mode. The insight of the Salaam approach is to use a specially designed grammar 
+%In the Salaam approach, an iterative algorithm uses a specially-designed recognition grammar to discover the best pronunciation(s) for a word one phoneme at a time
+
+The basic idea of phoneme-mapping is to discover the best pronunciation sequence for a given term in the target language by using the source language recognizer to perform phone decoding on one or more audio samples of the target term. However, the APIs for commercial recognizers such as Microsoft's are designed for word-decoding, and do not usually enable the use of the phone-decoding mode. The insight of the Salaam approach is to use a specially designed grammar 
 to mimic phone decoding 
 and guide pronunciation discovery 
 %THIS CITATION IS HARD-CODED BECAUSE OF MULTIPLE SECTION NUMBERS
 (Qiao~et~al., 2010, \S4.1; Chan~and~Rosenfeld, 2012, \S3.2).
 %Specifically, Qiao et al. \cite[\S4.1]{Qiao10} create a recognition grammar representing a phoneme ``super-wildcard'' that guides pronunciation discovery. 
-This so-called ``super-wildcard'' grammar allows the recognizer to treat an audio sample of the target word as a ``phrase'' made up of 0-10 ``words'',
+This so-called ``super-wildcard'' grammar allows the recognizer to treat each sample of the target term as a ``phrase'' made up of 0-10 ``words'',
 where each ``word'' can be matched to any possible sequence of 1, 2, or 3 source language phonemes \cite[\S4.1]{Qiao10}. 
 
-Given this super-wildcard grammar and one or more audio recordings of the target word, \newcite[\S4.1]{Qiao10} use an iterative training algorithm to discover the best pronunciation(s) for that word, one phoneme at a time. 
-In the first pass, the recognizer finds the best match(es) for the first phoneme, then for the first two phonemes in the second pass, and so on until a stopping criterion is met, e.g. the recognition confidence score assigned to the resulting ``phrase'' stops improving \cite[p.~4]{Qiao10}.
+Given this super-wildcard grammar and one or more audio recordings of the target term, \newcite[\S4.1]{Qiao10} use an iterative training algorithm to discover the best pronunciation(s) for that term, one phoneme at a time. 
+%In the first pass, 
+Essentially, the recognizer makes one pass to find the best match(es) for the first phoneme, then a second pass to find the first two phonemes, and so on until a stopping criterion is met, e.g. the recognition confidence score assigned to the resulting ``phrase'' stops improving \cite[p.~4]{Qiao10}.
 
-Compared to expert-crafted pronunciations, using pronunciations generated automatically by this algorithm improves recognition accuracy substantially \cite[\S5.2]{Qiao10}. By training on samples from two speakers instead of one, and by using a pronunciation lexicon containing multiple pronunciations for each word (i.e. the $n$-best results of the training algorithm instead of the single best result), Qiao et al. are able to further improve accuracy. \newcite{Chan12} achieve still higher accuracy by applying an iterative discriminative training algorithm, identifying and removing pronunciations that cause confusion between word types.
+Compared to pronunciations hand-written by a linguist, pronunciations generated automatically by this algorithm yield substantially higher recognition accuracy \cite[\S5.2]{Qiao10}. Qiao et al. further improve accuracy by training on samples from multiple speakers, and by creating a lexicon with multiple pronunciations for each word (i.e. the $n$-best results of the training algorithm instead of the single best result).
+%, Qiao et al. are able to further improve accuracy. 
+\newcite{Chan12} achieve still higher accuracy by applying an iterative discriminative training algorithm, identifying and removing pronunciations that cause confusion between word types.
 
-In sum, the Salaam method is fully automatic, requiring expertise neither in speech technology (to modify acoustic models) nor in linguistics (to manually generate seed pronunciations), and for each new target language it requires only a few minutes' worth of training data from one or more speakers, an amount that can be collected in a short time with little effort or expense. At the same time, it enables the construction of pronunciation lexicons that can help bring speech recognition applications to LRLs. This has been demonstrated in at least two developing-world projects that have successfully used the Salaam method to add voice interfaces to real applications: an Urdu telephone-based health information system in Pakistan \cite{Sherwani09}, and a text-free Hindi smartphone application to deliver agricultural information to farmers in rural India \cite{bali13}.
+In sum, the Salaam method is fully automatic, requiring expertise neither in speech technology 
+%(to modify acoustic models) 
+nor in linguistics,
+%(to manually generate seed pronunciations), 
+and for each new target language it requires only a few recorded utterances of each word from one or more speakers, an amount that can be collected in a short time with little effort or expense. Despite these humble requirements, it enables the construction of pronunciation lexicons that can help bring speech recognition applications to LRLs. This has been demonstrated in at least two projects that have successfully used the Salaam method to add voice interfaces to real applications: an Urdu telephone-based health information system in Pakistan \cite{Sherwani09}, and a Hindi text-free  smartphone application to deliver agricultural information to farmers in India \cite{bali13}.
 
 
-Given the established success of the Salaam method for pronunciation discovery, our contribution is to build an easy-to-use graphical application around these algorithms, so that non-expert users can quickly and easily create the pronunciation lexicons necessary for developing speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the modified implementation of the Salaam method which is at its core.
+Given the established success of the Salaam method for pronunciation discovery, our contribution is to build an easy-to-use graphical application around these algorithms, so that non-expert users can quickly and easily create the pronunciation lexicons necessary for developing speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the implementation of the Salaam method which is at its core.
 
 
 \section{System overview}
@@ -205,28 +235,32 @@ We use an engine designed to recognize low-quality audio since we aim to enable 
 \subsection{Implementation of the Salaam method}
 \label{sec:implementation}
 
-Pronunciations for each term in the target vocabulary are generated using the iterative Salaam algorithm of \newcite[\S4.1]{Qiao10}, described in \S\ref{sec:background} above. In our implementation, 
+Pronunciations (sequences of source-language phonemes) for each term in the target vocabulary are generated using the iterative Salaam algorithm \cite[\S4.1]{Qiao10}, described in \S\ref{sec:background} above. In our implementation, 
 %we follow \newcite[p. 2]{Chan12} in taking all sequences returned in a given pass as input for the following pass, and 
 %we slightly modify the algorithm's stopping condition to terminate 
 we stop iterations
-if the top-scoring phoneme sequence for a given word has not changed for three consecutive iterations, or -- following \newcite[p. 4]{Qiao10} --  if the best result from the $i^{th}$ pass has a lower score than the best result of the ${i - 1}^{th}$ pass (with the ${i - 1}^{th}$ results returned as the best pronunciations). In both cases, at least three passes are required. 
+if the top-scoring sequence for a given word has not changed for three consecutive iterations, or -- following \newcite[p. 4]{Qiao10} --  if the best sequence from the $i^{th}$ pass has a lower score than the best sequence of the ${i - 1}^{th}$ pass (with the ${i - 1}^{th}$ results returned as the best pronunciations). In both cases, at least three passes are required. 
 
-To determine the best pronunciation sequences for a given term from each pass, the results for all training samples of that term are naively combined into a set, and sorted by the confidence score assigned to each pronunciation (phoneme sequence). If a given pronunciation matches more than one sample, the overall score for that sequence in that pass is simply the sum of confidence scores for all samples it was associated with. In future work, it may be worth exploring more intelligent heuristics for ranking the set of sequences (see \S\ref{sec:future}).
+%To determine the best pronunciation sequences for a given term from each pass, the results for all training samples of that term are naively combined into a set, and sorted by the confidence score assigned to each pronunciation (phoneme sequence). If a given pronunciation matches more than one sample, the overall score for that sequence in that pass is simply the sum of confidence scores for all samples it was associated with. In future work, it may be worth exploring more intelligent heuristics for ranking the set of sequences (see \S\ref{sec:future}).
 
-After the iterative training has completed, the $n$-best pronunciation sequences (with $n$ specified by the user -- see \S\ref{sec:options}) for each term are written to the lexicon, each comprising a \texttt{phoneme} element corresponding to the single \texttt{grapheme} element containing the word's orthographic form (e.g. Listing~\ref{lst:lexicon}).
+After the iterative training has completed, the $n$-best pronunciation sequences (with $n$ specified by the user -- see \S\ref{sec:options}) for each term are written to the lexicon, each in a \texttt{phoneme} element corresponding to the \texttt{grapheme} element containing the term's orthographic form (e.g. Listing~\ref{lst:lexicon}).
 
 \subsection{Running time}
 \label{sec:runningtime}
 
-A major challenge we faced in engineering a user-friendly application based on the Salaam pronunciation-mapping algorithm \cite{Qiao10} was the long running time of the algorithm. As described in \S\ref{sec:background}, the algorithm described by \newcite{Qiao10} depends on a ``super-wildcard'' grammar that allows the recognizer to match the training audio sample to a ``phrase'' of 0-10 ``sub-words'', and each sub-word to any possible sequence of 1, 2, or 3 source-language phonemes. Given the 40 phonemes of American English, this results in 64,000 possibilities for each sub-word, which results in a huge training grammar and thus a long processing time. For a 25-word vocabulary with 5 training audio samples per word, we found the lexicon-building process to take approximately 1-2 hours. This is well beyond the amount of time that a developer will wish to spend creating just one component (the lexicon) of their speech-driven application, especially for a meager 25-word lexicon. 
+A major challenge we faced in engineering a user-friendly application based on the Salaam pronunciation-mapping algorithm \cite{Qiao10} was the long running time of the algorithm. As stated in \S\ref{sec:background}, the algorithm 
+%described by \newcite{Qiao10} 
+depends on a ``super-wildcard'' grammar that allows the recognizer to match each sample of a given term to a ``phrase'' of 0-10 ``words'', each word comprising any possible sequence of 1, 2, or 3 source-language phonemes. Given the 40 phonemes of American English, this results in over 65,000 possibilities for each word, which results in a huge training grammar and thus a long processing time. For a vocabulary of 25 terms with 5 training samples per term, we found the process to take approximately 1-2 hours. This is well beyond the amount of time that a developer will wish to spend creating just one component (the lexicon) of their speech-driven application, especially for a meager 25-term lexicon. 
 
-Therefore, we limit the length of each sub-word in the grammar to only one phoneme, instead of up to 3, giving e.g. 40 possibilities for each sub-word instead of the previous 64,000. Despite the shorter sub-word sequences, this implementation of the algorithm can nonetheless still discover pronunciation sequences of an arbitrary length, since, in each iteration, the phonemes discovered so far are prepended to the super-wildcard grammar, just as before \cite[p.~4]{Qiao10}. However, using this new implementation, constructing the same 25-word vocabulary with the same 5 samples per word takes approximately 2-5 \textit{minutes}. The new implementation is thus an order of magnitude faster than the old implementation.
+Therefore, we limit the length of each ``word'' in the grammar to only one phoneme, instead of up to 3, giving e.g. 40 possibilities instead of tens of thousands. 
+Despite the shorter word sequences, this implementation of the algorithm can nonetheless still discover pronunciation sequences of an arbitrary length, since, in each iteration, the phonemes discovered so far are prepended to the super-wildcard grammar, such that phoneme sequence of the first ``word'' in the phrase grows longer with each pass \cite[p.~4]{Qiao10}. 
+However, this new implementation is an order of magnitude faster: constructing the same 25-term lexicon on the same hardware takes only approximately 2-5 \textit{minutes}. 
 
-To ensure that the new implementation's vastly improved running time does not come at the cost of reduced recognition accuracy using the resulting lexicon, we evaluate and compare word recognition accuracy rates using lexicons built with the old and new implementations. The data we use for this evaluation is a subset of the Yoruba data collected by \newcite[\S5.1]{Qiao10}, comprising 25 Yoruba words uttered by 2 speakers (1 male, 1 female), with 5 samples of each word per speaker. 
-To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per word per speaker (this amounts to a five-fold evaluation, reserving one sample per word per speaker for testing, and training on the other four). Cross-speaker accuracy is evaluated by training the system on all five samples of each word recorded by one speaker, and testing on all five samples from the other speaker.
+To ensure that the new implementation's vastly improved running time does not come at the cost of reduced recognition accuracy, we evaluate and compare word recognition accuracy rates using lexicons built with the old and new implementations. The data we use for this evaluation is a subset of the Yoruba data collected by \newcite[\S5.1]{Qiao10}, comprising 25 Yoruba terms (words) uttered by 2 speakers (1 male, 1 female), with 5 samples of each term per speaker. 
+To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per term per speaker (this amounts to a five-fold evaluation, reserving one sample per term per speaker for testing, and training on the other four). Cross-speaker accuracy is evaluated by training the system on all five samples of each term recorded by one speaker, and testing on all five samples from the other speaker.
 Using R\footnote{\url{http://www.r-project.org/}} we perform a paired two-tailed $t$-test on the results to assess the significance of the difference in accuracy in each condition.
 
-The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this small modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy. The lex4all application therefore uses the new implementation by default, although for research purposes we leave users the option of using the original (slower) implementation (see \S\ref{sec:options}).
+The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this simple modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy. The lex4all application therefore uses the new implementation by default, although for research purposes we leave users the option of using the original (slower) implementation (see \S\ref{sec:options}).
 
 \begin{table}
 \begin{center}
@@ -237,8 +271,8 @@ The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no st
 \addlinespace
 \textit{Same-speaker results} & & & \\
 \addlinespace
-Female  (avg.) & 72.8 & \textbf{73.6} & 0.75 \\
-Male  (avg.) & \textbf{90.4} & \textbf{90.4} & 1.00\\
+Female  average & 72.8 & \textbf{73.6} & 0.75 \\
+Male  average & \textbf{90.4} & \textbf{90.4} & 1.00\\
 Overall average & 81.6 & \textbf{82} & 0.81 \\
 %\hline
 %\end{tabularx}
@@ -318,7 +352,7 @@ Once the target vocabulary and training audio have been specified, and the addit
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=\columnwidth]{../screenshots/LexiconBuilder-Main-Filled.PNG}
+\includegraphics[width=.9\columnwidth]{../screenshots/LexiconBuilder-Main-Filled.PNG}
 \caption{TODO: UPDATE SCREENSHOT Screenshot of the lexicon builder.\label{fig:mainform}}
 \end{center}
 \end{figure}
@@ -332,7 +366,9 @@ Once the target vocabulary and training audio have been specified, and the addit
 %\end{itemize}
 
 %The idea we had in mind was that in addition to uploading existing .wav files it would be interesting to let users record their own audio or ask friends and colleagues to support them. Especially in an international research context such as the one we were developing our tool in that was valuable. 
-The GUI allows users to easily browse their file system for pre-recorded audio samples (\texttt{.wav} files) to be used for lexicon training. However, as lex4all has been designed as a language-independent tool, it should enable the development of applications even in zero-resource languages for which no recorded audio is yet available; to this end, the application includes a built-in audio recorder, to simplify the process of collecting audio samples from native speakers.
+The GUI allows users to easily browse their file system for pre-recorded audio samples (\texttt{.wav} files) to be used for lexicon training. 
+To simplify data collection and enable the development of applications even for zero-resource languages, users also have the option of using the simple built-in audio recorder to record new speech samples.
+%However, as lex4all has been designed as a language-independent tool, it should enable the development of applications even in zero-resource languages for which no recorded audio is yet available; to this end, the application includes a built-in audio recorder, to simplify the process of collecting audio samples from native speakers.
 
 As the backend for the recording feature we use the open-source library NAudio.\footnote{\url{http://naudio.codeplex.com/}}
 % The package offers classes and methods for a variety of audio-related tasks. Essential for us was the access to I/O and volume control, in particular the classes \textit{waveIn}, \textit{waveFileWriter} and \textit{mixerLine}. 
@@ -340,7 +376,7 @@ The recorder takes the user's default audio input device as its data source and 
 We use this low sampling rate because the recognition engine we employ is for low-quality audio input (see \S\ref{sec:engine}).
 %This fixed setup is due to the fact that we simply prefer low-quality audio because the MS speech recognition aims better results with it.  
 
-A simple GUI form allows users to record audio samples for a given word that has been or is being added to the lexicon vocabulary. Recorded files can be used immediately for lexicon training and/or saved for future use, and can be combined with pre-recorded audio files for training. 
+%A simple GUI form allows users to record audio samples for a given word that has been or is being added to the lexicon vocabulary. Recorded files can be used immediately for lexicon training and/or saved for future use, and can be combined with pre-recorded audio files for training. 
 
 %Although lex4all's audio recording functionality is simple, ...
 
@@ -351,28 +387,39 @@ A simple GUI form allows users to record audio samples for a given word that has
 \subsection{Additional options}
 \label{sec:options}
 
-The lower left corner of the screenshot in Figure~\ref{fig:mainform} shows the parameters and additional options which users can easily modify, if they so choose. First of all, users
+The lower left corner of the screenshot in Figure~\ref{fig:mainform} shows the parameters and additional options which users can easily modify, if they so choose. 
+
+First of all, users
 %\begin{itemize}
 %\item Users 
-can specify the maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to \newcite[\S5.2.3]{Qiao10} and \newcite[\S4.2.1]{Chan12}, a higher number of pronunciations per word in the lexicon may improve the resulting recognition accuracy.
-
+can specify the maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to \newcite[\S5.2.3]{Qiao10} and \newcite[\S4.2.1]{Chan12}, more pronunciations per word in the lexicon may make the lexicon more robust and thus improve recognition accuracy.
 %\item Users 
-Secondly, we give users the choice of training the lexicon using our modified, much faster implementation of the Salaam algorithm instead of an implementation more closely following \newcite{Qiao10}, as explained in \S\ref{sec:backend}.
-
+Secondly, users may train the lexicon using our modified, much faster implementation of the Salaam algorithm or the original implementation more closely following \newcite{Qiao10}, as explained in \S\ref{sec:backend}.
 %\item Users 
 Finally, as mentioned in \S\ref{sec:discrimtrain}, users may choose whether or not discriminative training 
 %algorithm of \newcite{Chan12} 
 is applied, and if so, how many passes are run.
 %\end{itemize}
 
-We make these options easily modifiable via the graphical interface for users who wish to fine-tune the lexicon-building process, possibly to experiment with different settings to achieve the highest possible recognition accuracy. In conjunction with the application's evaluation module (see \S\ref{sec:evaluation}), this expedites further research into language-independent small-vocabulary recognition. However, users who do not wish to change the default settings (shown in Figure~\ref{fig:mainform}) may simply ignore these controls.
+We make these options easily controlled via the GUI for users who wish to fine-tune the lexicon-building process
+%, possibly to experiment with different settings to achieve the highest possible recognition accuracy. 
+In conjunction with the application's evaluation module (see \S\ref{sec:evaluation}), this expedites further research into language-independent small-vocabulary recognition. However, users who do not wish to change the default settings (shown in Figure~\ref{fig:mainform}) may simply ignore these controls.
 
 
 
 \section{Evaluation module for research}
 \label{sec:evaluation}
 
-In addition to its primary utility as a lexicon-building tool, lex4all is also a valuable research aide thanks to an evaluation module that allows users to quickly and easily evaluate the lexicons they have created. The evaluation tool allows users to browse their file system for an XML lexicon file that they wish to evaluate; this may be a lexicon created using lex4all, or any other lexicon conforming to same format \cite{pls}. The application reads this lexicon and automatically populates a list of its words (\texttt{grapheme} elements), displaying them in a window similar to that of Figure~\ref{fig:mainform}; users may remove words from the evaluation set, but may not add any words that are not included in the lexicon file. As in the main interface, users then select one or more audio samples (\texttt{.wav} files) for each word, which will be used for testing. At the click of a button, the system attempts to recognize each of the given audio samples using the given lexicon, and then reports the number of samples correctly and incorrectly recognized, and the number (if any) that could not be recognized. Users may optionally save this report, along with a confusion matrix of word types, as a comma-separated values (\texttt{.csv}) file, which can be easily imported into standard spreadsheet or statistical analysis software for analysis of the results. 
+In addition to its primary utility as a lexicon-building tool, lex4all is also a valuable research aide thanks to an evaluation module that allows users to quickly and easily evaluate the lexicons they have created. The evaluation tool allows users to browse their file system for an XML lexicon file that they wish to evaluate; this may be a lexicon created using lex4all, or any other lexicon conforming to same format \cite{pls}. 
+%The application reads this lexicon and automatically populates a list of its words (\texttt{grapheme} elements), displaying them in a window similar to that of Figure~\ref{fig:mainform}; users may remove words from the evaluation set, but may not add any words that are not included in the lexicon file. 
+As in the main interface, users then select one or more audio samples (\texttt{.wav} files) for each term they wish to evaluate.
+%, which will be used for testing. 
+%At the click of a button, the 
+The system then attempts to recognize each sample using the given lexicon, and reports the counts and percentages
+of correct, incorrect, and failed recognitions.
+%of samples correctly and incorrectly recognized, and the number (if any) that could not be recognized. 
+Users may optionally save this report, along with a confusion matrix of word types, as a comma-separated values (\texttt{.csv}) file.
+%, which can be easily imported into standard spreadsheet or statistical analysis software for analysis of the results. 
 
 This evaluation tool thus allows users to quickly and easily assess different configurations of the lexicon-building tool, by simply changing the settings using the GUI (see \S\ref{sec:options}) and evaluating the resulting lexicons. Furthermore, as the application's source code is freely available and modifiable, researchers may even replace entire modules of the system (e.g. use a recognition engine for a different source language, or a different pronunciation-discovery algorithm), and use this evaluation module to quickly assess the results. This tool therefore greatly facilitates further research into language-independent small-vocabulary speech recognition. 
 
@@ -381,10 +428,16 @@ This evaluation tool thus allows users to quickly and easily assess different co
 
 We have presented lex4all, an open-source Windows desktop application that enables the rapid automatic creation of pronunciation lexicons in any (low-resource) language, using an out-of-the-box commercial recognizer \cite{mspsdk} for a high-resource language (English) and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since the algorithm requires only minutes of training audio; combined with the built-in audio recorder, lexicons can be constructed even for zero-resource languages. We hope that this tool will help developers create speech-driven applications in LRLs, as well as facilitate research in language-independent small-vocabulary recognition.
 
-Future directions for the development of lex4all include the addition of more back-end options to give users even greater control over the lexicon-building process. One logical next step would be to expand the selection of source-language recognizers; at the moment, lex4all only offers American English as the source languge, but any of the 20+ other high-resource languages supported by the Microsoft Speech Platform \cite{mspsdk} could theoretically be used, and it would be interesting to investigate different pairings of source and target languages. Another future goal is to improve and extend the functionality of the audio-recording feature (see \S\ref{sec:recording}), 
+%Future directions for the development of lex4all include the addition of more back-end options to give users even greater control over the lexicon-building process. One logical next step would be
+In future work, we plan 
+to expand the selection of source-language recognizers; at the moment, lex4all only offers American English as the source languge, but any of the 20+ other HRLs supported by the Microsoft Speech Platform could theoretically be used, and it would be interesting to investigate different pairings of source and target languages. Another future goal is to improve and extend the functionality of the audio-recording tool (see \S\ref{sec:recording}), 
 %by giving users greater control over e.g. the sampling rate for recordings, and/or by making the tool more user-friendly with e.g. instant playback of recorded audio. 
-to make the recording tool more flexible and user-friendly.
-Finally, as an extension of the lex4all project, it would be beneficial to offer users the option to share the lexicons they have built and the speech samples they have recorded by uploading this data to a central online repository. Over time, this could become a valuable collection of data for LRLs, enabling developers and researchers to share and re-use data among languages or language families.
+to make it more flexible and user-friendly.
+Finally, as a complement to the application, it would be beneficial to 
+create a central online data repository where users can 
+%offer users the option to share 
+upload the lexicons they have built and the speech samples they have recorded %by uploading this data to a central online repository. 
+Over time, this could become a valuable collection of data for LRLs, enabling developers and researchers to share and re-use data among languages or language families.
 
 % future work on the recording function
 %It would be advantageous to display the volume while recording which is at the moment not possible because data is redirected either way. Unfortunately we had issues when doing both simultaneously which resulted in disturbances in the recorded audio.
