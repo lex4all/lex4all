@@ -193,8 +193,17 @@ Once pronunciations for all terms in the vocabulary have been generated, the app
 
 As mentioned above, we aim to make the creation and evaluation of lexicons simple, fast, and above all accessible to users with no expertise in speech or language technologies. Therefore, the application makes use of a simple graphical user interface that allows users to quickly and easily specify input and output file paths, and to control the parameters of the lexicon-building algorithms. 
 
-Figure~\ref{fig:mainform} shows the main window of the lex4all lexicon builder. This window displays the terms the user has specified and the number of audio samples that the user has selected for each word. The text and audio for each word can be modified in another form accessed by clicking the ``Edit'' button next to the word in question. 
+Figure~\ref{fig:mainform} shows the main interface of the lex4all lexicon builder. This window displays the terms the user has specified and the number of audio samples that the user has selected for each word. Another form, accessed via the "Add word" or "Edit" buttons, allows users to add to or edit the vocabulary by simply typing in the desired orthographic form of the word and graphically selecting the audio sample(s) to be used for pronunciation discovery (see Section~\ref{sec:recording} for more details on audio input).
 
+The lower left corner of the screenshot in Figure~\ref{fig:mainform} shows the parameters and additional options which users can easily modify, if they so choose:
+\begin{itemize}
+\item Users can specify maximum number of pronunciations (\texttt{phoneme} elements) that each word in the lexicon may contain. According to Qiao et al. \shortcite[\S5.2.3]{Qiao10} and Chan and Rosenfeld \shortcite[\S4.2.1]{Chan12}, a higher number of pronunciations per word in the lexicon may improve the resulting recognition accuracy.
+\item Users have the choice of training the lexicon using a modified, much faster implementation of the Salaam algorithm instead of an implementation more closely following Qiao et al. \shortcite{Qiao10}. See Section~\ref{sec:backend} for a detailed explanation of the alternative implementations.
+\item Users may choose whether or not the discriminative training algorithm of Chan and Rosenfeld \shortcite{Chan12} is applied, and if so, how many passes are run. See Section~\ref{sec:discrimtrain} for more information.
+\end{itemize}
+We make these options easily modifiable via the graphical interface for users who wish to fine-tune the lexicon-building process, possibly to experiment with different settings to achieve the highest possible recognition accuracy. In conjunction with the application's evaluation module (see Section~\ref{sec:evaluation}), this expedites further research into language-independent small-vocabulary recognition. However, users who do not wish to change the default settings (shown in Figure~\ref{fig:mainform}) may simply ignore the ``Options'' controls.
+
+Once the target vocabulary and training audio have been specified, and the additional options have been set if desired, the user clicks the ``Build Lexicon'' button and specifies the desired name and target directory of the lexicon file to be saved. In case of errors (e.g. there are terms in the vocabulary for which no audio files have been specified), an informative message pops up to instruct the user how to correct the error. Once any errors have been resolved, the pronunciation discovery process begins to run, and a progress bar appears above the ``Build Lexicon'' button to keep the user informed of the program's status. When all pronunciations have been generated, a success message displaying the elapsed training time is displayed, and the user may either proceed to the evaluation module to assess the newly created lexicon (see Section~\ref{sec:evaluation}), or may return to the main interface to build another lexicon. 
 
 \begin{figure}[tb]
 \begin{center}
@@ -203,9 +212,7 @@ Figure~\ref{fig:mainform} shows the main window of the lex4all lexicon builder. 
 \end{center}
 \end{figure}
 
-Audio input: use existing or new
-
-\subsection{Audio recording}
+\subsection{Audio input and recording}
 \label{sec:recording}
 
 %Things to mention (Max, please add to this):
@@ -214,7 +221,7 @@ Audio input: use existing or new
 %\end{itemize}
 
 %The idea we had in mind was that in addition to uploading existing .wav files it would be interesting to let users record their own audio or ask friends and colleagues to support them. Especially in an international research context such as the one we were developing our tool in that was valuable. 
-As described above, the GUI allows users to easily select pre-recorded audio samples for lexicon training. However, as lex4all has been designed as a language-independent tool, it should enable the development of applications even in zero-resource languages for which no recorded audio is yet available; to this end, the application includes a built-in audio recorder, to simplify the process of collecting audio samples from native speakers.
+The GUI allows users to easily browse their file system for pre-recorded audio samples (\texttt{.wav} files) to be used for lexicon training. However, as lex4all has been designed as a language-independent tool, it should enable the development of applications even in zero-resource languages for which no recorded audio is yet available; to this end, the application includes a built-in audio recorder, to simplify the process of collecting audio samples from native speakers.
 
 As the backend for the recording feature we use the open-source library NAudio.\footnote{\url{http://naudio.codeplex.com/}}
 % The package offers classes and methods for a variety of audio-related tasks. Essential for us was the access to I/O and volume control, in particular the classes \textit{waveIn}, \textit{waveFileWriter} and \textit{mixerLine}. 
