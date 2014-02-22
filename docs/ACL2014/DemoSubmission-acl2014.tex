@@ -275,7 +275,7 @@ To determine same-speaker accuracy for each of the two speakers, we perform a le
 We use the R software environment\footnote{\url{http://www.r-project.org/}} 
 for statistical analysis of the difference in accuracy in each condition.
 
-The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this small modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy.
+The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference between the accuracy obtained using the old and new implementations (all $p$-values are well above any reasonable significance threshold). Therefore, by making this small modification to the wildcard grammar used for pronunciation discovery, we achieve an implementation of the Salaam algorithm that is much faster than the original, yet yields just as high recognition accuracy. The lex4all application therefore uses the new implementation by default, although (as mentioned in Section~\ref{sec:options}) we leave users the option of using the original (slower) implementation, so that they may perform their own assessment.
 
 
 \begin{table*}[tb]
@@ -313,11 +313,15 @@ Cross-speaker	&Male $\rightarrow$ Female & \textbf{70.4} & 66.4 & -4.0 & \\
 
 \subsection{Discriminative training}
 \label{sec:discrimtrain}
-\cite{Chan12}
+As mentioned above, we implement the iterative discriminative training algorithm of Chan and Rosenfeld \shortcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. Chan and Rosenfeld \shortcite{Chan12} obtain a significant increases in accuracy with up to 8 iterations of the algorithm. lex4all therefore applies this discriminative training (TODO: DEFAULT NUMBER OF PASSES) by default, though users may change the number of passes or disable discriminative training entirely, as mentioned in Section~\ref{sec:options}.
 
 
 \section{Evaluation module for research}
 \label{sec:evaluation}
+
+In addition to its primary utility as a lexicon-building tool, lex4all is also a valuable research aide thanks to an evaluation module that allows users to quickly and easily evaluate the lexicons they have created. The evaluation tool allows users to browse their file system for an XML lexicon file that they wish to evaluate; this may be a lexicon created using lex4all, or any other lexicon conforming to same format \cite{pls}. The application reads this lexicon and automatically populates a list of its words (\texttt{grapheme} elements), displaying them in a window similar to that of Figure~\ref{fig:mainform}; users may remove words from the evaluation set, but may not add any words that are not included in the lexicon file. As in the main interface, users then select one or more audio samples (\texttt{.wav} files) for each word, which will be used for testing. At the click of a button, the system attempts to recognize each of the given audio samples using the given lexicon, and then reports the number of samples correctly and incorrectly recognized, and the number (if any) that could not be recognized. Users may optionally save this report, along with a confusion matrix of word types, as a comma-separated values (\texttt{.csv}) file, which can be easily imported into standard spreadsheet or statistical analysis software for analysis of the results. 
+
+This evaluation tool thus allows users to quickly and easily assess different configurations of the lexicon-building tool, by simply changing the settings using the GUI (see Section~\ref{sec:options}) and evaluating the resulting lexicons. Furthermore, as the application's source code is freely available and modifiable, researchers may even replace entire modules of the system (e.g. use a recognition engine for a different source language, or a different pronunciation-discovery algorithm), and use this evaluation module to quickly assess the results. This tool therefore greatly facilitates further research into language-independent small-vocabulary speech recognition. 
 
 \section{Conclusion and future work}
 \label{sec:future}
