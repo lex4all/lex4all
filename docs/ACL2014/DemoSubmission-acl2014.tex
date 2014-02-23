@@ -107,7 +107,7 @@ an existing recognizer for a completely unrelated high-resource language (HRL), 
 %of the type required in grammar-controlled applications (e.g. for accessing information or conducting basic transactions), which may require the system to distinguish a few dozen terms in the URL. 
 provided a pronunciation lexicon mapping each term in the target vocabulary to a sequence of phonemes in the HRL, i.e. phonemes which the recognizer can model. 
 
-This is the motivation behind \textit{lex4all},\footnote{[Link to GitHub project page removed for anonymity]} an open-source application that allows users to automatically create a mapped pronunciation lexicon for terms in any language, using a small number of speech recordings and an out-of-the-box recognition engine for a HRL. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility for the rapid
+This is the motivation behind \textit{lex4all},\footnote{http://lex4all.github.io/lex4all/} an open-source application that allows users to automatically create a mapped pronunciation lexicon for terms in any language, using a small number of speech recordings and an out-of-the-box recognition engine for a HRL. The resulting lexicon can then be used with the HRL recognizer to add small-vocabulary speech recognition functionality to applications in the LRL, without the need for the large amounts of data and expertise in speech technologies required to train a new recognizer. This paper describes the \textit{lex4all} application and its utility for the rapid
 %, simple 
 creation and evaluation of pronunciation lexicons enabling small-vocabulary speech recognition in any language.
 
@@ -565,7 +565,7 @@ research in language-independent small-vocabulary recognition.
 
 %Future directions for the development of \textit{lex4all} include the addition of more back-end options to give users even greater control over the lexicon-building process. One logical next step would be
 In future work, we plan 
-to expand the selection of source-language recognizers; at the moment, \textit{lex4all} only offers American English as the source languge, but any of the 20+ other HRLs supported by the Microsoft Speech Platform could theoretically be used, and it would be interesting to investigate different pairings of source and target languages. Another future goal is to improve and extend the functionality of the audio-recording tool (see Section~\ref{sec:recording}), 
+to expand the selection of source-language recognizers; at the moment, \textit{lex4all} only offers American English as the source language, but any of the 20+ other HRLs supported by the Microsoft Speech Platform could theoretically be used, and it would be interesting to investigate different pairings of source and target languages. Another future goal is to improve and extend the functionality of the audio-recording tool (see Section~\ref{sec:recording}), 
 %by giving users greater control over e.g. the sampling rate for recordings, and/or by making the tool more user-friendly with e.g. instant playback of recorded audio. 
 to make it more flexible and user-friendly.
 Finally, as a complement to the application, it would be beneficial to 
