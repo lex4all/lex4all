@@ -114,15 +114,18 @@ make it extremely simple to add voice interfaces to an application, requiring
 %as simple as specifying (in text) the words/phrases that should be recognized; this requires 
 very little general technical expertise and virtually no knowledge of the inner workings of the recognition engine. If the target language is supported by the system -- the Microsoft Speech Platform, for example, supports 
 %recognition and synthesis for 
-over 20 languages \cite{mspsdk} -- this makes it very easy for small-scale software developers (i.e. individuals or small organizations with limited funding) to create speech-driven applications. 
+over 20 languages \cite{mspsdk} -- this makes it very easy 
+%for small-scale software developers (i.e. individuals or small organizations with limited funding) 
+to create speech-driven applications. 
 
-While many such individuals or organizations in the developing world may be interested in using such platforms to build applications for use in their communities, the LRLs typically spoken in these areas are obviously not supported by such commercial systems. 
-And though tools for quickly training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{http://www.cmusphinx.org} or the Rapid Language Adaptation Toolkit\footnote{http://i19pc5.ira.uka.de/rlat-dev}), these typically require hours of training audio to produce effective models, 
-as well as 
-%and even the highest-level tools still require a nontrivial amount of 
-some expertise with speech technologies. Such data and expertise may not be available to the small-scale developers in question.
+If, however, the target language is one of the many thousands of LRLs for which high-quality recognition engines have not yet been developed, alternative strategies for developing speech-recognition interfaces must be employed.
+%While many such individuals or organizations in the developing world may be interested in using such platforms to build applications for use in their communities, the LRLs typically spoken in these areas are obviously not supported by such commercial systems. 
+Though tools for quickly training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{http://www.cmusphinx.org} or the Rapid Language Adaptation Toolkit\footnote{http://i19pc5.ira.uka.de/rlat-dev}), these typically require hours of training audio to produce effective models, 
+data which is by definition not available for a LRL.
+Furthermore, non-expert users may struggle to effectively utilize such tools, which still demand some understanding of speech/language technologies.
 
-However, many useful development-oriented applications (e.g. for accessing information or conducting basic transactions) only require small-vocabulary recognition, i.e. discrimination between
+However, many useful %development-oriented 
+applications (e.g. for accessing information or conducting basic transactions) only require small-vocabulary recognition, i.e. discrimination between
 a few dozen terms (words or short phrases).
 For such applications, 
 %an unmodified HRL recognizer 
@@ -198,9 +201,10 @@ Essentially, the recognizer makes one pass to find the best candidate(s) for the
 %assigned to the resulting ``phrase'' 
 stops improving \cite[p.~4]{Qiao10}, indicating that the sequence is complete.
 
-Compared to pronunciations hand-written by a linguist, pronunciations generated automatically by this algorithm yield substantially higher recognition accuracy \cite[Sec.~5.2]{Qiao10}. Qiao et al. further improve accuracy by training on samples from multiple speakers, and by creating a lexicon with multiple pronunciations for each word (i.e. the $n$-best results of the training algorithm instead of the single best result).
+Compared to pronunciations hand-written by a linguist, pronunciations generated automatically by this algorithm yield substantially higher recognition accuracy \cite[Sec.~5.2]{Qiao10}: Qiao et al. report word recognition accuracy rates in the range of 75-95\% for vocabularies of 50 terms.
+%Qiao et al. further improve accuracy by training on samples from multiple speakers, and by creating a lexicon with multiple pronunciations for each word (i.e. the $n$-best results of the training algorithm instead of the single best result).
 %, Qiao et al. are able to further improve accuracy. 
-\newcite{Chan12} achieve still higher accuracy by applying an iterative discriminative training algorithm, identifying and removing pronunciations that cause confusion between word types.
+\newcite{Chan12} improve accuracy on larger vocabularies (up to approximately 88\% for 100 terms) by applying an iterative discriminative training algorithm, identifying and removing pronunciations that cause confusion between word types.
 
 %In sum, 
 The Salaam method is fully automatic, demanding expertise neither in speech technology 
@@ -216,7 +220,7 @@ Despite these humble requirements, it
 can help create speech-driven applications in LRLs, as has been demonstrated in at least two projects that have successfully used the Salaam method to add voice interfaces to real applications: an Urdu telephone-based health information system in Pakistan \cite{Sherwani09}, and a Hindi text-free  smartphone application to deliver agricultural information to farmers in India \cite{bali13}.
 
 
-Given the established success of the Salaam method for pronunciation discovery, our contribution is to integrate it into an easy-to-use graphical application, so that non-expert users can quickly and easily create lexicons to develop speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the implementation of the Salaam method which is at its core.
+Given the established success of the Salaam method for pronunciation discovery, our contribution is to create a more time-efficient implementation of the pronunciation-discovery algorithm and integrate it into an easy-to-use graphical application, so that non-expert users can quickly and easily create lexicons to develop speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the implementation of the Salaam method which is at its core.
 
 %\vfill
 
@@ -228,13 +232,6 @@ A free and open-source desktop application for Microsoft Windows,\footnote{Windo
 %As stated above, the primary functionality of lex4all is the fast and easy construction of pronunciation lexicons; Figure~\ref{fig:system} illustrates the architecture of the lexicon-building system.
 %, explained below. In addition to this core system, lex4all also features an evaluation module that simulates recognition using a given lexicon and can be used as a research tool; this module is explained in detail in Section~\ref{sec:evaluation}.
 
-\begin{figure}[t]
-\begin{center}
-\includegraphics[width=\columnwidth]{../img/SystemOverview-compact.png}
-\caption{Overview of the core components of the lex4all lexicon-building application.\label{fig:system}}
-\end{center}
-\end{figure}
-
 The application's core feature is its lexicon-building tool, the architecture of which is illustrated in Figure~\ref{fig:system}.
 A simple graphical user interface (GUI) allows the user to type in the written form of each term in target vocabulary, and select one or more audio recordings (\texttt{.wav} files) of that term.
 %, as well as to set other options (detailed in Section~\ref{sec:options}). 
@@ -244,7 +241,14 @@ as well as a series of dynamically-created recognition grammars; the engine and 
 %, which are therefore crucial prerequisites for the lex4all application. 
 It should be noted here that 
 %in order to make the system more time-efficient, 
-our implementation of Salaam deviates slightly from the algorithm described by \newcite{Qiao10}, as explained in Section~\ref{sec:backend}. 
+our implementation of Salaam deviates slightly from the algorithm described by \newcite{Qiao10}; this is explained in Section~\ref{sec:backend} below. 
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\columnwidth]{../img/SystemOverview-compact.png}
+\caption{Overview of the core components of the lex4all lexicon-building application.\label{fig:system}}
+\end{center}
+\end{figure}
 
 Once pronunciations for all terms in the vocabulary have been generated, the application outputs a pronunciation lexicon for the given terms as an XML file conforming to the Pronunciation Lexicon Specification\footnote{http://www.w3.org/TR/pronunciation-lexicon/} (see Figure~\ref{fig:lexicon}). This lexicon can then be directly included in a speech recognition application built using the Microsoft Speech Platform API or a similar toolkit.
 
@@ -301,41 +305,47 @@ To ensure that the new implementation's vastly improved running time does not co
 To determine same-speaker accuracy for each of the two speakers, we perform a leave-one-out evaluation on the five samples recorded per term per speaker. 
 %(this amounts to a five-fold evaluation, reserving one sample per term per speaker for testing, and training on the other four). 
 Cross-speaker accuracy is evaluated by training the system on all five samples of each term recorded by one speaker, and testing on all five samples from the other speaker.
-Using R\footnote{http://www.r-project.org/} we perform a paired two-tailed $t$-test on the results to assess the significance of the differences in accuracy.
+%Using R\footnote{http://www.r-project.org/} 
+We perform a paired two-tailed $t$-test on the results to assess the significance of the differences in accuracy.
 
 \begin{table}[tb]
 \begin{center}
-\begin{tabularx}{\columnwidth}{X l r r X}
+\begin{tabularx}{\columnwidth}{p{1mm} p{3mm} l r r r}
 \hline
- & & Old & New & $p$\\
-\hline
-\noalign{\smallskip}
-\multicolumn{2}{l}{\parbox{3.7cm}{Approx. training time, 25 terms (minutes)}} & 60-120 & 2-5 & \\
-\noalign{\smallskip}
+ & & & Old & New & $p$\\
 \hline
 \noalign{\smallskip}
+
+%\multicolumn{2}{l}{\parbox{3.7cm}{Approx. training time, 25 terms (minutes)}} & 60-120 & 2-5 & \\
+%\noalign{\smallskip}
+%\hline
+%\noalign{\smallskip}
+
 %\multirow{3}{*}{\begin{sideways}Same-speaker\end{sideways}}
-\multicolumn{2}{l}{\textit{Same-speaker results}}\\
-& Female  average & 72.8 & \textbf{73.6} & 0.75 \\
-& Male  average & \textbf{90.4} & \textbf{90.4} & 1.00\\
-& Overall average & 81.6 & \textbf{82} & 0.81 \\
+%\multicolumn{2}{l}{\textit{Same-speaker results}}\\
+& & Female  average & 72.8 & \textbf{73.6} & 0.75 \\
+& & Male  average & \textbf{90.4} & \textbf{90.4} & 1.00\\
+\multirow{-3}{*}{\begin{sideways} Same \end{sideways}}& \multirow{-3}{*}{\begin{sideways} speaker \end{sideways}}& Overall average & 81.6 & \textbf{82} & 0.81 \\
+
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
+
 %\multirow{3}{*}{\rotatebox{90}{Cross-speaker}}
-\multicolumn{2}{l}{\textit{Cross-speaker results}} \\
-& Trained on male& \textbf{70.4} & 66.4 &\\
-& Trained on female & 76.8 & \textbf{77.6} &\\
-& Average & \textbf{73.6} & 72 & 0.63\\
+%\multicolumn{2}{l}{\textit{Cross-speaker results}} \\
+&& Trained on male& \textbf{70.4} & 66.4 & --\\
+&& Trained on female & 76.8 & \textbf{77.6} & --\\
+\multirow{-3}{*}{\begin{sideways}{ Cross-}\end{sideways}}&\multirow{-3}{*}{\begin{sideways}{ speaker}\end{sideways}}& Average & \textbf{73.6} & 72 & 0.63\\
+
 \noalign{\smallskip}
 \hline
 \end{tabularx}
 \end{center}
-\caption{Difference in word recognition accuracy in Yoruba 
+\caption{Difference in word recognition accuracy for Yoruba 
 %(25~words, 2~speakers, 5~samples per word per speaker) 
 using old (slower) and new (faster) implementations, with $p$-values from 
 %paired two-tailed 
-$t$-tests. \label{tab:accuracy}}
+$t$-tests. Bold values represent highest accuracy. \label{tab:accuracy}}
 \end{table}
 
 The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference in accuracy between the two conditions (all $p$-values are well above any reasonable significance threshold).  
