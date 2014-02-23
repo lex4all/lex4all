@@ -32,6 +32,8 @@
 \usepackage{tabularx}
 \usepackage{ctable}
 \usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{rotating}
 
 
 %\setlength\titlebox{5cm}
@@ -303,31 +305,29 @@ Using R\footnote{http://www.r-project.org/} we perform a paired two-tailed $t$-t
 
 \begin{table}[tb]
 \begin{center}
-\begin{tabularx}{\columnwidth}{X r r r}
+\begin{tabularx}{\columnwidth}{X l r r X}
 \hline
- & Old & New & $p$-value\\
+ & & Old & New & $p$\\
 \hline
-\addlinespace
-\textit{Same-speaker results} & & & \\
-\addlinespace
-Female  average & 72.8 & \textbf{73.6} & 0.75 \\
-Male  average & \textbf{90.4} & \textbf{90.4} & 1.00\\
-Overall average & 81.6 & \textbf{82} & 0.81 \\
-%\hline
-%\end{tabularx}
-%\end{center}
-\addlinespace
-%\begin{center}
-%\begin{tabularx}{\columnwidth}{X r r r}
+\noalign{\smallskip}
+\multicolumn{2}{l}{\parbox{3.7cm}{Approx. training time, 25 terms (minutes)}} & 60-120 & 2-5 & \\
+\noalign{\smallskip}
 \hline
-\addlinespace
- \textit{Cross-speaker results} &  &  & \\
- \addlinespace
-% \hline
- Train male, test female & \textbf{70.4} & 66.4 &\\
-Train female, test male & 76.8 & \textbf{77.6} &\\
- Average & \textbf{73.6} & 72 & 0.63\\
- \addlinespace
+\noalign{\smallskip}
+%\multirow{3}{*}{\begin{sideways}Same-speaker\end{sideways}}
+\multicolumn{2}{l}{\textit{Same-speaker results}}\\
+& Female  average & 72.8 & \textbf{73.6} & 0.75 \\
+& Male  average & \textbf{90.4} & \textbf{90.4} & 1.00\\
+& Overall average & 81.6 & \textbf{82} & 0.81 \\
+\noalign{\smallskip}
+\hline
+\noalign{\smallskip}
+%\multirow{3}{*}{\rotatebox{90}{Cross-speaker}}
+\multicolumn{2}{l}{\textit{Cross-speaker results}} \\
+& Trained on male& \textbf{70.4} & 66.4 &\\
+& Trained on female & 76.8 & \textbf{77.6} &\\
+& Average & \textbf{73.6} & 72 & 0.63\\
+\noalign{\smallskip}
 \hline
 \end{tabularx}
 \end{center}
