@@ -10,7 +10,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>lex4all by lex4all</title>
+    <title>lex4all</title>
   </head>
 
   <body>
@@ -42,14 +42,14 @@
 
 <p><a href="">lex4all</a> is an easy-to-use desktop application for Windows that will allow even naive users to automatically create a pronunciation lexicon for words in any language, using a small number of audio recordings and a pre-existing recognition engine in a HRL such as English. The resulting lexicon can then be used to add small-vocabulary speech recognition functionality to applications in the LRL.</p>
 
-<h4>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h4>
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>What it does</h2>
 
 <ul>
-<li>Simple graphical interface</li>
+<li>Build pronunciation lexicons for any language</li>
 <li>Use existing <code>.wav</code> audio files, or use the built-in audio recorder</li>
-<li>Advanced options (number of pronunciations per word, discriminative training [3])</li>
-<li>Evaluation module for testing/research</li>
+<li>Fine-tune parameters to improve recognition accuracy</li>
+<li>Evaluate lexicons for testing/research</li>
 </ul>
 
 <!--- REMOVED UNTIL INSTALLATION IS READY
@@ -59,22 +59,22 @@
 <p>(Info coming soon!)</p>
 --->
 
-<h4>
-<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h4>
+<h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
 
 <p>A simple user interface allows the user to easily specify one written form (text string) and and one or more audio samples (<code>.wav</code> files) for each word in the target vocabulary, and to set other options (e.g. number of pronunciations per word, name/save location of lexicon file, etc.). The audio is then passed to a speech recognition engine for a HRL (English). An automatic pronunciation generation algorithm (the Salaam method, [2–3]) finds the best pronunciation(s) for each word in the LRL vocabulary. The program outputs a pronunciation lexicon (<code>.pls</code> XML file). This lexicon file follows the standard pronunciation lexicon format [4], so it can be directly included in a speech recognition application, e.g. one built using the <a href="http://msdn.microsoft.com/en-us/library/hh361572">Microsoft Speech Platform</a> API.</p>
 
 <p><img src="https://docs.google.com/drawings/d/1eBPzBluKxJkQLYjMdbYRxi5z1Ez8OgwcMUtmbnbwQpk/pub?w=960&amp;h=582" alt="lex4all System Diagram"></p>
 
-<h4>
-<a name="backend" class="anchor" href="#backend"><span class="octicon octicon-link"></span></a>Backend</h4>
+<h2>
+<a name="backend" class="anchor" href="#backend"><span class="octicon octicon-link"></span></a>Backend</h2>
 
 <p>This approach to language-independent recognition requires an existing high-quality speech recognition engine with a usable API; we chose to use the English recognition engine of the <a href="http://msdn.microsoft.com/en-us/library/hh361572">Microsoft Speech Platform</a>, so lex4all is written in C#. The audio recording feature was built using the <a href="http://naudio.codeplex.com/">NAudio API</a>.</p>
 
 <p>To automatically discover the pronunciation mappings we implement the Salaam algorithm as presented in [2-3]; a slight modification was made to reduce the algorithm's running time. In addition to the basic discovery algorithm [2], users have the choice of applying the discriminative training algorithm [3] as well. </p>
 
-<h4>
-<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h4>
+<h2>
+<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
 
 <p>[1] Jahanzeb Sherwani. “Speech interfaces for information access by low literate users”. PhD thesis. Pittsburgh, PA, USA: Carnegie Mellon University, 2009. <a href="http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf">[pdf]</a>.</p>
 
