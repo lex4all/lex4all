@@ -127,7 +127,8 @@ Furthermore, non-expert users may struggle to effectively utilize such tools, wh
 However, many useful %development-oriented 
 applications (e.g. for accessing information or conducting basic transactions) only require small-vocabulary recognition, i.e. discrimination between
 a few dozen terms (words or short phrases).
-For such applications, 
+For example, VideoKheti \cite{bali13}, a smartphone application that delivers agricultural information to farmers in India using a Hindi speech interface, uses a vocabulary of 79 terms.
+For such small-vocabulary applications, 
 %an unmodified HRL recognizer 
 an engine designed to recognize speech in a HRL
 can be used as-is to perform recognition of the LRL terms,
@@ -144,7 +145,7 @@ a grammar describing the allowable combinations/sequences of terms to be recogni
 %\end{center}
 %\end{figure}
 
-%%% TODO: syntax highlighting
+%TODO syntax highlighting?
 \lstset{
 	%language=xml,
 	basicstyle={\footnotesize\ttfamily},
@@ -194,9 +195,10 @@ and guide pronunciation discovery \cite{Qiao10,Chan12}.
 %Specifically, Qiao et al. \cite[Sec.~4.1]{Qiao10} create a recognition grammar representing a phoneme ``super-wildcard'' that guides pronunciation discovery. 
 This grammar allows the engine to recognize each sample of the target term as a ``phrase'' made up of 0-10 ``words'',
 where each ``word'' can be matched to any possible sequence of 1, 2, or 3 source-language phonemes \cite[Sec.~4.1]{Qiao10}. 
+This allows the recognizer to identify the phoneme sequence best matching a given term, without any prior indication of how many phonemes that sequence should contain.
 
 Given this grammar and one or more audio recordings of the target term, \newcite[Sec.~4.1]{Qiao10} use an iterative training algorithm to discover the best pronunciation(s) for that term, one phoneme at a time. 
-%In the first pass, 
+%In the first pass, the recognizer determines the best candidate(s) for the first phoneme of the term, and prefixes the phoneme(s) to the super-wildcard grammar
 Essentially, the recognizer makes one pass to find the best candidate(s) for the first phoneme, then a second pass to find the first two phonemes, and so on until a stopping criterion is met, e.g. the recognition confidence score 
 %assigned to the resulting ``phrase'' 
 stops improving \cite[p.~4]{Qiao10}, indicating that the sequence is complete.
@@ -217,7 +219,9 @@ and requires only a few recorded utterances of each word,
 an amount of data that can be collected quickly with little effort or expense. 
 Despite these humble requirements, it 
 %enables the construction of pronunciation lexicons that 
-can help create speech-driven applications in LRLs, as has been demonstrated in at least two projects that have successfully used the Salaam method to add voice interfaces to real applications: an Urdu telephone-based health information system in Pakistan \cite{Sherwani09}, and a Hindi text-free  smartphone application to deliver agricultural information to farmers in India \cite{bali13}.
+can help create speech-driven applications in LRLs, as has been demonstrated in at least two projects that have successfully used the Salaam method to add voice interfaces to real applications: an Urdu telephone-based health information system \cite{Sherwani09}, and
+the VideoKheti application mentioned above \cite{bali13}.
+
 
 
 Given the established success of the Salaam method for pronunciation discovery, our contribution is to create a more time-efficient implementation of the pronunciation-discovery algorithm and integrate it into an easy-to-use graphical application, so that non-expert users can quickly and easily create lexicons to develop speech interfaces in LRLs using existing HRL recognizers. In the following sections, we describe the lex4all application and the implementation of the Salaam method which is at its core.
@@ -504,7 +508,7 @@ Therefore, lex4all facilitates not only application development but also further
 \label{sec:future}
 
 We have presented lex4all, an open-source application that enables the rapid automatic creation of pronunciation lexicons in any (low-resource) language, using an out-of-the-box commercial recognizer \cite{mspsdk} for a high-resource language (English) and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since the algorithm requires only minutes of training audio; given the built-in audio recorder, lexicons can be constructed even for zero-resource languages. 
-% TODO: draw more focus to evaluation tool?
+%TODO  draw more focus to evaluation tool?
 Furthermore, lex4all's flexible and open design and easy-to-use evaluation module
 %We hope that this tool will help developers create speech-driven applications in LRLs, as well as facilitate 
 make it a valuable tool for
