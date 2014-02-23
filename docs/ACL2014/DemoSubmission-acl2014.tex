@@ -381,7 +381,7 @@ lex4all uses the new implementation by default, although for research purposes w
 
 \subsection{Discriminative training}
 \label{sec:discrimtrain}
-We implement the iterative discriminative training algorithm of \newcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. \newcite[p.~5]{Chan12} obtain a significant increases in accuracy with up to 8 iterations of the algorithm. In lex4all, discriminative training is applied by default, though users may change the number of passes (4 by default) or disable discriminative training entirely, as mentioned in \S\ref{sec:options}.
+We implement the iterative discriminative training algorithm of \newcite{Chan12} and offer it as an optional step in the lexicon-building process. In each iteration, this algorithm takes as input the set of mapped pronunciations generated using the Salaam algorithm \cite{Qiao10}, simulates recognition of the training audio samples using these pronunciations, and outputs a ranked list of the pronunciations in the lexicon that best match each sample according to the recognizer. Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pronunciations that the recognizer matches to samples of the wrong word type, are thus identified and removed from the lexicon, and the process is repeated in the next iteration. \newcite[p.~5]{Chan12} obtain a significant increase in accuracy with up to 8 iterations of the algorithm. In lex4all, discriminative training is applied by default, though users may change the number of passes (4 by default) or disable discriminative training entirely, as mentioned in \S\ref{sec:options}.
 
 
 
@@ -500,7 +500,7 @@ Finally, as a complement to the application, it would be beneficial to
 create a central online data repository where users can 
 %offer users the option to share 
 upload the lexicons they have built and the speech samples they have recorded %by uploading this data to a central online repository. 
-Over time, this could become a valuable collection of data for LRLs, enabling developers and researchers to share and re-use data among languages or language families.
+over time, this could become a valuable collection of data for LRLs, enabling developers and researchers to share and re-use data among languages or language families.
 
 % future work on the recording function
 %It would be advantageous to display the volume while recording which is at the moment not possible because data is redirected either way. Unfortunately we had issues when doing both simultaneously which resulted in disturbances in the recorded audio.
