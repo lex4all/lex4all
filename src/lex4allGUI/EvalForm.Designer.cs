@@ -30,8 +30,6 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.selectLexBtn = new System.Windows.Forms.Button();
-            this.lexFileLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Audio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,7 +37,9 @@
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.startButton = new System.Windows.Forms.Button();
             this.addWordButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.addwordComboBox = new System.Windows.Forms.ComboBox();
+            this.lexFileLabel = new System.Windows.Forms.Label();
             this.openLexDialog = new System.Windows.Forms.OpenFileDialog();
             this.addAudioDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveLogDialog = new System.Windows.Forms.SaveFileDialog();
@@ -82,27 +82,6 @@
             this.selectLexBtn.UseVisualStyleBackColor = true;
             this.selectLexBtn.Click += new System.EventHandler(this.selectLexBtn_Click);
             // 
-            // lexFileLabel
-            // 
-            this.lexFileLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lexFileLabel.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.lexFileLabel, 2);
-            this.lexFileLabel.Location = new System.Drawing.Point(89, 10);
-            this.lexFileLabel.Name = "lexFileLabel";
-            this.lexFileLabel.Size = new System.Drawing.Size(80, 13);
-            this.lexFileLabel.TabIndex = 1;
-            this.lexFileLabel.Text = "(none selected)";
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Lexicon file:";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -127,10 +106,11 @@
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(528, 439);
-            this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // Word
             // 
@@ -168,7 +148,7 @@
             this.startButton.Margin = new System.Windows.Forms.Padding(5);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(126, 23);
-            this.startButton.TabIndex = 15;
+            this.startButton.TabIndex = 6;
             this.startButton.Text = "START EVALUATION";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -181,10 +161,20 @@
             this.addWordButton.Margin = new System.Windows.Forms.Padding(5);
             this.addWordButton.Name = "addWordButton";
             this.addWordButton.Size = new System.Drawing.Size(98, 23);
-            this.addWordButton.TabIndex = 16;
+            this.addWordButton.TabIndex = 5;
             this.addWordButton.Text = "Add word";
             this.addWordButton.UseVisualStyleBackColor = true;
             this.addWordButton.Click += new System.EventHandler(this.addWordButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Lexicon file:";
             // 
             // addwordComboBox
             // 
@@ -198,7 +188,18 @@
             this.addwordComboBox.MaxDropDownItems = 30;
             this.addwordComboBox.Name = "addwordComboBox";
             this.addwordComboBox.Size = new System.Drawing.Size(125, 21);
-            this.addwordComboBox.TabIndex = 17;
+            this.addwordComboBox.TabIndex = 4;
+            // 
+            // lexFileLabel
+            // 
+            this.lexFileLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lexFileLabel.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.lexFileLabel, 2);
+            this.lexFileLabel.Location = new System.Drawing.Point(89, 10);
+            this.lexFileLabel.Name = "lexFileLabel";
+            this.lexFileLabel.Size = new System.Drawing.Size(80, 13);
+            this.lexFileLabel.TabIndex = 1;
+            this.lexFileLabel.Text = "(none selected)";
             // 
             // openLexDialog
             // 
