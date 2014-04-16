@@ -46,16 +46,11 @@
 
 \title{\textit{lex4all}: A language-independent tool for building and evaluating pronunciation lexicons for small-vocabulary speech recognition}
 
-%\author{Anjana Vakil \\
-%  Affiliation / Address line 1 \\
-%  Affiliation / Address line 2 \\
-%  Affiliation / Address line 3 \\
-%  {\tt email@domain} \\\And
-%  Max Paulus \\
-%  Affiliation / Address line 1 \\
-%  Affiliation / Address line 2 \\
-%  Affiliation / Address line 3 \\
-%  {\tt email@domain} \\}
+\author{Anjana Vakil, Max Paulus, Alexis Palmer, and Michaela Regneri \\
+  Department of Computational Linguistics, % \\
+  Saarland University \\
+  %Saarbr{\"u}cken, Germany \\
+  {\tt \{anjanav,mpaulus,apalmer,mregneri\}@coli.uni-saarland.de} \\}
 
 \date{}
 
@@ -89,7 +84,8 @@ and an evaluation module that expedites research on small-vocabulary speech reco
 %\end{itemize}
 %Papers that overlap other papers that have appeared at a conference with published proceedings must contain significant new results. Authors must include on the title page a list of any previous papers that the current paper overlaps or extends, and must identify the significant new results contained in the new submission. The program co-chairs have the final decision about what constitutes significant new results.
 
-\section{Introduction\footnote{Parts of this paper (Sections \ref{sec:intro} and \ref{sec:background}) overlap with a paper submitted to the 4th Workshop on Spoken Language Technologies for Under-resourced languages (SLTU '14, http://www.mica.edu.vn/sltu2014). That paper, which is currently under review, concerns related research not reported here, and makes no mention of the \textit{lex4all} application.}}
+\section{Introduction}
+%\footnote{Parts of this paper (Sections \ref{sec:intro} and \ref{sec:background}) overlap with a paper submitted to the 4th Workshop on Spoken Language Technologies for Under-resourced languages (SLTU '14, http://www.mica.edu.vn/sltu2014). That paper, which is currently under review, concerns related research not reported here, and makes no mention of the \textit{lex4all} application.}}
 \label{sec:intro}
 
 In recent years it has been demonstrated that speech recognition interfaces can be extremely beneficial for applications in the developing world
@@ -117,22 +113,35 @@ Several commercial speech recognition systems offer high-level Application Progr
 make it extremely simple to add voice interfaces to an application, requiring
 %make adding voice recognition capabilities to an application 
 %as simple as specifying (in text) the words/phrases that should be recognized; this requires 
-very little general technical expertise and virtually no knowledge of the inner workings of the recognition engine. If the target language is supported by the system -- the Microsoft Speech Platform, for example, supports 
+very little general technical expertise and virtually no knowledge of the inner workings of the recognition engine. If the target language is supported by the system -- the Microsoft Speech Platform,\footnote{http://msdn.microsoft.com/en-us/library/hh361572} for example, supports 
 %recognition and synthesis for 
-over 20 languages \cite{mspsdk} -- this makes it very easy 
+over 20 languages 
+%\cite{mspsdk} 
+-- this makes it very easy 
 %for small-scale software developers (i.e. individuals or small organizations with limited funding) 
 to create speech-driven applications. 
 
 If, however, the target language is one of the many thousands of LRLs for which high-quality recognition engines have not yet been developed, alternative strategies for developing speech-recognition interfaces must be employed.
 %While many such individuals or organizations in the developing world may be interested in using such platforms to build applications for use in their communities, the LRLs typically spoken in these areas are obviously not supported by such commercial systems. 
-Though tools for quickly training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{http://www.cmusphinx.org} or the Rapid Language Adaptation Toolkit\footnote{http://i19pc5.ira.uka.de/rlat-dev}), these typically require hours of training audio to produce effective models, 
+%%OLD
+%Though tools for quickly training or adapting recognizers for new languages exist (e.g. CMUSphinx\footnote{http://www.cmusphinx.org} or the Rapid Language Adaptation Toolkit\footnote{http://i19pc5.ira.uka.de/rlat-dev}), these typically require hours of training audio to produce effective models, data which is by definition not available for a LRL. Furthermore, naive users may struggle to effectively utilize even such tools, which still demand some understanding of speech/language technologies.
+%%
+%%NEW
+Though tools for quickly training recognizers for new languages exist (e.g. CMUSphinx\footnote{http://www.cmusphinx.org}, these typically require many hours of training audio to produce effective models, 
 data which is by definition not available for a LRL.
-Furthermore, non-expert users may struggle to effectively utilize such tools, which still demand some understanding of speech/language technologies.
+In efforts to overcome this data scarcity problem, recent years have seen the development of techniques for rapidly adapting multilingual or language-independent acoustic models to new languages from relatively small amounts of data \cite{schultz01}, methods for building resources such as language models and pronunciation dictionaries from web-crawled data \cite{vu10,Schlippe14}, and even a web-based interface, the Rapid Language Adaptation Toolkit
+\footnote{http://i19pc5.ira.uka.de/rlat-dev}
+(RLAT), 
+which allows non-expert users to exploit these techniques to create speech recognition and synthesis tools for new languages. 
+While they greatly reduce the amount of data needed for training new recognizers, however, these approaches still require non-trivial amounts of speech and text in the target language, which may be an obstacle for very low- or zero-resource languages. Furthermore, even high-level tools such as RLAT still demand some understanding of linguistics/language technology, and as such may not be accessible to all users.
+%%
 
 However, many useful %development-oriented 
 applications (e.g. for accessing information or conducting basic transactions) only require small-vocabulary recognition, i.e. discrimination between
 a few dozen terms (words or short phrases).
-For example, VideoKheti \cite{bali13}, a smartphone application that delivers agricultural information to farmers in India using a Hindi speech interface, uses a vocabulary of 79 terms.
+For example, VideoKheti \cite{bali13}, a text-free smartphone application that delivers agricultural information to low-literate farmers in India, 
+recognizes 79 Hindi terms.
+%uses a Hindi speech interface which recognizes 79 terms.
 For such small-vocabulary applications, 
 %an unmodified HRL recognizer 
 an engine designed to recognize speech in a HRL
@@ -176,7 +185,7 @@ a grammar describing the allowable combinations/sequences of terms to be recogni
 \caption{Sample XML lexicon mapping the Yoruba word \textit{beeni} (``yes'') to two possible sequences of American English phonemes.\label{fig:lexicon}}
 \end{figure}
 
-
+%TODO related work on pronunciation generation
 
 This is the thinking behind Speech-based Automated Learning of Accent and Articulation Mapping, or ``Salaam'' \cite{Sherwani09,Qiao10,Chan12}, a
 %. This 
@@ -242,11 +251,12 @@ our contribution is to create a more time-efficient implementation of the pronun
 \section{System overview}
 \label{sec:overview}
 
-We have developed \textit{lex4all} as a desktop application for Microsoft Windows,\footnote{Windows 7 or 8 (64-bit).} since it relies on the Microsoft Speech Platform \cite{mspsdk} as explained below.
+We have developed \textit{lex4all} as a desktop application for Microsoft Windows,\footnote{Windows 7 or 8 (64-bit).} since it relies on the Microsoft Speech Platform (MSP) %\cite{mspsdk} 
+as explained in Section~\ref{sec:engine} below.
 %for speech recognition (see Section~\ref{sec:engine}).
 The application and its source code are freely available 
 %for download 
-via GitHub.\footnote{[GitHub repository link removed to preserve anonymity]} 
+via GitHub.\footnote{http://github.com/lex4all/lex4all} 
 
 %As stated above, the primary functionality of \textit{lex4all} is the fast and easy construction of pronunciation lexicons; Figure~\ref{fig:system} illustrates the architecture of the lexicon-building system.
 %, explained below. In addition to this core system, \textit{lex4all} also features an evaluation module that simulates recognition using a given lexicon and can be used as a research tool; this module is explained in detail in Section~\ref{sec:evaluation}.
@@ -256,7 +266,9 @@ A simple graphical user interface (GUI) allows the user to type in the written f
 %, as well as to set other options (detailed in Section~\ref{sec:options}). 
 Given this input, the program uses the Salaam algorithm \cite{Qiao10,Chan12} to find the best pronunciation(s) for each term. This algorithm requires a pre-trained recognition engine for a HRL 
 %(we use American English) 
-as well as a series of dynamically-created recognition grammars; the engine and grammars are constructed and managed using the Microsoft Speech Platform speech recognition libraries \cite{mspsdk}.
+as well as a series of dynamically-created recognition grammars; the engine and grammars are constructed and managed using the MSP.
+%SDK library. \footnote{\url{http://msdn.microsoft.com/en-us/library/microsoft.speech.recognition}}
+%\cite{mspsdk}.
 %, which are therefore crucial prerequisites for the \textit{lex4all} application. 
 It should be noted here that 
 %in order to make the system more time-efficient, 
@@ -269,7 +281,7 @@ our implementation of Salaam deviates slightly from the algorithm described by \
 \end{center}
 \end{figure}
 
-Once pronunciations for all terms in the vocabulary have been generated, the application outputs a pronunciation lexicon for the given terms as an XML file conforming to the Pronunciation Lexicon Specification\footnote{http://www.w3.org/TR/pronunciation-lexicon/} (see Figure~\ref{fig:lexicon}). This lexicon can then be directly included in a speech recognition application built using the Microsoft Speech Platform API or a similar toolkit.
+Once pronunciations for all terms in the vocabulary have been generated, the application outputs a pronunciation lexicon for the given terms as an XML file conforming to the Pronunciation Lexicon Specification\footnote{http://www.w3.org/TR/pronunciation-lexicon/} (see Figure~\ref{fig:lexicon}). This lexicon can then be directly included in a speech recognition application built using the MSP API or a similar toolkit.
 
 
 
@@ -285,12 +297,13 @@ Once pronunciations for all terms in the vocabulary have been generated, the app
 %As described above, \textit{lex4all} uses a recognition engine trained for a HRL to map audio in the target LRL to pronunciations (phoneme sequences) in the source HRL. 
 %In the current implementation, 
 For the HRL recognizer
-we use the American English recognition engine 
+we use the US English recognition engine 
 %developed by Microsoft for server-side recognition of telephone-quality audio, accessed via 
-of the Microsoft Speech Platform \cite{mspsdk}. 
+of the Microsoft Speech Platform (MSP).
+% \cite{mspsdk}. 
 %In keeping with the overall objective of the Salaam approach, 
 The engine is used as-is, with no modifications to its underlying models. 
-We choose the Microsoft Speech Platform for its robustness and ease of use, as well as to maintain comparability with the work of \newcite{Qiao10} and \newcite{Chan12}, who also used Microsoft's server-side American English recognizer. 
+We choose the MSP for its robustness and ease of use, as well as to maintain comparability with the work of \newcite{Qiao10} and \newcite{Chan12}, who also used Microsoft's server-side US English recognizer. 
 Following these authors, we use an engine designed for server-side recognition of low-quality audio, since we aim to enable the creation of useful applications for LRLs, including those spoken in developing-world communities, and such applications will most likely need to cope with telephone-quality audio or similar (see e.g. \newcite{case4st4d}).
 
 
@@ -321,7 +334,7 @@ was its long running time.
 %
 As stated in Section~\ref{sec:background}, this algorithm
 %described by \newcite{Qiao10} 
-depends on a ``super-wildcard'' grammar that allows the recognizer to match each sample of a given term to a ``phrase'' of 0-10 ``words'', each word comprising any possible sequence of 1, 2, or 3 source-language phonemes. Given the 40 phonemes of American English, this gives over 65,000 possibilities for each word, resulting in a huge training grammar and thus a long processing time. For a 25-term vocabulary with 5 training samples per term, we found the process to take approximately 1-2 hours
+depends on a ``super-wildcard'' grammar that allows the recognizer to match each sample of a given term to a ``phrase'' of 0-10 ``words'', each word comprising any possible sequence of 1, 2, or 3 source-language phonemes. Given the 40 phonemes of US English, this gives over 65,000 possibilities for each word, resulting in a huge training grammar and thus a long processing time. For a 25-term vocabulary with 5 training samples per term, we found the process to take approximately 1-2 hours
 on a standard modern laptop. 
 %This is well beyond the amount of time that a developer will wish to spend creating just one component (the lexicon) of their speech-driven application, especially for a meager 25-term lexicon. 
 For development and research, this long training time is a serious disadvantage.
@@ -424,7 +437,7 @@ is much faster than the original, yet equally accurate,
 %%}
 %\end{tabular}
 %\end{center}
-%\caption{Word recognition accuracy using American English recognizer on Yoruba audio (25~words, 2~speakers, 5~samples per word per speaker), with results of paired two-tailed $t$-test for significance.\label{tab:accuracy}}
+%\caption{Word recognition accuracy using US English recognizer on Yoruba audio (25~words, 2~speakers, 5~samples per word per speaker), with results of paired two-tailed $t$-test for significance.\label{tab:accuracy}}
 %\end{table*}
 
 
@@ -556,8 +569,14 @@ Therefore, \textit{lex4all} facilitates not only application development but als
 \section{Conclusion and future work}
 \label{sec:future}
 
-We have presented \textit{lex4all}, an open-source application that enables the rapid automatic creation of pronunciation lexicons in any (low-resource) language, using an out-of-the-box commercial recognizer \cite{mspsdk} for a high-resource language (English) and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since the algorithm requires only minutes of training audio; given the built-in audio recorder, lexicons can be constructed even for zero-resource languages. 
-%TODO  draw more focus to evaluation tool?
+We have presented \textit{lex4all}, an open-source application that enables the rapid automatic creation of pronunciation lexicons in any (low-resource) language, using an out-of-the-box commercial recognizer 
+%\cite{mspsdk} 
+for a high-resource language (English) and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since 
+%the algorithm requires 
+only minutes of training audio 
+are required; 
+given the built-in audio recorder, lexicons can be constructed even for zero-resource languages. 
+%%TODO  draw more focus to evaluation tool?
 Furthermore, \textit{lex4all}'s flexible and open design and easy-to-use evaluation module
 %We hope that this tool will help developers create speech-driven applications in LRLs, as well as facilitate 
 make it a valuable tool for
@@ -565,7 +584,11 @@ research in language-independent small-vocabulary recognition.
 
 %Future directions for the development of \textit{lex4all} include the addition of more back-end options to give users even greater control over the lexicon-building process. One logical next step would be
 In future work, we plan 
-to expand the selection of source-language recognizers; at the moment, \textit{lex4all} only offers American English as the source language, but any of the 20+ other HRLs supported by the Microsoft Speech Platform could theoretically be used, and it would be interesting to investigate different pairings of source and target languages. Another future goal is to improve and extend the functionality of the audio-recording tool (see Section~\ref{sec:recording}), 
+to expand the selection of source-language recognizers; at the moment, \textit{lex4all} uses US English as the source language, but any of the 20+ other HRLs supported by the MSP could be added.
+%and it would be interesting to investigate different pairings of source and target languages.
+This would enable investigation of the accuracy obtained with different source-target language pairs, though our initial exploration of this issue suggests that phonetic similarity between the source and target languages might not significantly affect recognition accuracy \cite{vakil14}. 
+%TODO cite SLTU article
+Another future goal is to improve and extend the functionality of the audio-recording tool (see Section~\ref{sec:recording}), 
 %by giving users greater control over e.g. the sampling rate for recordings, and/or by making the tool more user-friendly with e.g. instant playback of recorded audio. 
 to make it more flexible and user-friendly.
 Finally, as a complement to the application, it would be beneficial to 
@@ -584,11 +607,24 @@ Over time, this could become a valuable collection of data for LRLs, enabling de
 %not number the acknowledgments section. Do not include this section
 %when submitting your paper for review.
 
+\section*{Acknowledgements}
+\label{sec:thanks}
+%
+%The acknowledgments should go immediately before the references.  Do
+%not number the acknowledgments section. Do not include this section
+%when submitting your paper for review.
+
+The first author was partially supported by a Deutschlandstipendium scholarship sponsored by IMC AG. 
+We thank Roni Rosenfeld, Hao Yee Chan, and Mark Qiao for 
+%making this work possible by 
+generously sharing their speech data and valuable advice, and
+the three anonymous reviewers for their feedback.
+
 % include your own bib file like this:
 %\bibliographystyle{acl}
 %\bibliography{acl2014}
 \bibliographystyle{acl}
-\bibliography{lex4all.bib}
+\bibliography{lex4all-fullnames.bib}
 
 
 \end{document}
