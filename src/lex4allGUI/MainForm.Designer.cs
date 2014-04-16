@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.shortWildcardChkBx = new System.Windows.Forms.CheckBox();
             this.discrimPassesUpDn = new System.Windows.Forms.NumericUpDown();
             this.numPronsUpDn = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.shortWildcardChkBx = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,7 +68,7 @@
             this.startButton.Margin = new System.Windows.Forms.Padding(5);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(152, 23);
-            this.startButton.TabIndex = 11;
+            this.startButton.TabIndex = 4;
             this.startButton.Text = "BUILD LEXICON";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -80,7 +80,7 @@
             this.addWordButton.Margin = new System.Windows.Forms.Padding(5);
             this.addWordButton.Name = "addWordButton";
             this.addWordButton.Size = new System.Drawing.Size(75, 23);
-            this.addWordButton.TabIndex = 12;
+            this.addWordButton.TabIndex = 1;
             this.addWordButton.Text = "Add word";
             this.addWordButton.UseVisualStyleBackColor = true;
             this.addWordButton.Click += new System.EventHandler(this.addWordButton_Click);
@@ -109,7 +109,7 @@
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.Size = new System.Drawing.Size(528, 378);
             this.dataGridView1.StandardTab = true;
-            this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
@@ -187,7 +187,7 @@
             this.label1.Location = new System.Drawing.Point(3, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 13);
-            this.label1.TabIndex = 14;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Words and audio for lexicon training:";
             // 
             // groupBox1
@@ -203,18 +203,32 @@
             this.groupBox1.Name = "groupBox1";
             this.tableLayoutPanel1.SetRowSpan(this.groupBox1, 3);
             this.groupBox1.Size = new System.Drawing.Size(242, 88);
-            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             this.toolTip1.SetToolTip(this.groupBox1, "These options give you greater control over the lexicon-building process. If you\'" +
         "re not sure what settings to use, just leave them at the default values.");
+            // 
+            // shortWildcardChkBx
+            // 
+            this.shortWildcardChkBx.AutoSize = true;
+            this.shortWildcardChkBx.Checked = true;
+            this.shortWildcardChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.shortWildcardChkBx.Location = new System.Drawing.Point(12, 42);
+            this.shortWildcardChkBx.Name = "shortWildcardChkBx";
+            this.shortWildcardChkBx.Size = new System.Drawing.Size(92, 17);
+            this.shortWildcardChkBx.TabIndex = 2;
+            this.shortWildcardChkBx.Text = "Faster training";
+            this.toolTip1.SetToolTip(this.shortWildcardChkBx, resources.GetString("shortWildcardChkBx.ToolTip"));
+            this.shortWildcardChkBx.UseVisualStyleBackColor = true;
+            this.shortWildcardChkBx.CheckedChanged += new System.EventHandler(this.shortWildcardChkBx_CheckedChanged);
             // 
             // discrimPassesUpDn
             // 
             this.discrimPassesUpDn.Location = new System.Drawing.Point(185, 66);
             this.discrimPassesUpDn.Name = "discrimPassesUpDn";
             this.discrimPassesUpDn.Size = new System.Drawing.Size(47, 20);
-            this.discrimPassesUpDn.TabIndex = 16;
+            this.discrimPassesUpDn.TabIndex = 5;
             this.discrimPassesUpDn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.discrimPassesUpDn.Value = new decimal(new int[] {
             4,
@@ -267,7 +281,7 @@
             this.discrimTrainChkBx.Location = new System.Drawing.Point(12, 67);
             this.discrimTrainChkBx.Name = "discrimTrainChkBx";
             this.discrimTrainChkBx.Size = new System.Drawing.Size(128, 17);
-            this.discrimTrainChkBx.TabIndex = 15;
+            this.discrimTrainChkBx.TabIndex = 3;
             this.discrimTrainChkBx.Text = "Discriminative training";
             this.toolTip1.SetToolTip(this.discrimTrainChkBx, "If checked, any pronunciations that might cause confusion between words in the le" +
         "xicon will be removed. Improves accuracy, but slightly increases training time.");
@@ -280,7 +294,7 @@
             this.discrimPassesLabel.Location = new System.Drawing.Point(145, 68);
             this.discrimPassesLabel.Name = "discrimPassesLabel";
             this.discrimPassesLabel.Size = new System.Drawing.Size(44, 13);
-            this.discrimPassesLabel.TabIndex = 17;
+            this.discrimPassesLabel.TabIndex = 4;
             this.discrimPassesLabel.Text = "Passes:";
             this.toolTip1.SetToolTip(this.discrimPassesLabel, "Number of times the Discriminative Training process will be run (i.e. the lexicon" +
         " will be evaluated and \"confusing\" pronunciations will be removed).");
@@ -331,20 +345,6 @@
             this.toolTip1.AutoPopDelay = 20000;
             this.toolTip1.InitialDelay = 500;
             this.toolTip1.ReshowDelay = 100;
-            // 
-            // shortWildcardChkBx
-            // 
-            this.shortWildcardChkBx.AutoSize = true;
-            this.shortWildcardChkBx.Checked = true;
-            this.shortWildcardChkBx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.shortWildcardChkBx.Location = new System.Drawing.Point(12, 42);
-            this.shortWildcardChkBx.Name = "shortWildcardChkBx";
-            this.shortWildcardChkBx.Size = new System.Drawing.Size(92, 17);
-            this.shortWildcardChkBx.TabIndex = 18;
-            this.shortWildcardChkBx.Text = "Faster training";
-            this.toolTip1.SetToolTip(this.shortWildcardChkBx, resources.GetString("shortWildcardChkBx.ToolTip"));
-            this.shortWildcardChkBx.UseVisualStyleBackColor = true;
-            this.shortWildcardChkBx.CheckedChanged += new System.EventHandler(this.shortWildcardChkBx_CheckedChanged);
             // 
             // MainForm
             // 

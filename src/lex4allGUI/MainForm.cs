@@ -74,6 +74,8 @@ namespace lex4allGUI
                 numPronsUpDn.Enabled = false;
                 shortWildcardChkBx.Enabled = false;
                 discrimTrainChkBx.Enabled = false;
+                discrimPassesLabel.Enabled = false;
+                discrimPassesUpDn.Enabled = false;
                 Stopwatch watch = Stopwatch.StartNew();
 
                 label3.Show();
@@ -100,6 +102,8 @@ namespace lex4allGUI
                 numPronsUpDn.Enabled = true;
                 shortWildcardChkBx.Enabled = true;
                 discrimTrainChkBx.Enabled = true;
+                discrimPassesLabel.Enabled = true;
+                discrimPassesUpDn.Enabled = true;
 
                 if (MessageBox.Show("Evaluate this lexicon now? (Clicking 'Yes' will quit the Lexicon Builder and open the Evaluation Tool.)", "Continue to evaluation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {

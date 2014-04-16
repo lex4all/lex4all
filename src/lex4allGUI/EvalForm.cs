@@ -306,6 +306,11 @@ This tool enables you to evaluate the word recognition accuracy of an existing l
             
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
 
 
     }
