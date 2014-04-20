@@ -26,14 +26,17 @@
 \pdfpageheight=\paperheight
 
 
-%%%%%% EXTRA PACKAGES
-\usepackage{graphicx}
-\usepackage{listings}
+%%%%%% TABLES
 \usepackage{tabularx}
 \usepackage{ctable}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{rotating}
+
+%%%%%% EXTRA PACKAGES
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[all]{nowidow}
 
 
 %\setlength\titlebox{5cm}
@@ -126,11 +129,11 @@ If, however, the target language is one of the many thousands of LRLs for which 
 %%
 %%NEW
 Though tools for quickly training recognizers for new languages exist (e.g. CMUSphinx\footnote{http://www.cmusphinx.org}), they typically require many hours of training audio to produce effective models, 
-data which is by definition not available for a LRL.
-In efforts to overcome this data scarcity problem, recent years have seen the development of techniques for rapidly adapting multilingual or language-independent acoustic and language models to new languages from relatively small amounts of data \cite{schultz01,kim03}, methods for building resources such as pronunciation dictionaries from web-crawled data \cite{Schlippe14}, and even a web-based interface, the Rapid Language Adaptation Toolkit\footnote{http://i19pc5.ira.uka.de/rlat-dev}
+data which is by definition not available for LRLs.
+To overcome this data scarcity problem, techniques have been developed for rapidly adapting multilingual or language-independent acoustic and language models to new languages from relatively small amounts of data \cite{schultz01,kim03}, methods for building resources such as pronunciation dictionaries from web-crawled data \cite{Schlippe14}, and even a web-based interface, the Rapid Language Adaptation Toolkit\footnote{http://i19pc5.ira.uka.de/rlat-dev}
 (RLAT), 
-which allows non-expert users to exploit these techniques to create speech recognition and synthesis tools for new languages. 
-While they greatly reduce the amount of data needed for training new recognizers, however, these approaches still require non-trivial amounts of speech and text in the target language, which may be an obstacle for very low- or zero-resource languages. Furthermore, even high-level tools such as RLAT still demand some understanding of linguistics/language technology, and as such may not be accessible to all users.
+which allows non-expert users to exploit these techniques to create speech recognition and synthesis tools for new languages \cite{vu10}. 
+While they greatly reduce the amount of data needed to build new recognizers, however, these approaches still require non-trivial amounts of speech and text in the target language, which may be an obstacle for very low- or zero-resource languages. Furthermore, even high-level tools such as RLAT still demand some understanding of linguistics/language technology, and thus may not be accessible to all users.
 %%
 
 However, many useful %development-oriented 
@@ -158,7 +161,7 @@ a grammar describing the allowable combinations/sequences of terms to be recogni
 
 %TODO syntax highlighting?
 \lstset{
-	%language=xml,
+	%language=XML,
 	basicstyle={\footnotesize\ttfamily},
 	%frame=tblr,
 	numbers=none,
@@ -233,9 +236,9 @@ At least two projects have successfully used the Salaam method to add voice inte
 the VideoKheti application mentioned above \cite{bali13}.
 What has not existed before now is an interface that makes this approach accessible to any user.
 
-%Given the established success of the Salaam method 
+Given the established success of the Salaam method, 
 %for pronunciation discovery, 
-Our contribution is to create a more time-efficient implementation of the pronunciation-discovery algorithm and integrate it into an easy-to-use graphical application.
+our contribution is to create a more time-efficient implementation of the pronunciation-discovery algorithm and integrate it into an easy-to-use graphical application.
 %, so that non-expert users can quickly and easily create lexicons to develop speech interfaces in LRLs using existing HRL recognizers. 
 In the following sections, we describe this
 application 
@@ -258,9 +261,9 @@ via GitHub.\footnote{http://github.com/lex4all/lex4all}
 
 The application's core feature is its lexicon-building tool, the architecture of which is illustrated in Figure~\ref{fig:system}.
 A simple graphical user interface (GUI) allows the user to type in the written form of each term in the target vocabulary, and select one or more audio recordings (\texttt{.wav} files) of that term.
-Given this input, the program uses the Salaam algorithm 
+Given this input, the program uses the Salaam method 
 %\cite{Qiao10,Chan12} 
-to find the best pronunciation(s) for each term. This algorithm requires a pre-trained recognition engine for a HRL 
+to find the best pronunciation(s) for each term. This requires a pre-trained recognition engine for a HRL 
 %(we use American English) 
 as well as a series of dynamically-created recognition grammars; the engine and grammars are constructed and managed using the MSP.
 %SDK library. \footnote{\url{http://msdn.microsoft.com/en-us/library/microsoft.speech.recognition}}
@@ -308,18 +311,22 @@ Following these authors, we use an engine designed for server-side recognition o
 \subsection{Implementation of the Salaam method}
 \label{sec:implementation}
 
-Pronunciations (sequences of source-language phonemes) for each term in the target vocabulary are generated using the iterative Salaam algorithm %\cite[Sec.~4.1]{Qiao10}, 
-(Sec.~\ref{sec:background}). In our implementation, 
+Pronunciations (sequences of source-language phonemes) for each term in the target vocabulary are generated from the audio sample(s) of that term using the iterative Salaam algorithm %\cite[Sec.~4.1]{Qiao10}, 
+(Sec.~\ref{sec:background}), which employs the source-language recognizer and a special recognition grammar. In a first pass, the algorithm finds the best candidate(s) for the first phoneme of the sample(s), then the first two phonemes in the second pass, and so on until a stopping criterion is met. 
+In our implementation, 
 %we follow \newcite[p. 2]{Chan12} in taking all sequences returned in a given pass as input for the following pass, and 
 %we slightly modify the algorithm's stopping condition to terminate 
 we stop iterations
 if the top-scoring sequence for a term has not changed for three consecutive iterations \cite{Chan12}, or 
 %-- following \newcite{Qiao10} --  
-if the best sequence from the $i^{th}$ pass has a lower score than the best sequence of the ${i - 1}^{th}$ pass (with the ${i - 1}^{th}$ results returned as the best pronunciations) \cite{Qiao10}. In both cases, at least three passes are required. 
+if the best sequence from a given pass has a lower confidence score than the best sequence from the previous pass 
+%if the best sequence from the $i^{th}$ pass has a lower score than the best sequence of the ${i - 1}^{th}$ pass 
+%(with the ${i - 1}^{th}$ results returned as the best pronunciations) 
+\cite{Qiao10}. In both cases, at least three passes are required.
 
 %To determine the best pronunciation sequences for a given term from each pass, the results for all training samples of that term are naively combined into a set, and sorted by the confidence score assigned to each pronunciation (phoneme sequence). If a given pronunciation matches more than one sample, the overall score for that sequence in that pass is simply the sum of confidence scores for all samples it was associated with. In future work, it may be worth exploring more intelligent heuristics for ranking the set of sequences (see Section~\ref{sec:future}).
 
-After the iterative training has completed, the $n$-best pronunciation sequences (with $n$ specified by the user -- see Section~\ref{sec:options}) for each term are written to the lexicon, each in a \texttt{phoneme} element corresponding to the \texttt{grapheme} element containing the term's orthographic form (e.g. Fig.~\ref{fig:lexicon}).
+After the iterative training has completed, the $n$-best pronunciation sequences (with $n$ specified by the user -- see Sec.~\ref{sec:options}) for each term are written to the lexicon, each in a \texttt{phoneme} element corresponding to the \texttt{grapheme} element containing the term's orthographic form (e.g. Fig.~\ref{fig:lexicon}).
 
 \subsection{Running time}
 \label{sec:runningtime}
@@ -453,7 +460,7 @@ Pronunciations that cause ``confusion'' between words in the vocabulary, i.e. pr
 We implement this accuracy-boosting algorithm in \textit{lex4all}, and apply it by default. 
 %However, as \newcite[p.~5]{Chan12} caution that careful selection of the number of iterations is necessary to achieve the highest accuracy,
 To enable fine-tuning and experimentation,
-we leave users the option to change the number of passes (4 by default) or disable discriminative training entirely, as mentioned in Section~\ref{sec:options}.
+we leave users the option to change the number of passes (4 by default) or to disable discriminative training entirely, as mentioned in Section~\ref{sec:options}.
 
 
 
@@ -559,9 +566,8 @@ Users may optionally save this report, along with a confusion matrix of word typ
 The evaluation module thus allows users to quickly and easily assess different configurations of the lexicon-building tool, by simply changing the settings using the GUI 
 %(see Section~\ref{sec:options}) 
 and evaluating the resulting lexicons. Furthermore, as the application's source code is freely available and modifiable, researchers may even replace entire modules of the system 
-(e.g. use a 
-%recognition engine for a different source language, or a different 
-different recognition engine or 
+(e.g. use a different 
+%recognition engine or 
 pronunciation-discovery algorithm), and use the evaluation module to quickly assess the results. 
 Therefore, \textit{lex4all} facilitates not only application development but also further research into small-vocabulary speech recognition using mapped pronunciation lexicons.
 %into language-independent small-vocabulary speech recognition. 
@@ -571,7 +577,7 @@ Therefore, \textit{lex4all} facilitates not only application development but als
 
 We have presented \textit{lex4all}, an open-source application that enables the rapid automatic creation of pronunciation lexicons in any (low-resource) language, using an out-of-the-box commercial recognizer 
 %\cite{mspsdk} 
-for a high-resource language (English) and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since 
+for a high-resource language and the Salaam method for cross-language pronunciation mapping \cite{Qiao10,Chan12}. The application thus makes small-vocabulary speech recognition interfaces feasible in any language, since 
 %the algorithm requires 
 only minutes of training audio 
 are required; 
@@ -580,7 +586,7 @@ given the built-in audio recorder, lexicons can be constructed even for zero-res
 Furthermore, \textit{lex4all}'s flexible and open design and easy-to-use evaluation module
 %We hope that this tool will help developers create speech-driven applications in LRLs, as well as facilitate 
 make it a valuable tool for
-research in language-independent small-vocabulary recognition.
+research.% in language-independent small-vocabulary recognition.
 
 %Future directions for the development of \textit{lex4all} include the addition of more back-end options to give users even greater control over the lexicon-building process. One logical next step would be
 In future work, we plan 
@@ -608,6 +614,7 @@ Over time, this could become a valuable collection of data for LRLs, enabling de
 %not number the acknowledgments section. Do not include this section
 %when submitting your paper for review.
 
+
 \section*{Acknowledgements}
 \label{sec:thanks}
 %
@@ -618,8 +625,9 @@ Over time, this could become a valuable collection of data for LRLs, enabling de
 The first author was partially supported by a Deutschlandstipendium scholarship sponsored by IMC AG. 
 We thank Roni Rosenfeld, Hao Yee Chan, and Mark Qiao for 
 %making this work possible by 
-generously sharing their speech data and valuable advice, and
+generously sharing their speech data and valuable advice, and 
 the three anonymous reviewers for their feedback.
+
 
 % include your own bib file like this:
 %\bibliographystyle{acl}
