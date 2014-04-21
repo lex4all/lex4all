@@ -262,15 +262,20 @@ The application's core feature is its lexicon-building tool, the architecture of
 A simple graphical user interface (GUI) allows users to type in the written form of each term in the target vocabulary, and select one or more audio recordings (\texttt{.wav} files) of that term.
 Given this input, the program uses the Salaam method 
 %\cite{Qiao10,Chan12} 
-to find the best pronunciation(s) for each term. This requires a pre-trained recognition engine for a HRL 
+to find the best pronunciation(s) for each term. This requires a pre-trained
+recognition engine for a HRL 
 %(we use American English) 
 as well as a series of dynamically-created recognition grammars; the engine and grammars are constructed and managed using the MSP.
 %SDK library. \footnote{\url{http://msdn.microsoft.com/en-us/library/microsoft.speech.recognition}}
 %\cite{mspsdk}.
 %, which are therefore crucial prerequisites for the \textit{lex4all} application. 
-It should be noted here that 
-%in order to make the system more time-efficient, 
-our implementation of Salaam deviates slightly from the algorithm described by \newcite{Qiao10}; this is explained in Section~\ref{sec:backend}. 
+We note here that 
+%to improve the system's time-efficiency and thus usability, 
+our implementation of Salaam deviates slightly from that of \newcite{Qiao10}, 
+improving the time-efficiency and thus usability of the system 
+%of the system
+(see Sec.~\ref{sec:backend}).
+%as explained in Section~\ref{sec:backend}. 
 
 \begin{figure}[t]
 \begin{center}
@@ -361,7 +366,7 @@ To determine same-speaker accuracy for each of the two speakers, we perform a le
 %(this amounts to a five-fold evaluation, reserving one sample per term per speaker for testing, and training on the other four). 
 Cross-speaker accuracy is evaluated by training the system on all five samples of each term recorded by one speaker, and testing on all five samples from the other speaker.
 %Using R\footnote{http://www.r-project.org/} 
-We perform a paired two-tailed $t$-test on the results to assess the significance of the differences in accuracy.
+We perform paired two-tailed $t$-tests on the results to assess the significance of the differences in mean accuracy.
 
 \begin{table}[tb]
 \begin{center}
@@ -396,11 +401,13 @@ We perform a paired two-tailed $t$-test on the results to assess the significanc
 \hline
 \end{tabularx}
 \end{center}
-\caption{Difference in word recognition accuracy for Yoruba 
+\caption{%Difference in 
+Word recognition accuracy for Yoruba 
 %(25~words, 2~speakers, 5~samples per word per speaker) 
 using old (slower) and new (faster) implementations, with $p$-values from 
 %paired two-tailed 
-$t$-tests. Bold values represent highest accuracy. \label{tab:accuracy}}
+$t$-tests for significance of difference in means. 
+Bold indicates highest accuracy.\label{tab:accuracy}}
 \end{table}
 
 The results of our evaluation, given in Table~\ref{tab:accuracy}, indicate no statistically significant difference in accuracy between the two implementations 
@@ -479,7 +486,7 @@ Figure~\ref{fig:mainform} shows the main interface of the \textit{lex4all} lexic
 (see Sec.~\ref{sec:recording} for more details on audio input).
 
 
-Once the target vocabulary and training audio have been specified, and the additional options have been set if desired, users click the ``Build Lexicon'' button and specifies the desired name and target directory of the lexicon file to be saved, 
+Once the target vocabulary and training audio have been specified, and the additional options have been set if desired, users click the ``Build Lexicon'' button and specify the desired name and target directory of the lexicon file to be saved, 
 and pronunciation discovery begins. 
 %In case of errors (e.g. there are terms in the vocabulary for which no audio files have been specified), a message pops up instructing the user on how to correct the error. 
 %Once any errors have been resolved, pronunciation discovery begins, and a progress bar appears above the ``Build Lexicon'' button to keep the user informed of the program's status. 
@@ -623,9 +630,11 @@ Over time, this could become a valuable collection of LRL data, enabling develop
 %when submitting your paper for review.
 
 The first author was partially supported by a Deutschlandstipendium scholarship sponsored by IMC AG. 
-We are grateful to Roni Rosenfeld, Hao Yee Chan, and Mark Qiao for 
+We thank Roni Rosenfeld, Hao Yee Chan, and Mark Qiao for 
 %making this work possible by 
-generously sharing their speech data and valuable advice, and we also thank
+generously sharing their speech data and valuable advice, and
+%We also thank
+Dietrich Klakow, Florian Metze, and 
 the three anonymous reviewers for their feedback.
 
 
