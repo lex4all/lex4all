@@ -27,7 +27,7 @@ namespace lex4allGUI
         public void updateListView()
         {
             // listView1.Clear();
-            dataGridView1.Rows.Clear();
+            wordsAudioGrid.Rows.Clear();
             if (wavDict.Count > 0)
             {
                 startButton.Enabled = true;
@@ -36,11 +36,11 @@ namespace lex4allGUI
             foreach (string word in wavDict.Keys)
             {
                 // this.listView1.Items.Add(word);
-                dataGridView1.Rows.Add(new string[] { word, wavDict[word].Length.ToString() });
+                wordsAudioGrid.Rows.Add(new string[] { word, wavDict[word].Length.ToString() });
             }
 
             // update row headers with row numbers
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in wordsAudioGrid.Rows)
             {
                 if (row.Index > -1)
                     row.HeaderCell.Value = String.Format("{0}", row.Index + 1);
@@ -62,15 +62,15 @@ namespace lex4allGUI
                 }
             }
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveLexDialog.ShowDialog() == DialogResult.OK)
             {  
                 
 
                 startButton.Enabled = false;
                 startButton.Text = "Working...";
                 addWordButton.Enabled = false;
-                dataGridView1.Enabled = false;
-                label2.Enabled = false;
+                wordsAudioGrid.Enabled = false;
+                maxPronsLabel.Enabled = false;
                 numPronsUpDn.Enabled = false;
                 shortWildcardChkBx.Enabled = false;
                 discrimTrainChkBx.Enabled = false;
@@ -78,27 +78,27 @@ namespace lex4allGUI
                 discrimPassesUpDn.Enabled = false;
                 Stopwatch watch = Stopwatch.StartNew();
 
-                label3.Show();
-                label4.Show();
+                beingBuiltLabel.Show();
+                progressLabel.Show();
                 progressBar.Show();
-                BuildLexicon(wavDict, numProns, saveFileDialog1.FileName);
+                BuildLexicon(wavDict, numProns, saveLexDialog.FileName);
 
                 watch.Stop();
                 TimeSpan time = watch.Elapsed;
                 string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds);
 
-                MessageBox.Show("Lexicon was built in " + elapsedTime + "\n" + "Saved as " + saveFileDialog1.FileName, "Done");
+                MessageBox.Show("Lexicon was built in " + elapsedTime + "\n" + "Saved as " + saveLexDialog.FileName, "Done");
                 progressBar.Value = 0;
                 progressBar.Hide();
-                label4.Hide();
-                label3.Hide();
+                progressLabel.Hide();
+                beingBuiltLabel.Hide();
                 
                 
                 startButton.Text = "BUILD LEXICON";
                 startButton.Enabled = true;
                 addWordButton.Enabled = true;
-                dataGridView1.Enabled = true;
-                label2.Enabled = true;
+                wordsAudioGrid.Enabled = true;
+                maxPronsLabel.Enabled = true;
                 numPronsUpDn.Enabled = true;
                 shortWildcardChkBx.Enabled = true;
                 discrimTrainChkBx.Enabled = true;
@@ -109,7 +109,7 @@ namespace lex4allGUI
                 {
                     this.Close();
                     lex4allGUI.Program.eval = new EvalForm();
-                    lex4allGUI.Program.eval.lexFile = saveFileDialog1.FileName;
+                    lex4allGUI.Program.eval.lexFile = saveLexDialog.FileName;
                     lex4allGUI.Program.eval.updateLexFile();
                     lex4allGUI.Program.eval.Show();
 
@@ -126,12 +126,12 @@ namespace lex4allGUI
             lex4allGUI.Program.input.Show();
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void wordsAudioGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 2 && e.RowIndex > -1)
             { //button column is third column
                     int row = e.RowIndex;
-                    string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
+                    string word = wordsAudioGrid.Rows[row].Cells[0].Value.ToString();
                     lex4allGUI.Program.input = new InputForm();
                     lex4allGUI.Program.input.word1.Text = word;
                     foreach (string wav in wavDict[word])
@@ -145,7 +145,7 @@ namespace lex4allGUI
             if (e.ColumnIndex == 3 && e.RowIndex > -1)
             {
                 int row = e.RowIndex;
-                string word = dataGridView1.Rows[row].Cells[0].Value.ToString();
+                string word = wordsAudioGrid.Rows[row].Cells[0].Value.ToString();
                 if (MessageBox.Show("Are you sure you want to delete this word and its audio files?", "Remove word",MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     wavDict.Remove(word);
@@ -206,12 +206,12 @@ namespace lex4allGUI
             lex4allGUI.Program.start.Show();
         }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void wordsAudioGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex > -1 && e.ColumnIndex == 1)
             {
-                var cell = dataGridView1.Rows[e.RowIndex].Cells[1];
-                string word = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var cell = wordsAudioGrid.Rows[e.RowIndex].Cells[1];
+                string word = wordsAudioGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string ttText;
                 if (wavDict[word].Count() > 0)
                 {
@@ -224,7 +224,7 @@ namespace lex4allGUI
             }
         }
 
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void wordsAudioGrid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             e.PaintHeader(DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentBackground);
 
@@ -266,9 +266,9 @@ namespace lex4allGUI
             }
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private void wordsAudioGrid_SelectionChanged(object sender, EventArgs e)
         {
-            dataGridView1.ClearSelection();
+            wordsAudioGrid.ClearSelection();
         }
 
         
