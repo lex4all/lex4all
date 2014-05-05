@@ -54,19 +54,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>a7qj1NbrjdaGKGyFYE1qRPDomVHzQbI19ffx22WV9G0=</dsig:DigestValue>
+        <dsig:DigestValue>Yiuo5H70l4bWylwuVBTf2m46UF4Nze0dSCu/Onz1wmg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="lex4allGUI.exe" size="47616">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="lex4allGUI.exe" size="49664">
       <assemblyIdentity name="lex4allGUI" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bx5exjQe8GerPwvnbKI+l2FXczPw2ztPv4IhyDpmihg=</dsig:DigestValue>
+        <dsig:DigestValue>MCVD72u67LIQANM0elI1/lufGw9Zg/2zBDZcdvGF+8w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -78,7 +78,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uMarqBTBHrBxb5TI93Z1/kFT7+ADFW6am0/a6a8OQqQ=</dsig:DigestValue>
+        <dsig:DigestValue>c9wlYznsSn0uBy10/O0SN1JlUipFDbW9FfmfI6JNtVY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
