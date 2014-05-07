@@ -277,6 +277,12 @@ namespace lex4allGUI
             wordsAudioGrid.ClearSelection();
         }
 
+        private void sourceLangBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            lex4all.EngineControl.setLanguage(sourceLangBox.SelectedItem.ToString());
+            Debug.WriteLine(lex4all.EngineControl.getLanguage());
+        }
+
         
         
     }

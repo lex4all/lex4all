@@ -346,6 +346,7 @@
             this.sourceLangBox.TabIndex = 6;
             this.mainToolTip.SetToolTip(this.sourceLangBox, "The language of the recognition engine that will be used, and the language of the" +
         " created lexicon.");
+            this.sourceLangBox.SelectedValueChanged += new System.EventHandler(this.sourceLangBox_SelectedValueChanged);
             // 
             // sourceLangLabel
             // 
