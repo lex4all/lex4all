@@ -321,6 +321,306 @@ namespace lex4all.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A
+        ///AN
+        ///AO
+        ///AX
+        ///E
+        ///EH
+        ///EN
+        ///EU
+        ///I
+        ///O
+        ///OE
+        ///OEN
+        ///ON
+        ///U
+        ///Y
+        ///B
+        ///D
+        ///F
+        ///G
+        ///J
+        ///K
+        ///L
+        ///M
+        ///N
+        ///NG
+        ///NJ
+        ///P
+        ///RH
+        ///S
+        ///SH
+        ///T
+        ///V
+        ///W
+        ///WJ
+        ///Z
+        ///ZH.
+        /// </summary>
+        public static string fr_FR_wildcard1 {
+            get {
+                return ResourceManager.GetString("fr_FR_wildcard1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A
+        ///AN
+        ///AO
+        ///AX
+        ///E
+        ///EH
+        ///EN
+        ///EU
+        ///I
+        ///O
+        ///OE
+        ///OEN
+        ///ON
+        ///U
+        ///Y
+        ///B
+        ///D
+        ///F
+        ///G
+        ///J
+        ///K
+        ///L
+        ///M
+        ///N
+        ///NG
+        ///NJ
+        ///P
+        ///RH
+        ///S
+        ///SH
+        ///T
+        ///V
+        ///W
+        ///WJ
+        ///Z
+        ///ZH
+        ///A A
+        ///A AN
+        ///A AO
+        ///A AX
+        ///A E
+        ///A EH
+        ///A EN
+        ///A EU
+        ///A I
+        ///A O
+        ///A OE
+        ///A OEN
+        ///A ON
+        ///A U
+        ///A Y
+        ///A B
+        ///A D
+        ///A F
+        ///A G
+        ///A J
+        ///A K
+        ///A L
+        ///A M
+        ///A N
+        ///A NG
+        ///A NJ
+        ///A P
+        ///A RH
+        ///A S
+        ///A SH
+        ///A T
+        ///A V
+        ///A W
+        ///A WJ
+        ///A Z
+        ///A ZH
+        ///AN A
+        ///AN AN
+        ///AN AO
+        ///AN AX
+        ///AN E
+        ///AN EH
+        ///AN EN
+        ///AN EU
+        ///AN I
+        ///AN O
+        ///AN OE
+        ///AN OEN
+        ///AN ON
+        ///AN U
+        ///AN Y
+        ///AN B
+        ///AN D
+        ///AN F
+        ///AN G
+        ///AN J
+        ///AN K
+        ///AN L
+        ///AN M
+        ///AN N
+        ///AN NG
+        ///AN NJ
+        ///AN P
+        ///AN RH
+        ///AN S
+        ///AN SH
+        ///AN T
+        ///AN V
+        ///AN W
+        ///AN WJ
+        ///AN Z
+        ///AN ZH
+        ///AO A
+        ///AO AN
+        ///AO AO
+        ///AO AX
+        ///AO E
+        ///AO EH
+        ///AO EN
+        ///AO EU
+        ///AO I
+        ///AO O
+        ///AO OE
+        ///AO OEN [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string fr_FR_wildcard12 {
+            get {
+                return ResourceManager.GetString("fr_FR_wildcard12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A
+        ///AN
+        ///AO
+        ///AX
+        ///E
+        ///EH
+        ///EN
+        ///EU
+        ///I
+        ///O
+        ///OE
+        ///OEN
+        ///ON
+        ///U
+        ///Y
+        ///B
+        ///D
+        ///F
+        ///G
+        ///J
+        ///K
+        ///L
+        ///M
+        ///N
+        ///NG
+        ///NJ
+        ///P
+        ///RH
+        ///S
+        ///SH
+        ///T
+        ///V
+        ///W
+        ///WJ
+        ///Z
+        ///ZH
+        ///A A
+        ///A AN
+        ///A AO
+        ///A AX
+        ///A E
+        ///A EH
+        ///A EN
+        ///A EU
+        ///A I
+        ///A O
+        ///A OE
+        ///A OEN
+        ///A ON
+        ///A U
+        ///A Y
+        ///A B
+        ///A D
+        ///A F
+        ///A G
+        ///A J
+        ///A K
+        ///A L
+        ///A M
+        ///A N
+        ///A NG
+        ///A NJ
+        ///A P
+        ///A RH
+        ///A S
+        ///A SH
+        ///A T
+        ///A V
+        ///A W
+        ///A WJ
+        ///A Z
+        ///A ZH
+        ///AN A
+        ///AN AN
+        ///AN AO
+        ///AN AX
+        ///AN E
+        ///AN EH
+        ///AN EN
+        ///AN EU
+        ///AN I
+        ///AN O
+        ///AN OE
+        ///AN OEN
+        ///AN ON
+        ///AN U
+        ///AN Y
+        ///AN B
+        ///AN D
+        ///AN F
+        ///AN G
+        ///AN J
+        ///AN K
+        ///AN L
+        ///AN M
+        ///AN N
+        ///AN NG
+        ///AN NJ
+        ///AN P
+        ///AN RH
+        ///AN S
+        ///AN SH
+        ///AN T
+        ///AN V
+        ///AN W
+        ///AN WJ
+        ///AN Z
+        ///AN ZH
+        ///AO A
+        ///AO AN
+        ///AO AO
+        ///AO AX
+        ///AO E
+        ///AO EH
+        ///AO EN
+        ///AO EU
+        ///AO I
+        ///AO O
+        ///AO OE
+        ///AO OEN [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string fr_FR_wildcard123 {
+            get {
+                return ResourceManager.GetString("fr_FR_wildcard123", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         public static System.IO.UnmanagedMemoryStream sampleAudio {

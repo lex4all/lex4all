@@ -127,6 +127,15 @@
   <data name="en_US_wildcard123" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\en-US_wildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
+  <data name="fr_FR_wildcard1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fr-FR_shortwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="fr_FR_wildcard12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fr-FR_prefixwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="fr_FR_wildcard123" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fr-FR_wildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="sampleAudio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\weather.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
