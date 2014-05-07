@@ -158,6 +158,12 @@ namespace lex4allGUI
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.CenterToScreen();
+
+            // Populate recognizer (source language) list
+            this.sourceLangBox.Items.AddRange(lex4all.EngineControl.getLanguageOptions());
+            Debug.Write("en-US in sourceLangBox? ");
+            Debug.WriteLine(this.sourceLangBox.Items.Contains("en-US"));
+            this.sourceLangBox.SelectedItem = "en-US";
         }
 
 

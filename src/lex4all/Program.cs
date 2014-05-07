@@ -12,70 +12,7 @@ namespace lex4all
 {
     public class Program
     {
-        public static void Main(string[] args)
-        {
-            //Console.WriteLine("Welcome to the lex4all Lexicon Builder!");
-            //Console.WriteLine();
 
-            //Dictionary<String, String[]> wavDict = GatherData();
-
-            //Dictionary<String, String[]> lexDict = GetLexDict(wavDict, numProns);
-
-            //XDocument lexDoc = DictToXml(lexDict);
-
-            //Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
-            //String lexFile = Console.ReadLine();
-
-            //Console.Write("Writing lexicon to {0}... ", lexFile);
-            //lexDoc.Save(lexFile);
-            //Console.WriteLine("Done.");
-
-            //Console.ReadKey();
-
-        }
-
-        //public static void BuildLexicon(Dictionary<string, string[]> wavDict, string filename)
-        //{
-        //    Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
-        //    XDocument lexDoc = DictToXml(lexDict);
-        //    lexDoc.Save(filename);
-        //}
-
-        /// <summary>
-        /// Gets the user input of words and audio files
-        /// </summary>
-        /// <returns>Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</returns>
-        public static Dictionary<String, String[]> GatherData()
-        {
-            Dictionary<String, String[]> dataDict = new Dictionary<string,string[]>();
-
-            String moreWords = "y";
-
-            while (moreWords == "y")
-            {
-                Console.Write("Enter a word: ");
-                String word = Console.ReadLine();
-                List<String> wavs = new List<String>();
-                String moreWavs = "y";
-                while (moreWavs == "y")
-                {
-                    Console.Write("Enter a .wav file path: ");
-                    String wav = Console.ReadLine();
-                    wavs.Add(wav);
-                    Console.Write("Add another .wav file? (y/n): ");
-                    moreWavs = Console.ReadLine();
-                }
-
-                String[] wavsArray = wavs.ToArray();
-                dataDict[word] = wavsArray;
-
-                Console.WriteLine("");
-                Console.Write("Add another word? (y/n): ");
-                moreWords = Console.ReadLine();
-            }
-            Console.WriteLine("");
-            return dataDict;
-        }
 
         /// <summary>
         /// Writes a dictionary of word:pronunciations kvps to an XML file matching PLS
@@ -109,6 +46,69 @@ namespace lex4all
                 String[] prons = Algorithm.GeneratePronunciations(wavs);
 
                 return prons;
+        }
+
+        /// <summary>
+        /// OUTDATED (for old console interface) - Gets the user input of words and audio files
+        /// </summary>
+        /// <returns>Dictionary with words (orthographic forms) as keys and arrays of wav file paths as values</returns>
+        public static Dictionary<String, String[]> GatherData()
+        {
+            Dictionary<String, String[]> dataDict = new Dictionary<string, string[]>();
+
+            String moreWords = "y";
+
+            while (moreWords == "y")
+            {
+                Console.Write("Enter a word: ");
+                String word = Console.ReadLine();
+                List<String> wavs = new List<String>();
+                String moreWavs = "y";
+                while (moreWavs == "y")
+                {
+                    Console.Write("Enter a .wav file path: ");
+                    String wav = Console.ReadLine();
+                    wavs.Add(wav);
+                    Console.Write("Add another .wav file? (y/n): ");
+                    moreWavs = Console.ReadLine();
+                }
+
+                String[] wavsArray = wavs.ToArray();
+                dataDict[word] = wavsArray;
+
+                Console.WriteLine("");
+                Console.Write("Add another word? (y/n): ");
+                moreWords = Console.ReadLine();
+            }
+            Console.WriteLine("");
+            return dataDict;
+        }
+
+
+        // OUTDATED (for old console interface)
+        //public static void BuildLexicon(Dictionary<string, string[]> wavDict, string filename)
+        //{
+        //    Dictionary<String, String[]> lexDict = GetLexDict(wavDict);
+        //    XDocument lexDoc = DictToXml(lexDict);
+        //    lexDoc.Save(filename);
+        //}
+
+
+        // OUTDATED (for old console interface)
+        public static void Main(string[] args)
+        {
+            //Console.WriteLine("Welcome to the lex4all Lexicon Builder!");
+            //Console.WriteLine();
+            //Dictionary<String, String[]> wavDict = GatherData();
+            //Dictionary<String, String[]> lexDict = GetLexDict(wavDict, numProns);
+            //XDocument lexDoc = DictToXml(lexDict);
+            //Console.Write("Enter a name for the lexicon file (e.g. \"mylex.pls\"): ");
+            //String lexFile = Console.ReadLine()
+            //Console.Write("Writing lexicon to {0}... ", lexFile);
+            //lexDoc.Save(lexFile);
+            //Console.WriteLine("Done.");
+            //Console.ReadKey();
+
         }
     }
 }

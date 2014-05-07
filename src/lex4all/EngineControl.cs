@@ -4,11 +4,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace lex4all
 {
     public static class EngineControl
     {
+        /// <summary>
+        /// Stores the user's language selection; default is English (US).
+        /// </summary>
+        private static string LANGUAGE;
+
+        /// <summary>
+        /// Gets the current recognizer language
+        /// </summary>
+        /// <returns>Culture code as string (e.g. "en-US")</returns>
+        public static string getLanguage()
+        {
+            return LANGUAGE;
+        }
+
+        /// <summary>
+        /// Sets the current recognizer language
+        /// </summary>
+        /// <param name="cultureCode">Culture code as string (e.g. "en-US")</param>
+        public static void setLanguage(string cultureCode)
+        {
+            LANGUAGE = cultureCode;
+        }
+
+        /// <summary>
+        /// Gets the available source languages, i.e. languages for which a recognizer is installed on the user's system
+        /// </summary>
+        /// <returns>Array of Culture codes as strings</returns>
+        public static string[] getLanguageOptions() 
+        {
+            string[] options = (
+                from info in SpeechRecognitionEngine.InstalledRecognizers() 
+                where info.Culture.Equals(System.Globalization.CultureInfo.InvariantCulture) == false
+                select info.Culture.Name).ToArray();
+            foreach (string option in options) {Debug.WriteLine(option);}
+            return options;
+        }
+
+
         /// <summary>
         /// creates engine and sets properties
         /// </summary>
@@ -19,7 +58,8 @@ namespace lex4all
 
             Console.WriteLine("Building recognition engine");
 
-            SpeechRecognitionEngine sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
+            //SpeechRecognitionEngine sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
+            SpeechRecognitionEngine sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo(LANGUAGE));
             
             // set confidence threshold(s)
             sre.UpdateRecognizerSetting("CFGConfidenceRejectionThreshold", 0);

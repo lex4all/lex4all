@@ -340,8 +340,6 @@
             this.optionsLayoutPanel.SetColumnSpan(this.sourceLangBox, 2);
             this.sourceLangBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sourceLangBox.FormattingEnabled = true;
-            this.sourceLangBox.Items.AddRange(new object[] {
-            "en-US"});
             this.sourceLangBox.Location = new System.Drawing.Point(140, 3);
             this.sourceLangBox.Name = "sourceLangBox";
             this.sourceLangBox.Size = new System.Drawing.Size(96, 21);
