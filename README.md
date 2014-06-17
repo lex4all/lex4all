@@ -1,5 +1,6 @@
-# lex4all: pronunciation LEXicons for Any Low-resource Language
-## http://lex4all.github.io/lex4all/
+## lex4all: pronunciation LEXicons for Any Low-resource Language
+### http://lex4all.github.io/lex4all/
+
 
 ### Anjana Vakil & Max Paulus
 ### Advisors: Alexis Palmer & Michaela Regneri
