@@ -58,7 +58,7 @@ To automatically discover the pronunciation mappings we implement the Salaam alg
 
 [3] Hao Yee Chan and Roni Rosenfeld. 2012. “Discriminative pronunciation learning for speech recognition for resource scarce languages." In: Proceedings of the 2nd ACM Symposium on Computing for Development (ACM DEV ’12). [\[pdf\]](http://www.cs.cmu.edu/~roni/papers/salaam-DEV2012.pdf).
 
-[4] Anjana Vakil, Max Paulus, Alexis Palmer and Michaela Regneri. 2014. "lex4all: A language-independent tool for building and evaluating pronunciation lexicons for small-vocabulary speech recognition." In: Proceedings of 52nd Annual Meeting of the Association for Computational Linguistics (ACL 2014): System Demonstrations. [\[pdf\]](http://69.195.124.161/~aclwebor/anthology//P/P14/P14-5019.pdf)
+[4] Anjana Vakil, Max Paulus, Alexis Palmer and Michaela Regneri. 2014. "lex4all: A language-independent tool for building and evaluating pronunciation lexicons for small-vocabulary speech recognition." In: Proceedings of 52nd Annual Meeting of the Association for Computational Linguistics (ACL 2014): System Demonstrations. [\[pdf\]](http://69.195.124.161/~aclwebor/anthology//P/P14/P14-5.pdf)
 
 [5] Anjana Vakil and Alexis Palmer. 2014. "Cross-language mapping for small-vocabulary ASR in under-resourced languages: investigating the impact of source language choice." In: Proceedings of the 4th Workshop on Spoken Language Technologies for Under-resourced Languages (SLTU'14). [\[pdf\]](http://www.coli.uni-saarland.de/~apalmer/docs/vakil_crosslg_sltu2014.pdf)
 
