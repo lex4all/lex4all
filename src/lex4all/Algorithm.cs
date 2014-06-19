@@ -8,7 +8,7 @@ using Microsoft.Speech.Recognition.SrgsGrammar;
 
 namespace lex4all
 {
-    class Algorithm
+    public class Algorithm
     {
         /// <summary>
         /// Get best pronunciations for one word represented by one or more audio samples

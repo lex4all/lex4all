@@ -64,7 +64,7 @@ namespace lex4allGUI
 
             if (saveLexDialog.ShowDialog() == DialogResult.OK)
             {  
-                
+       
 
                 startButton.Enabled = false;
                 startButton.Text = "Working...";
@@ -186,14 +186,17 @@ namespace lex4allGUI
         }
 
         public void BuildLexicon(Dictionary<string, string[]> wavDict, int numProns, string filename)
-        {   
+        {
+            lex4all.GrammarControl.setWildcards(); //is there a better place for this?
+
             Dictionary<String, String[]> lexDict = new Dictionary<string,string[]>();
             int wordProportion = 100/wavDict.Count;
 
             foreach (KeyValuePair<String, String[]> kvp in wavDict)
             {
                 String word = kvp.Key;
-                lexDict[word] = lex4all.Program.GetProns(kvp.Value).Take(numProns).ToArray();
+                //lexDict[word] = lex4all.Program.GetProns(kvp.Value).Take(numProns).ToArray();
+                lexDict[word] = lex4all.Algorithm.GeneratePronunciations(kvp.Value).Take(numProns).ToArray();
                 progressBar.Increment(wordProportion);
             }
 
@@ -202,7 +205,8 @@ namespace lex4allGUI
                 lexDict = lex4all.DiscriminativeTraining.RunTraining(lexDict, wavDict, (int)discrimPassesUpDn.Value);
             }
 
-            XDocument lexDoc = lex4all.Program.DictToXml(lexDict);
+            //XDocument lexDoc = lex4all.Program.DictToXml(lexDict);
+            XDocument lexDoc = lex4all.XmlControl.DictToXml(lexDict);
             lexDoc.Save(filename);
             
         }
@@ -243,13 +247,15 @@ namespace lex4allGUI
         {
             if (shortWildcardChkBx.Checked == true)
             {
-                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
-                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+                lex4all.GrammarControl.WildcardLength = "short";
+                //lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+                //lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
             }
             else
             {
-                lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
-                lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
+                lex4all.GrammarControl.WildcardLength = "long";
+                //lex4all.GrammarControl.wildcardFile = lex4all.Properties.Resources.en_US_wildcard123;
+                //lex4all.GrammarControl.prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard12;
             }
         }
 
@@ -279,8 +285,8 @@ namespace lex4allGUI
 
         private void sourceLangBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            lex4all.EngineControl.setLanguage(sourceLangBox.SelectedItem.ToString());
-            Debug.WriteLine(lex4all.EngineControl.getLanguage());
+            lex4all.EngineControl.Language = sourceLangBox.SelectedItem.ToString();
+            Debug.WriteLine(lex4all.EngineControl.Language);
         }
 
         

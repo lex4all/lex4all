@@ -67,7 +67,7 @@ namespace lex4all
                 new XDeclaration("1.0", "utf-8", "no"),
                 new XElement(ns + "grammar",
                     new XAttribute("version", "1.0"),
-                    new XAttribute(XNamespace.Xml + "lang", "en-US"),
+                    new XAttribute(XNamespace.Xml + "lang", EngineControl.Language),
                     new XAttribute(XNamespace.Xmlns + "sapi", @"http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions"),
                     new XAttribute("root", "Main"),
                     new XElement(ns + "lexicon",

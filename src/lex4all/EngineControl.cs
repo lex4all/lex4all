@@ -13,25 +13,13 @@ namespace lex4all
         /// <summary>
         /// Stores the user's language selection; default is English (US).
         /// </summary>
-        private static string LANGUAGE = "en-US";
+        private static string language = "en-US";
 
         /// <summary>
-        /// Gets the current recognizer language
+        /// Gets or sets recognizer language
         /// </summary>
-        /// <returns>Culture code as string (e.g. "en-US")</returns>
-        public static string getLanguage()
-        {
-            return LANGUAGE;
-        }
+        public static string Language { get { return language; } set { language = value; } } 
 
-        /// <summary>
-        /// Sets the current recognizer language
-        /// </summary>
-        /// <param name="cultureCode">Culture code as string (e.g. "en-US")</param>
-        public static void setLanguage(string cultureCode)
-        {
-            LANGUAGE = cultureCode;
-        }
 
         /// <summary>
         /// Gets the available source languages, i.e. languages for which a recognizer is installed on the user's system
@@ -41,9 +29,14 @@ namespace lex4all
         {
             string[] options = (
                 from info in SpeechRecognitionEngine.InstalledRecognizers() 
-                where info.Culture.Equals(System.Globalization.CultureInfo.InvariantCulture) == false
+                //where info.Culture.Equals(System.Globalization.CultureInfo.InvariantCulture) == false
+                where GrammarControl.AvailableWildcards.ContainsKey(info.Culture.ToString())
                 select info.Culture.Name).ToArray();
-            foreach (string option in options) {Debug.WriteLine(option);}
+            foreach (string option in options) 
+            { 
+                Debug.Write(option); 
+                Debug.WriteLine(" found - available? " + GrammarControl.AvailableWildcards.ContainsKey(option).ToString());
+            }
             return options;
         }
 
@@ -56,10 +49,10 @@ namespace lex4all
         /// </returns>
         public static SpeechRecognitionEngine getEngine () {
 
-            Console.WriteLine("Building recognition engine");
+            Console.WriteLine(String.Format("Building recognition engine for {0}", language));
 
             //SpeechRecognitionEngine sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
-            SpeechRecognitionEngine sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo(LANGUAGE));
+            SpeechRecognitionEngine sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo(language));
             
             // set confidence threshold(s)
             sre.UpdateRecognizerSetting("CFGConfidenceRejectionThreshold", 0);

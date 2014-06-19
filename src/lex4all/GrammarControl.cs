@@ -5,13 +5,94 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Speech.Recognition.SrgsGrammar;
 using System.IO;
+using System.Diagnostics;
 
 namespace lex4all
 {
     public static class GrammarControl
     {
-        public static string wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
-        public static string prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+        /// <summary>
+        /// Stores the currently selected wildcard for building the initial training grammar.
+        /// </summary>
+        private static string wildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+
+        /// <summary>
+        /// Stores the currently selected wildcard for updating the grammar with prefixes.
+        /// </summary>
+        private static string prefixWildcardFile = lex4all.Properties.Resources.en_US_wildcard1;
+
+        /// <summary>
+        /// Dictionary of the wildcard resource files organized by language.
+        /// Keys are culture codes as strings (e.g. "en-US") of each supported language.
+        /// Values are Dictionaries with three key-value pairs: 
+        ///     "1" - single-phoneme wildcard file (for faster implementation), 
+        ///     "12" - two-phoneme wildcard (for prefix grammars in original implementation),
+        ///     "123" - three-phoneme wildcard (for initial grammar in original implementation).
+        /// </summary>
+        public static Dictionary<string, Dictionary<string, string>> AvailableWildcards = new Dictionary<string, Dictionary<string, string>>()
+        {
+            {"en-US", 
+                new Dictionary<string, string>()
+                {
+                    {"1", lex4all.Properties.Resources.en_US_wildcard1},
+                    {"12", lex4all.Properties.Resources.en_US_wildcard12},
+                    {"123", lex4all.Properties.Resources.en_US_wildcard123}
+                }
+            },
+            {"fr-FR", 
+                new Dictionary<string, string>()
+                {
+                    {"1", lex4all.Properties.Resources.fr_FR_wildcard1},
+                    {"12", lex4all.Properties.Resources.fr_FR_wildcard12},
+                    {"123", lex4all.Properties.Resources.fr_FR_wildcard123}
+                }
+            }
+        };
+
+        ///// <summary>
+        ///// Enumeration to hold training options.
+        ///// Short = faster implementation, Long = original implementation
+        ///// </summary>
+        //public enum Wildcards { Short, Long };
+
+        /// <summary>
+        /// Stores the currently selected training option ("short" or "long")
+        /// </summary>
+        private static string wildcardLength = "short";
+
+        /// <summary>
+        /// Accesses the currently selected training option ("short" or "long")
+        /// </summary>
+        public static string WildcardLength 
+        { 
+            get { return wildcardLength; } 
+            set 
+            {
+                if (new string[] { "short", "long" }.Contains(value) == false)
+                {
+                    throw new ArgumentException("value must be \"short\" or \"long\"");
+                }
+                wildcardLength = value; 
+            } 
+        }
+
+        /// <summary>
+        /// Sets the grammar to use the correct wildcard file(s) for training.
+        /// Uses the currently selected recognizer language (EngineControl.Language)
+        /// </summary>
+        public static void setWildcards()
+        {
+            if (wildcardLength == "long")
+            {
+                wildcardFile = AvailableWildcards[EngineControl.Language]["123"];
+                prefixWildcardFile = AvailableWildcards[EngineControl.Language]["12"];
+            }
+            else if (wildcardLength == "short")
+            {
+                wildcardFile = AvailableWildcards[EngineControl.Language]["1"];
+                prefixWildcardFile = AvailableWildcards[EngineControl.Language]["1"];
+            }
+        }
 
         /// <summary>
         /// is used by the algorithm to build the super wildcard grammar
@@ -24,7 +105,7 @@ namespace lex4all
         /// </returns>
         public static SrgsDocument getInitialGrammar() {
             
-            Console.WriteLine("Building grammar...");
+            Console.WriteLine("Building initial grammar...");
 
             // set up basic wildcard rule
             SrgsOneOf wildOneOf = new SrgsOneOf();
@@ -34,11 +115,14 @@ namespace lex4all
             // StreamReader rd = new StreamReader(readPath);
             // string allWords = rd.ReadToEnd();
             //string wildcardFile = lex4all.Properties.Resources.en_US_wildcard;
-            string[] words = wildcardFile.Split(new string[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            
+            //string[] words = wildcardFile.Split(new string[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            string[] words = wildcardFile.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+            Debug.WriteLine(String.Format("After split, words has length {0}", words.Length));
             foreach (string word in words) {
                 if (word.Contains("\n"))
                 {
-                    Console.WriteLine("Found a newline in line {0}", word);
+                    Debug.WriteLine(String.Format("Found a newline in line {0}", word));
                     break;
                 }
                 else
@@ -51,6 +135,7 @@ namespace lex4all
                     SrgsItem thisItem = new SrgsItem();
                     thisItem.Add(thisToken);
                     wildOneOf.Add(thisItem);
+                    Debug.WriteLine(String.Format("Wrote {0} to wildOneOf", word));
                 }
             }
 
@@ -68,12 +153,12 @@ namespace lex4all
             // create document and add rules
             SrgsDocument gramDoc = new SrgsDocument();
             gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ups;
-            gramDoc.Culture = new System.Globalization.CultureInfo("en-US");
+            gramDoc.Culture = new System.Globalization.CultureInfo(EngineControl.Language);
             gramDoc.Rules.Add(new SrgsRule[] { superRule, wildRule });
             gramDoc.Root = superRule;
 
             // report
-            Console.WriteLine("Done.");
+            Console.WriteLine(String.Format("Done. Grammar language is {0}", gramDoc.Culture));
 
             // output initial grammar
             Console.WriteLine("");
@@ -93,12 +178,15 @@ namespace lex4all
         public static SrgsDocument updateGrammar (List<String> prefixes, SrgsDocument doc, int passNum) {
 
             Console.WriteLine("Prefixing grammar with phonemes from pass {0}...", passNum-1);
+            Debug.WriteLine(String.Format("Grammar language is {0}", doc.Culture));
 
             // read prefix wildcard from text file 
             //(this is a smaller wildcard with just 1 and 2 phonemes which, with the prefix, makes up the first word of superwildcard grammar)
 
             //string prefixWildcardFile = lex4all.Properties.Resources.en_US_prefixwildcard;
-            string[] words = prefixWildcardFile.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            //string[] words = prefixWildcardFile.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] words = prefixWildcardFile.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+            Debug.WriteLine(String.Format("After split, words has length {0}", words.Length));
 
             // set up basic wildcard oneof
             SrgsOneOf prefixOneOf = new SrgsOneOf();
