@@ -121,7 +121,8 @@ namespace lex4all
             string[] fakeWords = trainingLexDict.Keys.ToArray();
 
             // Write training lexicon
-            XDocument trainingLexDoc = Program.DictToXml(trainingLexDict);
+            //XDocument trainingLexDoc = Program.DictToXml(trainingLexDict);
+            XDocument trainingLexDoc = XmlControl.DictToXml(trainingLexDict);
             string tmpLexFile = Path.GetTempFileName();
             trainingLexDoc.Save(tmpLexFile);
 

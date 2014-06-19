@@ -14,26 +14,26 @@ namespace lex4all
     {
 
 
-        /// <summary>
-        /// Writes a dictionary of word:pronunciations kvps to an XML file matching PLS
-        /// </summary>
-        /// <param name="vocabDict">Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</param>
-        /// <returns>XML file as XDocument object</returns>
-        public static XDocument DictToXml(Dictionary<String, String[]> vocabDict)
-        {
-            XNamespace ns = @"http://www.w3.org/2005/01/pronunciation-lexicon";
-            XDocument lexDoc = new XDocument(
-                new XDeclaration("1.0", "utf-8", "no"),
-                new XElement(ns + "lexicon",
-                    new XAttribute("version", "1.0"),
-                    new XAttribute(XNamespace.Xml + "lang", "en-US"),
-                    new XAttribute("alphabet", "x-microsoft-ups"),
-                    vocabDict.Keys.Where(x => vocabDict[x].Length > 0).Select(x => new XElement(ns + "lexeme",
-                        new XElement(ns + "grapheme", x),
-                        vocabDict[x].Select(y => new XElement(ns + "phoneme", y))))));
+        ///// <summary>
+        ///// Writes a dictionary of word:pronunciations kvps to an XML file matching PLS
+        ///// </summary>
+        ///// <param name="vocabDict">Dictionary with words (graphemes) as keys and pronunciations (phonemes) as values</param>
+        ///// <returns>XML file as XDocument object</returns>
+        //public static XDocument DictToXml(Dictionary<String, String[]> vocabDict)
+        //{
+        //    XNamespace ns = @"http://www.w3.org/2005/01/pronunciation-lexicon";
+        //    XDocument lexDoc = new XDocument(
+        //        new XDeclaration("1.0", "utf-8", "no"),
+        //        new XElement(ns + "lexicon",
+        //            new XAttribute("version", "1.0"),
+        //            new XAttribute(XNamespace.Xml + "lang", "en-US"),
+        //            new XAttribute("alphabet", "x-microsoft-ups"),
+        //            vocabDict.Keys.Where(x => vocabDict[x].Length > 0).Select(x => new XElement(ns + "lexeme",
+        //                new XElement(ns + "grapheme", x),
+        //                vocabDict[x].Select(y => new XElement(ns + "phoneme", y))))));
 
-            return lexDoc;
-        }
+        //    return lexDoc;
+        //}
 
         /// <summary>
         /// Passes the training audio files for one word to the Algorithm module for pronunciation generation
