@@ -51,7 +51,7 @@
             // recordButton
             // 
             this.recordButton.Location = new System.Drawing.Point(2, 2);
-            this.recordButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.recordButton.Margin = new System.Windows.Forms.Padding(2);
             this.recordButton.Name = "recordButton";
             this.recordButton.Size = new System.Drawing.Size(56, 23);
             this.recordButton.TabIndex = 0;
@@ -64,6 +64,7 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "wav";
+            this.saveFileDialog1.Filter = "WAV files (*.wav)|*.wav";
             // 
             // tableLayoutPanel1
             // 
@@ -81,7 +82,7 @@
             this.tableLayoutPanel1.Controls.Add(this.rmCheckedBtn, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 1);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.007342F));
@@ -100,19 +101,20 @@
             this.tableLayoutPanel1.SetColumnSpan(this.listView1, 2);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(74, 226);
-            this.listView1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.listView1.Margin = new System.Windows.Forms.Padding(5);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(455, 222);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
+            this.listView1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.recordButton);
             this.flowLayoutPanel1.Controls.Add(this.saveButton);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(71, 42);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(281, 66);
             this.flowLayoutPanel1.TabIndex = 10;
@@ -122,7 +124,7 @@
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(62, 2);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(2);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(56, 23);
             this.saveButton.TabIndex = 1;
@@ -135,7 +137,7 @@
             // 
             this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.backButton.Location = new System.Drawing.Point(474, 4);
-            this.backButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.backButton.Margin = new System.Windows.Forms.Padding(4);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(56, 23);
             this.backButton.TabIndex = 1;
@@ -147,7 +149,7 @@
             // 
             this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.progressBar1.Location = new System.Drawing.Point(71, 122);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.MarqueeAnimationSpeed = 30;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(281, 20);
@@ -158,7 +160,7 @@
             // 
             this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trackBar1.Location = new System.Drawing.Point(71, 165);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(2);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(281, 45);
@@ -183,7 +185,7 @@
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addButton.Enabled = false;
             this.addButton.Location = new System.Drawing.Point(438, 457);
-            this.addButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addButton.Margin = new System.Windows.Forms.Padding(4);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(92, 23);
             this.addButton.TabIndex = 7;
@@ -195,12 +197,13 @@
             // 
             this.rmCheckedBtn.Enabled = false;
             this.rmCheckedBtn.Location = new System.Drawing.Point(73, 457);
-            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rmCheckedBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rmCheckedBtn.Name = "rmCheckedBtn";
             this.rmCheckedBtn.Size = new System.Drawing.Size(136, 23);
             this.rmCheckedBtn.TabIndex = 6;
             this.rmCheckedBtn.Text = "Remove checked files";
             this.rmCheckedBtn.UseVisualStyleBackColor = true;
+            this.rmCheckedBtn.Click += new System.EventHandler(this.rmCheckedBtn_Click);
             // 
             // label2
             // 
@@ -220,7 +223,7 @@
             this.ClientSize = new System.Drawing.Size(534, 511);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Recording";

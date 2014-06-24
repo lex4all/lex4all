@@ -218,11 +218,13 @@ namespace lex4allGUI
         private void backButton_Click(object sender, EventArgs e)
         {
             if
-            (MessageBox.Show("All changes will be discarded. Are you sure?", "Back to word", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            (MessageBox.Show("Any audio you recorded & saved will not be added to this word's training data. You can manually add the saved files later. Really go back?", "Back to word", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.Close();
                 lex4allGUI.Program.input.Show();
             }
         }
+
+
     }
 }
