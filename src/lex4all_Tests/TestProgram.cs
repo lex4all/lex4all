@@ -38,7 +38,7 @@ namespace lex4allUnitTests
             XNamespace ns = @"http://www.w3.org/2005/01/pronunciation-lexicon";
 
             //act
-            XDocument xDoc = lex4all.Program.DictToXml(lexDict);
+            XDocument xDoc = lex4all.XmlControl.DictToXml(lexDict);
             string rootName = xDoc.Root.Name.ToString();
 
             //assert
