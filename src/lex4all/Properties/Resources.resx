@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="de_DE_wildcard1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\de_shortwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="de_DE_wildcard12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\de_prefixedwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="de_DE_wildcard123" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\de_wildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="en_US_wildcard1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\en-US_shortwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -136,7 +145,22 @@
   <data name="fr_FR_wildcard123" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fr-FR_wildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="ja_JP_wildcard1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jap_shortwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ja_JP_wildcard12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jap_prefixedwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ja_JP_wildcard123" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jap_wildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="sampleAudio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\weather.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="zh_CN_wildcard1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chinese_shortwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="zh_CN_wildcard12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chinese_prefixedwildcard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

@@ -14,6 +14,7 @@ namespace lex4all
         /// Stores the user's language selection; default is English (US).
         /// </summary>
         private static string language = "en-US";
+        
 
         /// <summary>
         /// Gets or sets recognizer language
