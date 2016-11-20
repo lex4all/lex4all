@@ -187,7 +187,7 @@ namespace lex4all
             // create document and add rules
             SrgsDocument gramDoc = new SrgsDocument();
 
-            //This if-else tree is used set the correct phonetic alphabet depending on the language of choice by the user - zh-CN, fr-FR, de-DE, ja-JP or en-US (So far)
+            //Dynamically allocate the  correct phonetic alphabet depending on the language of choice
             if (EngineControl.Language.Equals("zh-CN") || EngineControl.Language.Equals("de-DE"))
             {
                 gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Sapi;
