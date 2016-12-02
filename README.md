@@ -1,10 +1,13 @@
 ## lex4all: pronunciation LEXicons for Any Low-resource Language
 ### http://lex4all.github.io/lex4all/
 
+#### A project of the Department of Computational Linguistics, Saarland University, Germany
 
-### Anjana Vakil & Max Paulus
+### Creators: Anjana Vakil & Max Paulus
 ### Advisors: Alexis Palmer & Michaela Regneri
-##### Department of Computational Linguistics, University of Saarland
+### Contributors: Kayokwa Chibuye (University of Cape Town, South Africa)
+
+
 
 Developers trying to incorporate speech recognition interfaces in a low-resource language (LRL) into their applications currently face the hurdle of not finding recognition engines trained on their target language. Although tools such as Carnegie Mellon University's Sphinx simplify the creation of new acoustic models for recognition, they require large amounts of training data (audio recordings) in the target language. However, for small-vocabulary applications, an existing recognizer for a high-resource language (HRL) can be used to perform recognition in the target language. This requires a pronunciation lexicon mapping the relevant words in the target language into sequences of sounds in the HRL.
 
@@ -24,6 +27,7 @@ http://lex4all.github.io/lex4all/walkthrough.html
 * Use existing `.wav` audio files, or use the built-in audio recorder
 * Advanced options (number of pronunciations per word, discriminative training [3])
 * Evaluation module for testing/research
+* Built-in support for 5 source languages: German (de-DE), English (en-US), French (fr-FR), Japanese (ja-JP), Chinese (zh-CN)
 
 
 #### Requirements & Installation
