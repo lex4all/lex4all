@@ -11,6 +11,13 @@ namespace lex4all
 {
     public static class GrammarControl
     {
+
+        /// <summary>
+        /// Stores the currently appropriate phonetic alphabet used for the selected source language.
+        /// </summary>
+
+        public static string phoneticAlphabet = "ups";
+
         /// <summary>
         /// Stores the currently selected wildcard for building the initial training grammar.
         /// </summary>
@@ -45,6 +52,33 @@ namespace lex4all
                     {"1", lex4all.Properties.Resources.fr_FR_wildcard1},
                     {"12", lex4all.Properties.Resources.fr_FR_wildcard12},
                     {"123", lex4all.Properties.Resources.fr_FR_wildcard123}
+                }
+            },
+
+             {"de-DE",
+                new Dictionary<string, string>()
+                {
+                    {"1", lex4all.Properties.Resources.de_DE_wildcard1},
+                    {"12", lex4all.Properties.Resources.de_DE_wildcard12},
+                    {"123", lex4all.Properties.Resources.de_DE_wildcard123}
+                }
+            },
+
+             {"ja-JP",
+                new Dictionary<string, string>()
+                {
+                    {"1", lex4all.Properties.Resources.ja_JP_wildcard1},
+                    {"12", lex4all.Properties.Resources.ja_JP_wildcard12},
+                    {"123", lex4all.Properties.Resources.ja_JP_wildcard123}
+                }
+            },
+
+             {"zh-CN",
+                new Dictionary<string, string>()
+                {
+                    {"1", lex4all.Properties.Resources.zh_CN_wildcard1},
+                    {"12", lex4all.Properties.Resources.zh_CN_wildcard12}
+                   
                 }
             }
         };
@@ -152,7 +186,27 @@ namespace lex4all
 
             // create document and add rules
             SrgsDocument gramDoc = new SrgsDocument();
-            gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ups;
+
+            //Dynamically allocate the  correct phonetic alphabet depending on the language of choice
+            if (EngineControl.Language.Equals("zh-CN") || EngineControl.Language.Equals("de-DE"))
+            {
+                gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Sapi;
+                phoneticAlphabet = "sapi";
+
+            }
+            else if (EngineControl.Language.Equals("ja-JP"))
+            {
+                gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ipa;
+                phoneticAlphabet = "ipa";
+            }
+            else
+
+            {
+                gramDoc.PhoneticAlphabet = SrgsPhoneticAlphabet.Ups; // This is the default phonetic alphabet setting
+                phoneticAlphabet = "ups";
+            }
+
+
             gramDoc.Culture = new System.Globalization.CultureInfo(EngineControl.Language);
             gramDoc.Rules.Add(new SrgsRule[] { superRule, wildRule });
             gramDoc.Root = superRule;

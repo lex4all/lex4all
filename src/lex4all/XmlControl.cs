@@ -26,7 +26,7 @@ namespace lex4all
                 new XElement(ns + "lexicon",
                     new XAttribute("version", "1.0"),
                     new XAttribute(XNamespace.Xml + "lang", EngineControl.Language),
-                    new XAttribute("alphabet", "x-microsoft-ups"),
+                    new XAttribute("alphabet", "x-microsoft-" + GrammarControl.phoneticAlphabet),   // dynamically set the phonetic alphabet type
                     vocabDict.Keys.Where(x => vocabDict[x].Length > 0).Select(x => new XElement(ns + "lexeme",
                         new XElement(ns + "grapheme", x),
                         vocabDict[x].Select(y => new XElement(ns + "phoneme", y))))));
