@@ -54,6 +54,12 @@ This approach to language-independent recognition requires an existing high-qual
 
 To automatically discover the pronunciation mappings we implement the Salaam algorithm as presented in [2-3]; a slight modification was made to reduce the algorithm's running time. In addition to the basic discovery algorithm [2], users have the choice of applying the discriminative training algorithm [3] as well. 
 
+#### Publications 
+
+Anjana Vakil, Max Paulus, Alexis Palmer and Michaela Regneri. 2014. "lex4all: A language-independent tool for building and evaluating pronunciation lexicons for small-vocabulary speech recognition." In: Proceedings of 52nd Annual Meeting of the Association for Computational Linguistics (ACL 2014): System Demonstrations. [\[pdf\]](http://www.anthology.aclweb.org/P/P14/P14-5.pdf#page=121)
+
+Anjana Vakil and Alexis Palmer. 2014. "Cross-language mapping for small-vocabulary ASR in under-resourced languages: investigating the impact of source language choice." In: Proceedings of the 4th Workshop on Spoken Language Technologies for Under-resourced Languages (SLTU'14). [\[pdf\]](http://www.coli.uni-saarland.de/~apalmer/docs/vakil_crosslg_sltu2014.pdf)
+
 #### References
 
 [1] Jahanzeb Sherwani. 2009. “Speech interfaces for information access by low literate users”. PhD thesis. Pittsburgh, PA, USA: Carnegie Mellon University. [\[pdf\]](http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf).
@@ -62,8 +68,6 @@ To automatically discover the pronunciation mappings we implement the Salaam alg
 
 [3] Hao Yee Chan and Roni Rosenfeld. 2012. “Discriminative pronunciation learning for speech recognition for resource scarce languages." In: Proceedings of the 2nd ACM Symposium on Computing for Development (ACM DEV ’12). [\[pdf\]](http://www.cs.cmu.edu/~roni/papers/salaam-DEV2012.pdf).
 
-[4] Anjana Vakil, Max Paulus, Alexis Palmer and Michaela Regneri. 2014. "lex4all: A language-independent tool for building and evaluating pronunciation lexicons for small-vocabulary speech recognition." In: Proceedings of 52nd Annual Meeting of the Association for Computational Linguistics (ACL 2014): System Demonstrations. [\[pdf\]](http://69.195.124.161/~aclwebor/anthology//P/P14/P14-5.pdf)
 
-[5] Anjana Vakil and Alexis Palmer. 2014. "Cross-language mapping for small-vocabulary ASR in under-resourced languages: investigating the impact of source language choice." In: Proceedings of the 4th Workshop on Spoken Language Technologies for Under-resourced Languages (SLTU'14). [\[pdf\]](http://www.coli.uni-saarland.de/~apalmer/docs/vakil_crosslg_sltu2014.pdf)
 
 
