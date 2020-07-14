@@ -60,6 +60,8 @@ Anjana Vakil, Max Paulus, Alexis Palmer and Michaela Regneri. 2014. "lex4all: A 
 
 Anjana Vakil and Alexis Palmer. 2014. "Cross-language mapping for small-vocabulary ASR in under-resourced languages: investigating the impact of source language choice." In: Proceedings of the 4th Workshop on Spoken Language Technologies for Under-resourced Languages (SLTU'14). [\[pdf\]](http://www.coli.uni-saarland.de/~apalmer/docs/vakil_crosslg_sltu2014.pdf)
 
+Chibuye, N.K., Rosenstock, T. and DeRenzi, B., 2018. "Cross-language Phoneme Mapping for Low-resource Languages: An Exploration of Benefits and Trade-offs." In: INTERSPEECH (pp. 2623-2627). [\[pdf\]](https://www.isca-speech.org/archive/Interspeech_2018/pdfs/2454.pdf)
+
 #### References
 
 [1] Jahanzeb Sherwani. 2009. “Speech interfaces for information access by low literate users”. PhD thesis. Pittsburgh, PA, USA: Carnegie Mellon University. [\[pdf\]](http://reports-archive.adm.cs.cmu.edu/anon/anon/home/ftp/usr/ftp/2009/CMU-CS-09-131.pdf).
